@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="php,html,c," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ZhangHy's Zone!" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="今天同事问我，我们前台是如何传递数据给C，通过什么参数和方法。C又是通过什么机制进行接收前台传递过来的数据。我在代码上瞄了瞄，还是没有搞懂C是如何进行数据处理，这个问题留到后面再讲。接下来讲讲我们前台通过PHP是如何获取C的数据，然后进行页面展示的。先上一段代码，待会儿再分析：">
+<meta name="keywords" content="php,html,c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP如何与C进行数据交互">
+<meta property="og:url" content="http://weibo.com/2017/08/19/PHP如何与C进行数据交互/index.html">
+<meta property="og:site_name" content="ZhangHy&#39;s Zone!">
+<meta property="og:description" content="今天同事问我，我们前台是如何传递数据给C，通过什么参数和方法。C又是通过什么机制进行接收前台传递过来的数据。我在代码上瞄了瞄，还是没有搞懂C是如何进行数据处理，这个问题留到后面再讲。接下来讲讲我们前台通过PHP是如何获取C的数据，然后进行页面展示的。先上一段代码，待会儿再分析：">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://weibo.com/2017/08/19/PHP如何与C进行数据交互/code_1.png">
+<meta property="og:updated_time" content="2017-08-19T06:27:47.276Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP如何与C进行数据交互">
+<meta name="twitter:description" content="今天同事问我，我们前台是如何传递数据给C，通过什么参数和方法。C又是通过什么机制进行接收前台传递过来的数据。我在代码上瞄了瞄，还是没有搞懂C是如何进行数据处理，这个问题留到后面再讲。接下来讲讲我们前台通过PHP是如何获取C的数据，然后进行页面展示的。先上一段代码，待会儿再分析：">
+<meta name="twitter:image" content="http://weibo.com/2017/08/19/PHP如何与C进行数据交互/code_1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":4},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://weibo.com/2017/08/19/PHP如何与C进行数据交互/"/>
+
+
+
+
+
+  <title>PHP如何与C进行数据交互 | ZhangHy's Zone!</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ZhangHy's Zone!</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-search">
+          <a href="/search/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-search"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://weibo.com/2017/08/19/PHP如何与C进行数据交互/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZhangHy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhangHy's Zone!">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">PHP如何与C进行数据交互</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-19T11:29:30+08:00">
+                2017-08-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/php-c/" itemprop="url" rel="index">
+                    <span itemprop="name">php,c</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>今天同事问我，我们前台是如何传递数据给C，通过什么参数和方法。C又是通过什么机制进行接收前台传递过来的数据。我在代码上瞄了瞄，还是没有搞懂C是如何进行数据处理，这个问题留到后面再讲。接下来讲讲我们前台通过PHP是如何获取C的数据，然后进行页面展示的。<br>先上一段代码，待会儿再分析：<br><img src="/2017/08/19/PHP如何与C进行数据交互/code_1.png" alt=""><br><a id="more"></a></p>
+<h2 id="PHP交互处理流程"><a href="#PHP交互处理流程" class="headerlink" title="PHP交互处理流程"></a>PHP交互处理流程</h2><h3 id="参数介绍："><a href="#参数介绍：" class="headerlink" title="参数介绍："></a>参数介绍：</h3><pre><code>POST: submit_post(对应变量名：$post_submit_action)
+GET:  g(对应变量名：$get_url_param)
+</code></pre><h4 id="通过参数-get-url-param进行交互"><a href="#通过参数-get-url-param进行交互" class="headerlink" title="通过参数$get_url_param进行交互"></a>通过参数$get_url_param进行交互</h4><p>模块入口在indexmods文件夹中的.mod文件中，通过参数$get_url_param进行判断，然后加载对应的modules文件夹中的.mds文件，同样是通过参数$get_url_param进行数据交互处理，最后显示在页面上。<br>简单流程如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">html --&gt; <span class="variable">$get_url_param</span> --&gt; mod --&gt; mds(<span class="variable">$get_url_param</span>) --&gt; html</div></pre></td></tr></table></figure></p>
+<h4 id="通过参数-post-submit-action进行交互"><a href="#通过参数-post-submit-action进行交互" class="headerlink" title="通过参数$post_submit_action进行交互"></a>通过参数$post_submit_action进行交互</h4><p>$post_submit_action原理与$get_url_param一样，但是submit_post有的情况不需要通过.mod进行判断，直接在.mds文件中进行处理，最后显示在页面上。<br>简单流程如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">html --&gt; <span class="variable">$post_submit_action</span> --&gt; mod --&gt; mds(<span class="variable">$post_submit_action</span>) --&gt; html</div></pre></td></tr></table></figure></p>
+<h3 id="数据获取"><a href="#数据获取" class="headerlink" title="数据获取"></a>数据获取</h3><h4 id="getResponse-方法："><a href="#getResponse-方法：" class="headerlink" title="getResponse()方法："></a>getResponse()方法：</h4><p>通过C提供的接口(模块名)和方法获取XML数据。<br>语法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$rspString</span> = getResponse(<span class="string">'接口名称'</span>, <span class="string">'方法'</span>, <span class="string">'参数'</span>);</div></pre></td></tr></table></figure></p>
+<p>接口名称：字符串(C开发人员提供)<br>方法：    字符串(接口的调用方法，C开发人员提供)<br>参数：    数组(接口所需要的各个字段，与C开发人员进行对接)</p>
+<h4 id="getAssign-方法："><a href="#getAssign-方法：" class="headerlink" title="getAssign()方法："></a>getAssign()方法：</h4><p>对getResponse()获取的数据进行格式化。<br>语法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$rsp_arr</span> = getAssign(<span class="variable">$rspString</span>, json:0);</div></pre></td></tr></table></figure></p>
+<p>json:0 是对数据进行json数据格式化。</p>
+<h2 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h2><p>之前贴的一张图来说：<br>$param[‘…’]为前台需要获取的字段<br>$_GET 或者 $_POST是请求方式<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">file_put_contents(<span class="string">'001.txt'</span>,json_encode(<span class="variable">$param</span>));</div></pre></td></tr></table></figure></p>
+<p>这个方法是PHP里用于生成数据文件的方法，通过这个方法可以查看从后台获取json格式的数据文件，也可以查看传递给后台json格式的数据文件，以及各种参数。用来调试十分方便。</p>
+<h3 id="PHP的isset-函数"><a href="#PHP的isset-函数" class="headerlink" title="PHP的isset()函数"></a>PHP的isset()函数</h3><p>一般用来检测变量是否设置<br>格式：<br>bool isset ( mixed var [, mixed var [, …]] )<br>功能：<br>检测变量是否设置<br>返回值：<br>若变量不存在则返回 FALSE<br>若变量存在且其值为NULL，也返回 FALSE<br>若变量存在且值不为NULL，则返回 TURE<br>同时检查多个变量时，每个单项都符合上一条要求时才返回 TRUE，否则结果为 FALSE<br>更多说明：<br>使用 unset() 释放变量之后，它将不再是 isset()。<br>PHP函数isset()只能用于变量，传递任何其它参数都将造成解析错误。<br>检测常量是否已设置可使用 defined() 函数。 </p>
+<h3 id="PHP的empty-函数"><a href="#PHP的empty-函数" class="headerlink" title="PHP的empty()函数"></a>PHP的empty()函数</h3><p>判断值为否为空<br>格式：bool empty ( mixed var )<br>功能：检查一个变量是否为空<br>返回值：<br>若变量不存在则返回 TRUE<br>若变量存在且其值为””、0、”0”、NULL、、FALSE、array()、var $var; 以及没有任何属性的对象，则返回 TURE<br>若变量存在且值不为””、0、”0”、NULL、、FALSE、array()、var $var; 以及没有任何属性的对象，则返回 FALSE<br>更多说明：<br>empty()的返回值=!(boolean) var，但不会因为变量未定义而产生警告信息。参见转换为布尔值获取更多信息。<br>empty() 只能用于变量，传递任何其它参数都将造成Paser error而终止运行。<br>检测常量是否已设置可使用 defined() 函数。</p>
+<h2 id="json-decode-—-对-JSON-格式的字符串进行编码"><a href="#json-decode-—-对-JSON-格式的字符串进行编码" class="headerlink" title="json_decode — 对 JSON 格式的字符串进行编码"></a>json_decode — 对 JSON 格式的字符串进行编码</h2><h2 id="json-encode-—-对变量进行-JSON-编码"><a href="#json-encode-—-对变量进行-JSON-编码" class="headerlink" title="json_encode — 对变量进行 JSON 编码"></a>json_encode — 对变量进行 JSON 编码</h2><p>json_encode()和json_decode()是编译和反编译过程，注意json只接受utf-8编码的字符，所以json_encode()的参数必须是utf-8编码，否则会得到空字符或者null。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/php-html-c/" rel="tag"># php,html,c</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/17/使用-vue-cli-搭建项目/" rel="next" title="使用 vue-cli 搭建项目">
+                <i class="fa fa-chevron-left"></i> 使用 vue-cli 搭建项目
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/19/PHP如何传递多层不同类型的变量/" rel="prev" title="PHP如何传递多层不同类型的变量">
+                PHP如何传递多层不同类型的变量 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="ZhangHy" />
+          <p class="site-author-name" itemprop="name">ZhangHy</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#PHP交互处理流程"><span class="nav-number">1.</span> <span class="nav-text">PHP交互处理流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参数介绍："><span class="nav-number">1.1.</span> <span class="nav-text">参数介绍：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#通过参数-get-url-param进行交互"><span class="nav-number">1.1.1.</span> <span class="nav-text">通过参数$get_url_param进行交互</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通过参数-post-submit-action进行交互"><span class="nav-number">1.1.2.</span> <span class="nav-text">通过参数$post_submit_action进行交互</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据获取"><span class="nav-number">1.2.</span> <span class="nav-text">数据获取</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#getResponse-方法："><span class="nav-number">1.2.1.</span> <span class="nav-text">getResponse()方法：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#getAssign-方法："><span class="nav-number">1.2.2.</span> <span class="nav-text">getAssign()方法：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码分析"><span class="nav-number">2.</span> <span class="nav-text">代码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PHP的isset-函数"><span class="nav-number">2.1.</span> <span class="nav-text">PHP的isset()函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PHP的empty-函数"><span class="nav-number">2.2.</span> <span class="nav-text">PHP的empty()函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#json-decode-—-对-JSON-格式的字符串进行编码"><span class="nav-number">3.</span> <span class="nav-text">json_decode — 对 JSON 格式的字符串进行编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#json-encode-—-对变量进行-JSON-编码"><span class="nav-number">4.</span> <span class="nav-text">json_encode — 对变量进行 JSON 编码</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZhangHy</span>
+
+  
+</div>
+
+
+  <div class="powered-by">
+    由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+  </div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">
+    主题 &mdash;
+    <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+      NexT.Pisces
+    </a>
+  </div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

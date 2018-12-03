@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ZhangHy's Zone!" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="sqlite是非常著名的开源嵌入式数据库软件，它可以嵌入到其他程序中使用，并且提供SQL接口用来查询，非常方便。它的官方站点为http://www.sqlite.org。而pysqlite 则是一个 sqlite 为 python 提供的 api 接口，它让一切对于 sqlite 的操作都变得异常简单在python2.5版本这后，SQLite的优势在于它的一个包装（PySQLite）已经被包括在标">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQLite了解数据库操作">
+<meta property="og:url" content="http://weibo.com/2017/08/28/SQLite了解数据库操作/index.html">
+<meta property="og:site_name" content="ZhangHy&#39;s Zone!">
+<meta property="og:description" content="sqlite是非常著名的开源嵌入式数据库软件，它可以嵌入到其他程序中使用，并且提供SQL接口用来查询，非常方便。它的官方站点为http://www.sqlite.org。而pysqlite 则是一个 sqlite 为 python 提供的 api 接口，它让一切对于 sqlite 的操作都变得异常简单在python2.5版本这后，SQLite的优势在于它的一个包装（PySQLite）已经被包括在标">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-08-28T08:35:01.613Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQLite了解数据库操作">
+<meta name="twitter:description" content="sqlite是非常著名的开源嵌入式数据库软件，它可以嵌入到其他程序中使用，并且提供SQL接口用来查询，非常方便。它的官方站点为http://www.sqlite.org。而pysqlite 则是一个 sqlite 为 python 提供的 api 接口，它让一切对于 sqlite 的操作都变得异常简单在python2.5版本这后，SQLite的优势在于它的一个包装（PySQLite）已经被包括在标">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":4},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://weibo.com/2017/08/28/SQLite了解数据库操作/"/>
+
+
+
+
+
+  <title>SQLite了解数据库操作 | ZhangHy's Zone!</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ZhangHy's Zone!</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-search">
+          <a href="/search/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-search"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://weibo.com/2017/08/28/SQLite了解数据库操作/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZhangHy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhangHy's Zone!">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SQLite了解数据库操作</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-28T16:08:18+08:00">
+                2017-08-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python-SQLite，PySQLite/" itemprop="url" rel="index">
+                    <span itemprop="name">python,SQLite，PySQLite</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>sqlite是非常著名的开源嵌入式数据库软件，它可以嵌入到其他程序中使用，并且提供SQL接口用来查询，非常方便。它的官方站点为<a href="http://www.sqlite.org" target="_blank" rel="external">http://www.sqlite.org</a>。<br>而pysqlite 则是一个 sqlite 为 python 提供的 api 接口，它让一切对于 sqlite 的操作都变得异常简单<br>在python2.5版本这后，SQLite的优势在于它的一个包装（PySQLite）已经被包括在标准库内，所以我们可以直接使用。<br><a id="more"></a><br>可以将SQLite作为名为sqlite3的模块导入。之后就可以创建一个到数据库文件的连接—-如果文件不存在就会被创建—-通过提供一个文件名：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; import sqlite3</div><div class="line">&gt;&gt;&gt; conn = sqlite3.connect(<span class="string">'somedatabase.db'</span>) <span class="comment"># 创建数据库</span></div><div class="line">&gt;&gt;&gt; cu = conn.cursor()   <span class="comment">#能获得连接的游标</span></div><div class="line"></div><div class="line"><span class="comment">#创建数据表</span></div><div class="line">&gt;&gt;&gt; cu.execute(<span class="string">""</span><span class="string">"create table catalog (</span></div><div class="line"><span class="string">    id integer primary key,</span></div><div class="line"><span class="string">    pid integer,</span></div><div class="line"><span class="string">    name varchar(10) UNIQUE</span></div><div class="line"><span class="string">   )"</span><span class="string">""</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#插入两条数据</span></div><div class="line">&gt;&gt;&gt; cu.execute(<span class="string">"insert into catalog values(0,0,'name1')"</span>)</div><div class="line">&gt;&gt;&gt; cu.execute(<span class="string">"insert into catalog values(1,0,'name2')"</span>)</div><div class="line">&gt;&gt;&gt; conn.commit()</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#选择（select）</span></div><div class="line">&gt;&gt;&gt; cu.execute(<span class="string">"select * from catalog"</span>)</div><div class="line">&gt;&gt;&gt; cu.fetchall()  </div><div class="line">[(0, 0, <span class="string">'name1'</span>), (1, 0, <span class="string">'name2'</span>)]</div><div class="line">&gt;&gt;&gt; cu.execute(<span class="string">"select * from catalog where id = 1"</span>)</div><div class="line">&gt;&gt;&gt; cu.fetchall()</div><div class="line">[(1, 0, <span class="string">'name2'</span>)]</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#修改（update）</span></div><div class="line">&gt;&gt;&gt; cu.execute(“update catalog <span class="built_in">set</span> name=’name2′ <span class="built_in">where</span> id = 0″)</div><div class="line">&gt;&gt;&gt; cx.commit()</div><div class="line">&gt;&gt;&gt; cu.execute(“select * from catalog”)</div><div class="line">&gt;&gt;&gt; cu.fetchone()</div><div class="line">(0, 0, ‘name2′)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#删除（delete）</span></div><div class="line">&gt;&gt;&gt; cu.execute(“delete from catalog <span class="built_in">where</span> id = 1″)</div><div class="line">&gt;&gt;&gt; cx.commit()</div><div class="line">&gt;&gt;&gt; cu.execute(“select * from catalog”)</div><div class="line">&gt;&gt;&gt; cu.fetchall()</div><div class="line">[(0, 0, <span class="string">'name2'</span>)]</div></pre></td></tr></table></figure></p>
+<h2 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h2><p>为了使用基础数据库系统，首先必须连接到它，这个时候需要使用具有名称的connect函数，该函数有多个参数，而具体用哪个参数取决于数据库。</p>
+<h3 id="connect函数的常用参数："><a href="#connect函数的常用参数：" class="headerlink" title="connect函数的常用参数："></a>connect函数的常用参数：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">dsn             数据源名称，给出该参数表示数据依赖               不可选</div><div class="line">user            用户名                                           可选</div><div class="line">password        用户密码                                         可选</div><div class="line">host            主机名                                           可选</div><div class="line">database        数据库                                           可选</div></pre></td></tr></table></figure>
+<p>connect函数返回连接对象。这个对象表示目前和数据库的会话。</p>
+<h3 id="连接对象方法："><a href="#连接对象方法：" class="headerlink" title="连接对象方法："></a>连接对象方法：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">clos（）                 关闭连接之后，连接对象和它的游标均不可用</div><div class="line">commit（）               如果支持的话就提交挂起的事务，否则不做任何事</div><div class="line">rollback（）             回滚挂起的事务</div><div class="line">cursor（）               返回连接的游标对象</div></pre></td></tr></table></figure>
+<p>commit 方法总是可用的，但如果数据库不支持事务，它就没有任何作用。如果关闭了连接但还有未提交的事务，它们会隐式地回滚—但是只有在数据库支持持回滚的时候才可以。<br>rollback 方法可能不可用，因为不是所有的数据库都支持事务（事务是一系列动作）。如果可用，那么就可以“撤销”所有未提交的事务。<br>cursor 方法将我们引入另外一个主题：游标对象。通过游标扫行SQL 查询并检查结果。游标连接支持更多的方法，而且可能在程序中更好用。</p>
+<h2 id="游标："><a href="#游标：" class="headerlink" title="游标："></a>游标：</h2><p>cu = conn.cursor()<br>能获得连接的游标，这个游标可以用来执行SQL查询。<br>conn.commit()<br>完成插入并且做出某些更改后确保已经进行了提交，这样才可以将这些修改真正地保存到文件中。</p>
+<h3 id="游标对象方法："><a href="#游标对象方法：" class="headerlink" title="游标对象方法："></a>游标对象方法：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">callproc（name[,params]）       使用给定的名称和参数调用已命名的数据库程序</div><div class="line">close（）                       关闭游标之后，游标不可用</div><div class="line">execute（oper[,params]）        执行SQL操作，可能使用参数</div><div class="line">executemany（oper,pseq）        对序列中的每个参数执行SQL操作</div><div class="line">fetchone（）                    把查询的结果集中的下一行保存为序列，或者None</div><div class="line">fetchmany（[size]）             获取查询结果集中的多行，默认尺寸为arraysize</div><div class="line">fetchall（）                    将所有（剩余）的行作为序列的序列</div><div class="line">nextset（）                     跳至下一个可用的结果集（可选）</div><div class="line">setinputsizes（sizes）          为参数预先定义内存区域</div><div class="line">setoutputsize（size[,col]）     为获取的大数据值设定缓冲区尺寸</div></pre></td></tr></table></figure>
+<h3 id="游标对象特性："><a href="#游标对象特性：" class="headerlink" title="游标对象特性："></a>游标对象特性：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">description                     结果列描述的序列，只读</div><div class="line">rowcount                        结果中的行数，保读</div><div class="line">arraysize                       fetchmany中返回的行数，默认为1</div></pre></td></tr></table></figure>
+<p>cu.fetchone()<br>fetchall()返回结果集中的全部数据，结果为一个tuple的列表。每个tuple元素是按建表的字段顺序排列。注意，游标是有状态的，它可以记录当前已经取到结果的第几个记录了，因此，一般你只可以遍历结果集一次。在上面的情况下，如果执行fetchone()会返回为空。这一点在测试时需要注意。<br>conn.close()<br>可以在每次修改数据库后都进行提交，而不是仅仅在准备关闭才提交，准备关闭数据时，使用close 方法。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/22/WebSocket与消息推送/" rel="next" title="WebSocket与消息推送">
+                <i class="fa fa-chevron-left"></i> WebSocket与消息推送
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/28/python操作mysql数据库/" rel="prev" title="python操作mysql数据库">
+                python操作mysql数据库 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="ZhangHy" />
+          <p class="site-author-name" itemprop="name">ZhangHy</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#连接"><span class="nav-number">1.</span> <span class="nav-text">连接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#connect函数的常用参数："><span class="nav-number">1.1.</span> <span class="nav-text">connect函数的常用参数：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接对象方法："><span class="nav-number">1.2.</span> <span class="nav-text">连接对象方法：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#游标："><span class="nav-number">2.</span> <span class="nav-text">游标：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#游标对象方法："><span class="nav-number">2.1.</span> <span class="nav-text">游标对象方法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#游标对象特性："><span class="nav-number">2.2.</span> <span class="nav-text">游标对象特性：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZhangHy</span>
+
+  
+</div>
+
+
+  <div class="powered-by">
+    由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+  </div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">
+    主题 &mdash;
+    <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+      NexT.Pisces
+    </a>
+  </div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

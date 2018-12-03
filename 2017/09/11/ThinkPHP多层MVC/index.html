@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ZhangHy's Zone!" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="ThinkPHP基于MVC（Model-View-Controller，模型-视图-控制器）模式，并且均支持多层（multi-Layer）设计。 模型（Model）层默认的模型层由Model类构成，但是随着项目的增大和业务体系的复杂化，单一的模型层很难解决要求，ThinkPHP支持多层Model，设计思路很简单，不同的模型层仍然都继承自系统的Model类，但是在目录结构和命名规范上做了区分。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ThinkPHP多层MVC">
+<meta property="og:url" content="http://weibo.com/2017/09/11/ThinkPHP多层MVC/index.html">
+<meta property="og:site_name" content="ZhangHy&#39;s Zone!">
+<meta property="og:description" content="ThinkPHP基于MVC（Model-View-Controller，模型-视图-控制器）模式，并且均支持多层（multi-Layer）设计。 模型（Model）层默认的模型层由Model类构成，但是随着项目的增大和业务体系的复杂化，单一的模型层很难解决要求，ThinkPHP支持多层Model，设计思路很简单，不同的模型层仍然都继承自系统的Model类，但是在目录结构和命名规范上做了区分。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-09-11T12:40:11.661Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ThinkPHP多层MVC">
+<meta name="twitter:description" content="ThinkPHP基于MVC（Model-View-Controller，模型-视图-控制器）模式，并且均支持多层（multi-Layer）设计。 模型（Model）层默认的模型层由Model类构成，但是随着项目的增大和业务体系的复杂化，单一的模型层很难解决要求，ThinkPHP支持多层Model，设计思路很简单，不同的模型层仍然都继承自系统的Model类，但是在目录结构和命名规范上做了区分。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":4},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://weibo.com/2017/09/11/ThinkPHP多层MVC/"/>
+
+
+
+
+
+  <title>ThinkPHP多层MVC | ZhangHy's Zone!</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ZhangHy's Zone!</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-search">
+          <a href="/search/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-search"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://weibo.com/2017/09/11/ThinkPHP多层MVC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZhangHy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhangHy's Zone!">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ThinkPHP多层MVC</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-11T09:08:08+08:00">
+                2017-09-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>ThinkPHP基于MVC（Model-View-Controller，模型-视图-控制器）模式，并且均支持多层（multi-Layer）设计。</p>
+<h2 id="模型（Model）层"><a href="#模型（Model）层" class="headerlink" title="模型（Model）层"></a>模型（Model）层</h2><p>默认的模型层由Model类构成，但是随着项目的增大和业务体系的复杂化，单一的模型层很难解决要求，ThinkPHP支持多层Model，设计思路很简单，不同的模型层仍然都继承自系统的Model类，但是在目录结构和命名规范上做了区分。<br><a id="more"></a><br>例如在某个项目设计中需要区分数据层、逻辑层、服务层等不同的模型层，我们可以在模块目录下面创建Model、Logic和Service目录，把对用户表的所有模型操作分成三层：<br>1、数据层：Model/UserModel 用于定义数据相关的自动验证和自动完成和数据存取接口<br>2、逻辑层：Logic/UserLogic 用于定义用户相关的业务逻辑<br>3、服务层：Service/UserService 用于定义用户相关的服务接口等<br>而这三个模型操作类统一都继承Model类即可，例如：<br>数据层：Home/Model/UserModel.class.php<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">namespace Home\Model;</div><div class="line">use Think\Model;</div><div class="line">class UserModel extends Model&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>逻辑层：Home/Logic/UserLogic.class.php<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">namespace Home\Logic;</div><div class="line">use Think\Model;</div><div class="line">class UserLogic extends Model&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>服务层：Home/Service/UserService.class.php<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">namespace Home\Service;</div><div class="line">use Think\Model;</div><div class="line">class UserService extends Model&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这样区分不同的模型层之后对用户数据的操作就非常清晰，在调用的时候，我们也可以用内置的D方法很方便的调用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">D(<span class="string">'User'</span>) //实例化UserModel</div><div class="line">D(<span class="string">'User'</span>,<span class="string">'Logic'</span>) //实例化UserLogic</div><div class="line">D(<span class="string">'User'</span>,<span class="string">'Service'</span>) //实例化UserService</div></pre></td></tr></table></figure></p>
+<p>默认的模型层是Model，我们也可以更改设置，例如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">'DEFAULT_M_LAYER'</span>       =&gt;  <span class="string">'Logic'</span>, // 更改默认的模型层名称为Logic</div></pre></td></tr></table></figure></p>
+<p>更改之后，实例化的时候需要改成：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">D(<span class="string">'User'</span>) //实例化UserLogic</div><div class="line">D(<span class="string">'User'</span>,<span class="string">'Model'</span>) //实例化UserModel</div><div class="line">D(<span class="string">'User'</span>,<span class="string">'Service'</span>) //实例化UserService</div></pre></td></tr></table></figure></p>
+<p>对模型层的分层划分是很灵活的，开发人员可以根据项目的需要自由定义和增加模型分层，你也完全可以只使用Model层。</p>
+<h2 id="视图（View）层"><a href="#视图（View）层" class="headerlink" title="视图（View）层"></a>视图（View）层</h2><p>视图层由模板和模板引擎组成，在模板中可以直接使用PHP代码，通过驱动也可以支持其他第三方的模板引擎。视图的多层可以简单的通过目录（也就是模板主题）区分，例如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">View/default/User/add.html</div><div class="line">View/blue/User/add.html</div></pre></td></tr></table></figure></p>
+<p>复杂一点的多层视图还可以更进一步，采用不同的视图目录来完成，例如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">view 普通视图层目录</div><div class="line">mobile 手机端访问视图层目录</div></pre></td></tr></table></figure></p>
+<p>这样做的好处是每个不同的视图层都可以支持不同的模板主题功能。<br>默认的视图层是View目录，我们可以调整设置如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">'DEFAULT_V_LAYER'</span>       =&gt;  <span class="string">'Mobile'</span>, // 默认的视图层名称更改为Mobile</div></pre></td></tr></table></figure></p>
+<p>非默认视图层目录的模板获取需要使用T函数</p>
+<h2 id="控制器（Controller）层"><a href="#控制器（Controller）层" class="headerlink" title="控制器（Controller）层"></a>控制器（Controller）层</h2><p>ThinkPHP的控制器层由核心控制器和业务控制器组成，核心控制器由系统内部的App类完成，负责应用（包括模块、控制器和操作）的调度控制，包括HTTP请求拦截和转发、加载配置等。业务控制器则由用户定义的控制器类完成。多层业务控制器的实现原理和模型的分层类似，例如业务控制器和事件控制器：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Controller/UserController //用于用户的业务逻辑控制和调度</div><div class="line">Event/UserEvent //用于用户的事件响应操作</div></pre></td></tr></table></figure></p>
+<p>访问控制器 Home/Controller/UserController.class.php 定义如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">namespace Home\Controller;</div><div class="line">use Think\Controller;</div><div class="line">class UserController extends Controller&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>事件控制器 Home/Event/UserEvent.class.php 定义如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">namespace Home\Event;</div><div class="line">use Think\Controller;</div><div class="line">class UserEvent extends Controller&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>UserController负责外部交互响应，通过URL请求响应，例如 <a href="http://serverName/User/index,而" target="_blank" rel="external">http://serverName/User/index,而</a> UserEvent负责内部的事件响应，并且只能在内部调用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">A(<span class="string">'User'</span>,<span class="string">'Event'</span>);</div></pre></td></tr></table></figure></p>
+<p>默认的访问控制器层是Controller，我们可以调整设置如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">'DEFAULT_C_LAYER'</span>       =&gt;  <span class="string">'Event'</span>, // 默认的控制器层名称改为Event</div></pre></td></tr></table></figure></p>
+<p>所以是和外部隔离的。<br>多层控制器的划分也不是强制的，可以根据应用的需要自由分层。控制器分层里面可以根据需要调用分层模型，也可以调用不同的分层视图（主题）。<br>在MVC三层中，ThinkPHP并不依赖M或者V，甚至可以只有C或者只有V，这个在ThinkPHP的设计里面是一个很重要的用户体验设计，用户只需要定义视图，在没有C的情况下也能自动识别。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/10/编写shell脚本最佳实践/" rel="next" title="编写shell脚本最佳实践">
+                <i class="fa fa-chevron-left"></i> 编写shell脚本最佳实践
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/03/JS加密七种方法/" rel="prev" title="JS加密七种方法">
+                JS加密七种方法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="ZhangHy" />
+          <p class="site-author-name" itemprop="name">ZhangHy</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#模型（Model）层"><span class="nav-number">1.</span> <span class="nav-text">模型（Model）层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#视图（View）层"><span class="nav-number">2.</span> <span class="nav-text">视图（View）层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#控制器（Controller）层"><span class="nav-number">3.</span> <span class="nav-text">控制器（Controller）层</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZhangHy</span>
+
+  
+</div>
+
+
+  <div class="powered-by">
+    由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+  </div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">
+    主题 &mdash;
+    <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+      NexT.Pisces
+    </a>
+  </div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

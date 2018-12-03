@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="gulp, webpack," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ZhangHy's Zone!" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="前段时间开发进度紧，没时间更新博客；今天主要讲一下前端工程化构建工具–gulp和模块化管理工具–webpack。 gulp是一个基于流的构建工具，可以自动执行指定的任务，简洁且高效gulp能干什么？1、开发环境下，想要能够按模块组织代码，监听实时变化2、css/js预编译，postcss等方案，浏览器前缀自动补全等3、条件输出不同的网页，比如app页面和mobile页面4、线上环境下，我想要合并、">
+<meta name="keywords" content="gulp, webpack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gulp">
+<meta property="og:url" content="http://weibo.com/2017/09/10/gulp/index.html">
+<meta property="og:site_name" content="ZhangHy&#39;s Zone!">
+<meta property="og:description" content="前段时间开发进度紧，没时间更新博客；今天主要讲一下前端工程化构建工具–gulp和模块化管理工具–webpack。 gulp是一个基于流的构建工具，可以自动执行指定的任务，简洁且高效gulp能干什么？1、开发环境下，想要能够按模块组织代码，监听实时变化2、css/js预编译，postcss等方案，浏览器前缀自动补全等3、条件输出不同的网页，比如app页面和mobile页面4、线上环境下，我想要合并、">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://weibo.com/2017/09/10/gulp/gulp.png">
+<meta property="og:updated_time" content="2017-09-10T07:23:23.084Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="gulp">
+<meta name="twitter:description" content="前段时间开发进度紧，没时间更新博客；今天主要讲一下前端工程化构建工具–gulp和模块化管理工具–webpack。 gulp是一个基于流的构建工具，可以自动执行指定的任务，简洁且高效gulp能干什么？1、开发环境下，想要能够按模块组织代码，监听实时变化2、css/js预编译，postcss等方案，浏览器前缀自动补全等3、条件输出不同的网页，比如app页面和mobile页面4、线上环境下，我想要合并、">
+<meta name="twitter:image" content="http://weibo.com/2017/09/10/gulp/gulp.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":4},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://weibo.com/2017/09/10/gulp/"/>
+
+
+
+
+
+  <title>gulp | ZhangHy's Zone!</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ZhangHy's Zone!</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-search">
+          <a href="/search/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-search"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://weibo.com/2017/09/10/gulp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZhangHy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhangHy's Zone!">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">gulp</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-10T09:41:35+08:00">
+                2017-09-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>前段时间开发进度紧，没时间更新博客；<br>今天主要讲一下前端工程化构建工具–gulp和模块化管理工具–webpack。</p>
+<h2 id="gulp是一个基于流的构建工具，可以自动执行指定的任务，简洁且高效"><a href="#gulp是一个基于流的构建工具，可以自动执行指定的任务，简洁且高效" class="headerlink" title="gulp是一个基于流的构建工具，可以自动执行指定的任务，简洁且高效"></a>gulp是一个基于流的构建工具，可以自动执行指定的任务，简洁且高效</h2><h2 id="gulp能干什么？"><a href="#gulp能干什么？" class="headerlink" title="gulp能干什么？"></a>gulp能干什么？</h2><p>1、开发环境下，想要能够按模块组织代码，监听实时变化<br>2、css/js预编译，postcss等方案，浏览器前缀自动补全等<br>3、条件输出不同的网页，比如app页面和mobile页面<br>4、线上环境下，我想要合并、压缩 html/css/javascritp/图片，减少网络请求，同时降低网络负担<br>5、等等…<br><a id="more"></a></p>
+<h2 id="安装gulp"><a href="#安装gulp" class="headerlink" title="安装gulp"></a>安装gulp</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">npm install -g gulp    //全局安装</div><div class="line">npm install --save-dev gulp    //安装到当前项目并在package.json中添加依赖</div></pre></td></tr></table></figure>
+<h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><h3 id="gulp-task-task-name-deps-fn"><a href="#gulp-task-task-name-deps-fn" class="headerlink" title="gulp.task()   task(name[, deps], fn)"></a>gulp.task()   task(name[, deps], fn)</h3><p>task()方法用于定义任务，传入名字、依赖任务数组、函数即可，gulp会先执行任务数组，结束后调用定义的函数，可以通过此手段控制任务的执行顺利。<br>例：要定义一个任务build来执行css、js、imgs这三个任务，我们可以通过指定一个任务数组而不是函数来完成。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gulp.task(<span class="string">'build'</span>, [<span class="string">'css'</span>, <span class="string">'js'</span>, <span class="string">'imgs'</span>]);</div></pre></td></tr></table></figure></p>
+<h3 id="gulp-src-src-globs-options"><a href="#gulp-src-src-globs-options" class="headerlink" title="gulp.src    src(globs[, options])"></a>gulp.src    src(globs[, options])</h3><p>src()方法输入一个glob或者glob数组，然后返回一个可以传递给插件的数据流<br>Gulp使用node-glob来从你指定的glob里面获取文件：<br>1、app.js 精确匹配<br>2、<em>.js 能匹配js后缀的文件<br>3、**/</em>.js 能匹配多级目录下的js文件（也包含当前目录下）<br>4、!js/app.js 精确排除<br>例：js目录下包含了压缩和未压缩的js文件，我们想要压缩还没有被压缩的文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gulp.src([<span class="string">'js/**/*.js'</span>, <span class="string">'!js/**/*.min.js'</span>])</div></pre></td></tr></table></figure></p>
+<h3 id="gulp-dest-dest-path-options"><a href="#gulp-dest-dest-path-options" class="headerlink" title="gulp.dest    dest(path[, options])"></a>gulp.dest    dest(path[, options])</h3><p>dest()方法用来写文件，第一个参数表示最终输出的目录名。注意，它无法允许我们指明最终输出的文件名，只能指定输出文件夹名，而且在文件夹不存在的情况下会自动创建。<br>例：把开发目录src下的js文件输出到部署目录dist下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">gulp.src(<span class="string">'src/**/*.js'</span>)</div><div class="line">  .pipe(gulp.dest(<span class="string">'dist'</span>))</div></pre></td></tr></table></figure></p>
+<h3 id="gulp-watch-watch-globs-opts-cb-or-watch-globs-opts-tasks"><a href="#gulp-watch-watch-globs-opts-cb-or-watch-globs-opts-tasks" class="headerlink" title="gulp.watch    watch(globs[, opts], cb) or watch(globs[, opts], tasks)"></a>gulp.watch    watch(globs[, opts], cb) or watch(globs[, opts], tasks)</h3><p>watch()方法可以监听文件，它接受一个glob或者glob数组以及一个任务数组来执行回调<br>// 当templates目录下的模板文件发生变化，自动执行编译任务<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">gulp.task(<span class="string">'watch'</span>, <span class="keyword">function</span> (event) &#123;</div><div class="line">  gulp.watch(<span class="string">'templates/*.tmpl.html'</span>, [<span class="string">'artTemplate'</span>]);</div><div class="line">  console.log(<span class="string">'Event type: '</span> + event.type); // added, changed, or deleted   </div><div class="line">  console.log(<span class="string">'Event path: '</span> + event.path); // The path of the modified file</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h3 id="gulp-watch-的另一个非常好的特性是返回watcher对象"><a href="#gulp-watch-的另一个非常好的特性是返回watcher对象" class="headerlink" title="gulp.watch()的另一个非常好的特性是返回watcher对象"></a>gulp.watch()的另一个非常好的特性是返回watcher对象</h3><h4 id="watcher对象可以监听很多事件"><a href="#watcher对象可以监听很多事件" class="headerlink" title="watcher对象可以监听很多事件:"></a>watcher对象可以监听很多事件:</h4><p>change 文件变化时触发<br>end 在watcher结束时触发<br>error 在出现error时触发<br>ready 在文件被找到并正被监听时触发<br>nomatch 在glob没有匹配到任何文件时触发</p>
+<h4 id="Watcher对象也包含了一些可以调用的方法："><a href="#Watcher对象也包含了一些可以调用的方法：" class="headerlink" title="Watcher对象也包含了一些可以调用的方法："></a>Watcher对象也包含了一些可以调用的方法：</h4><p>watcher.end() 停止watcher<br>watcher.files() 返回watcher监听的文件列表<br>watcher.add(glob) 将与指定glob相匹配的文件添加到watcher（也接受可选的回调当第二个参数）<br>watcher.remove(filepath) 从watcher中移除个别文件</p>
+<h2 id="配置文件-gulpfile-js"><a href="#配置文件-gulpfile-js" class="headerlink" title="配置文件 gulpfile.js"></a>配置文件 gulpfile.js</h2><p><img src="/2017/09/10/gulp/gulp.png" alt=""><br>任务会让所有的文件匹配js/*.js，并且执行JSHint，然后打印输出结果，取消文件缩进，最后把他们合并起来，保存为build/app.js，整个过程如下图所示：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">var gulp = require(<span class="string">'gulp'</span>),</div><div class="line">    jshint = require(<span class="string">'gulp-jshint'</span>),</div><div class="line">    uglify = require(<span class="string">'gulp-uglify'</span>),</div><div class="line">    concat = require(<span class="string">'gulp-concat'</span>);</div><div class="line"></div><div class="line">gulp.task(<span class="string">'js'</span>, <span class="function"><span class="title">function</span></span> () &#123;</div><div class="line">   <span class="built_in">return</span> gulp.src(<span class="string">'js/*.js'</span>)</div><div class="line">      .pipe(jshint())</div><div class="line">      .pipe(jshint.reporter(<span class="string">'default'</span>))</div><div class="line">      .pipe(uglify())</div><div class="line">      .pipe(concat(<span class="string">'app.js'</span>))</div><div class="line">      .pipe(gulp.dest(<span class="string">'build'</span>));</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h2 id="webpack是模块化管理工具，使用webpack可以对模块进行压缩、预处理、按需打包、按需加载等。"><a href="#webpack是模块化管理工具，使用webpack可以对模块进行压缩、预处理、按需打包、按需加载等。" class="headerlink" title="webpack是模块化管理工具，使用webpack可以对模块进行压缩、预处理、按需打包、按需加载等。"></a>webpack是模块化管理工具，使用webpack可以对模块进行压缩、预处理、按需打包、按需加载等。</h2><h2 id="webpack-重要特征"><a href="#webpack-重要特征" class="headerlink" title="webpack 重要特征"></a>webpack 重要特征</h2><p>1、插件化：<br>webpack本身非常灵活，提供了丰富的插件接口。基于这些接口，webpack开发了很多插件作为内置功能。<br>2、速度快：<br>webpack使用异步IO以及多级缓存机制。所以webpack的速度是很快的，尤其是增量更新。<br>丰富的Loaders：<br>loaders用来对文件做预处理。这样webpack就可以打包任何静态文件。<br>3、高适配性：<br>webpack同时支持AMD/CommonJs/ES6模块方案。webpack会静态解析你的代码，自动帮你管理他们的依赖关系。此外，webpack对第三方库的兼容性很好。<br>4、代码拆分：<br>webpack可以将你的代码分片，从而实现按需打包。这种机制可以保证页面只加载需要的JS代码，减少首次请求的时间。<br>5、优化：<br>webpack提供了很多优化机制来减少打包输出的文件大小，不仅如此，它还提供了hash机制，来解决浏览器缓存问题。<br>6、开发模式友好：<br>webpack为开发模式也提供了很多辅助功能。比如SourceMap、热更新等。<br>7、使用场景多：<br>webpack不仅适用于web应用场景，也适用于Webworkers、Node.js场景</p>
+<h2 id="webpack-最佳配置"><a href="#webpack-最佳配置" class="headerlink" title="webpack 最佳配置"></a>webpack 最佳配置</h2><p>比如要解决：production模式和development模式，webpack的配置是有差异的，大致有两种思路。<br>1、两份配置文件webpack.config.production.js/webpack.config.development.js，然后不同场景下，使用不同的配置文件。<br>2、通过module.exports返回函数，该函数能接受参数。<br>相对来说，第一种更简单，但是重复配置多；第二种更灵活，推荐第二种方式。<br>那么，按返回函数的方式的配置代码架子如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">module.exports = <span class="keyword">function</span>(env) &#123;</div><div class="line">    <span class="built_in">return</span> &#123;</div><div class="line">        context: config.context,</div><div class="line">        entry: config.src,</div><div class="line">        output: &#123;</div><div class="line">            path: path.join(config.jsDest, project),</div><div class="line">            filename: <span class="string">'[name].js'</span>,</div><div class="line">            chunkFilename: <span class="string">'[name].[chunkhash:8].js'</span>,</div><div class="line">            publicPath: <span class="string">'/assets/'</span> + project + <span class="string">'/'</span></div><div class="line">        &#125;,</div><div class="line">        devtool: <span class="string">"eval"</span>,</div><div class="line">        watch: <span class="literal">false</span>,</div><div class="line">        profile: <span class="literal">true</span>,</div><div class="line">        cache: <span class="literal">true</span>,</div><div class="line">        module: &#123;</div><div class="line">            loaders: getLoaders(env)</div><div class="line">        &#125;,</div><div class="line">        resolve: &#123;</div><div class="line">            <span class="built_in">alias</span>: getAlias(env)</div><div class="line">        &#125;,</div><div class="line">        plugins: getPlugins(env)</div><div class="line">    &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>其中关键的配置这儿简单介绍如下，后续的系列博客会根据每个点详细介绍。<br>context：上下文。<br>entry：入口文件，是所有依赖关系的入口，webpack从这个入口开始静态解析，分析模块之间的依赖关系。<br>output：打包输出的配置。<br>devtools：SourceMap选项，便于开发模式下调试。<br>watch：监听模式，增量更新，开发必备！<br>profile：优化。<br>cache：webpack构建的过程中会生成很多临时的文件，打开cache可以让这些临时的文件缓存起来，从而更快的构建。<br>module.loaders：如前文介绍，loaders用来对文件做预处理。这样webpack就可以打包任何静态文件。<br>resolve.alias：模块别名，这样可以更方便的引用模块。<br>plugins：如前文介绍，webpack的一些内置功能均是以插件的形式提供。</p>
+<h2 id="webpack和gulp的区别"><a href="#webpack和gulp的区别" class="headerlink" title="webpack和gulp的区别"></a>webpack和gulp的区别</h2><p>gulp是基于流的构建工具：all in one的打包模式，输出一个js文件和一个css文件，优点是减少http请求，万金油方案。<br>webpack是模块化管理工具，使用webpack可以对模块进行压缩、预处理、打包、按需加载等</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/gulp-webpack/" rel="tag"># gulp, webpack</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/29/python实现简单爬虫/" rel="next" title="python实现简单爬虫">
+                <i class="fa fa-chevron-left"></i> python实现简单爬虫
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/10/S-O-L-I-D-原则/" rel="prev" title="S.O.L.I.D 原则">
+                S.O.L.I.D 原则 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="ZhangHy" />
+          <p class="site-author-name" itemprop="name">ZhangHy</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#gulp是一个基于流的构建工具，可以自动执行指定的任务，简洁且高效"><span class="nav-number">1.</span> <span class="nav-text">gulp是一个基于流的构建工具，可以自动执行指定的任务，简洁且高效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gulp能干什么？"><span class="nav-number">2.</span> <span class="nav-text">gulp能干什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装gulp"><span class="nav-number">3.</span> <span class="nav-text">安装gulp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#API"><span class="nav-number">4.</span> <span class="nav-text">API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#gulp-task-task-name-deps-fn"><span class="nav-number">4.1.</span> <span class="nav-text">gulp.task()   task(name[, deps], fn)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gulp-src-src-globs-options"><span class="nav-number">4.2.</span> <span class="nav-text">gulp.src    src(globs[, options])</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gulp-dest-dest-path-options"><span class="nav-number">4.3.</span> <span class="nav-text">gulp.dest    dest(path[, options])</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gulp-watch-watch-globs-opts-cb-or-watch-globs-opts-tasks"><span class="nav-number">4.4.</span> <span class="nav-text">gulp.watch    watch(globs[, opts], cb) or watch(globs[, opts], tasks)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gulp-watch-的另一个非常好的特性是返回watcher对象"><span class="nav-number">4.5.</span> <span class="nav-text">gulp.watch()的另一个非常好的特性是返回watcher对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#watcher对象可以监听很多事件"><span class="nav-number">4.5.1.</span> <span class="nav-text">watcher对象可以监听很多事件:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Watcher对象也包含了一些可以调用的方法："><span class="nav-number">4.5.2.</span> <span class="nav-text">Watcher对象也包含了一些可以调用的方法：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置文件-gulpfile-js"><span class="nav-number">5.</span> <span class="nav-text">配置文件 gulpfile.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#webpack是模块化管理工具，使用webpack可以对模块进行压缩、预处理、按需打包、按需加载等。"><span class="nav-number">6.</span> <span class="nav-text">webpack是模块化管理工具，使用webpack可以对模块进行压缩、预处理、按需打包、按需加载等。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#webpack-重要特征"><span class="nav-number">7.</span> <span class="nav-text">webpack 重要特征</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#webpack-最佳配置"><span class="nav-number">8.</span> <span class="nav-text">webpack 最佳配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#webpack和gulp的区别"><span class="nav-number">9.</span> <span class="nav-text">webpack和gulp的区别</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZhangHy</span>
+
+  
+</div>
+
+
+  <div class="powered-by">
+    由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+  </div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">
+    主题 &mdash;
+    <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+      NexT.Pisces
+    </a>
+  </div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
