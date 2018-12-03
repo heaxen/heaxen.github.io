@@ -266,7 +266,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://weibo.com/2017/08/19/5种跨域方式以及原理/">
+    <link itemprop="mainEntityOfPage" href="http://weibo.com/2017/08/16/RESTful（表述性状态转移）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZhangHy">
@@ -285,7 +285,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/19/5种跨域方式以及原理/" itemprop="url">5种跨域方式以及原理</a></h1>
+                <a class="post-title-link" href="/2017/08/16/RESTful（表述性状态转移）/" itemprop="url">RESTful(表述性状态转移)</a></h1>
         
 
         <div class="post-meta">
@@ -297,8 +297,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-19T16:05:30+08:00">
-                2017-08-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-16T19:25:55+08:00">
+                2017-08-16
               </time>
             
 
@@ -320,8 +320,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javascript/" itemprop="url" rel="index">
-                    <span itemprop="name">javascript</span>
+                  <a href="/categories/node-js-express-RESTful/" itemprop="url" rel="index">
+                    <span itemprop="name">node.js , express , RESTful</span>
                   </a>
                 </span>
 
@@ -358,11 +358,12 @@
 
       
         
-          <p>如果想从浏览器的一个网站访问去执行另外一个网站的脚本，显然是不可行的，因为受到了浏览器同源策略的影响，同源策略是浏览器对JavaScript施加的安全限制。<br>同源策略：如果两个页面拥有相同的协议（protocol），端口（port，如果指定）和主机（host），那么这两个页面就属于同一个源（origin）。<br>如果想要通过浏览器中的一个页面去执行另一个页面的脚本，那么就需要通过跨域。<br>下面介绍几种常见的跨域方式：</p>
-<h2 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h2><p>script标签是不受同源策略的影响的，它可以引入来自任何地方的js文件。<br>jsonp的原理就是在客户端和服务端定义一个函数，当客户端发起一个请求时，服务端返回一段javascript代码，其中调用了在客户端定义的函数，并将相应的数据作为参数传入该函数。<br></p>
+          <p>REST是英文Representational State Transfer的缩写，中文称之为“表述性状态转移”<br>基于HTTP协议<br>是另一种服务架构<br>传递是JSON、POX（Plain Old XML）而不是SOAP格式的数据<br>充分利用HTTP谓词（Verb）<br>侧重数据的传输，业务逻辑交给客户端自行处理<br>REST是一种分布式服务架构的风格约束，像Java、.Net（WCF、WebAPI）都有对该约束的实现，使URL变得更加有意义，更加简洁明了，如：<br><a href="http://heaxen.github.io/products/1" target="_blank" rel="external">http://heaxen.github.io/products/1</a> get请求 表示获得所有产品的第1个<br><a href="http://heaxen.github.io/products/product" target="_blank" rel="external">http://heaxen.github.io/products/product</a> post请求 表示添加一个产品<br><a href="http://heaxen.github.io/products/1/price" target="_blank" rel="external">http://heaxen.github.io/products/1/price</a> get请求 表示获得第1个产品的价格<br><a href="http://heaxen.github.io/products/1" target="_blank" rel="external">http://heaxen.github.io/products/1</a> delete请求 删除编号为1的产品</p>
+<h2 id="REST设计需要遵循的原则"><a href="#REST设计需要遵循的原则" class="headerlink" title="REST设计需要遵循的原则"></a>REST设计需要遵循的原则</h2><p>网络上的所有事物都被抽象为资源（resource）；<br>每个资源对应一个唯一的资源标识符（resource identifier）；<br>通过通用的连接器接口（generic connector interface）对资源进行操作；<br>对资源的各种操作不会改变资源标识符；<br>所有的操作都是无状态的（stateless）</p>
+<h2 id="谓词"><a href="#谓词" class="headerlink" title="谓词"></a>谓词</h2><p>GET<br>表示查询操作，相当于Retrieve、Select操作<br>POST<br>表示插入操作，相当于Create，Insert操作<br>PUT<br>表示修改操作，相当于Update操作<br>DELETE<br>表示删除操作，相当于Delete操作<br></p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/08/19/5种跨域方式以及原理/#more" rel="contents">
+            <a class="btn" href="/2017/08/16/RESTful（表述性状态转移）/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -413,7 +414,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://weibo.com/2017/08/19/PHP如何传递多层不同类型的变量/">
+    <link itemprop="mainEntityOfPage" href="http://weibo.com/2017/08/16/Express框架实例/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZhangHy">
@@ -432,7 +433,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/19/PHP如何传递多层不同类型的变量/" itemprop="url">PHP如何传递多层不同类型的变量</a></h1>
+                <a class="post-title-link" href="/2017/08/16/Express框架实例/" itemprop="url">Express框架实例</a></h1>
         
 
         <div class="post-meta">
@@ -444,8 +445,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-19T14:57:42+08:00">
-                2017-08-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-16T14:01:47+08:00">
+                2017-08-16
               </time>
             
 
@@ -467,8 +468,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/php/" itemprop="url" rel="index">
-                    <span itemprop="name">php</span>
+                  <a href="/categories/node-js-express/" itemprop="url" rel="index">
+                    <span itemprop="name">node.js , express</span>
                   </a>
                 </span>
 
@@ -505,10 +506,11 @@
 
       
         
-          <p>这个问题是上次做网络攻击检测配置时候遇到的一个问题，当时问题是这样的，异常包攻击检测的时候需要配置IP地址，IP范围以及子网地址，后台给我的接口是这样的。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;ipaddr_items&gt;</div><div class="line">    &lt;<span class="built_in">type</span>&gt;subnet&lt;/<span class="built_in">type</span>&gt;</div><div class="line">    &lt;address&gt;192.168.199.0/24&lt;/address&gt;</div><div class="line">&lt;/ipaddr_items&gt;</div><div class="line">&lt;ipaddr_items&gt;</div><div class="line">    &lt;<span class="built_in">type</span>&gt;range&lt;/<span class="built_in">type</span>&gt;</div><div class="line">    &lt;address&gt;192.168.199.1-192.168.199.254&lt;/address&gt;</div><div class="line">&lt;/ipaddr_items&gt;</div><div class="line">&lt;ipaddr_items&gt;</div><div class="line">    &lt;<span class="built_in">type</span>&gt;host&lt;/<span class="built_in">type</span>&gt;</div><div class="line">    &lt;address&gt;192.168.199.10&lt;/address&gt;</div><div class="line">&lt;/ipaddr_items&gt;</div></pre></td></tr></table></figure></p>
+          <h2 id="什么是Express？"><a href="#什么是Express？" class="headerlink" title="什么是Express？"></a>什么是Express？</h2><p>Express 是一个简洁而灵活的 node.js Web应用框架, 提供了一系列强大特性帮助你创建各种 Web 应用，和丰富的 HTTP 工具。<br>使用 Express 可以快速地搭建一个完整功能的网站。使用Node.js作为AngularJS开发Web服务器的最佳方式是使用Express模块。<br><a href="http://expressjs.com/" target="_blank" rel="external">Express官网：</a><br><a href="http://expressjs.com/zh-cn/4x/api.html" target="_blank" rel="external">Express4.x API: </a></p>
+<h2 id="Express框架核心特性"><a href="#Express框架核心特性" class="headerlink" title="Express框架核心特性"></a>Express框架核心特性</h2><p>可以设置中间件来响应 HTTP 请求。<br>定义了路由表用于执行不同的 HTTP 请求动作。<br>可以通过向模板传递参数来动态渲染 HTML 页面。<br>丰富的 HTTP 快捷方法和任意排列组合的 Connect 中间件，让你创建健壮、友好的 API 变得既快速又简单。<br>Express 不对 Node.js 已有的特性进行二次抽象，我们只是在它之上扩展了 Web 应用所需的基本功能。<br></p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/08/19/PHP如何传递多层不同类型的变量/#more" rel="contents">
+            <a class="btn" href="/2017/08/16/Express框架实例/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -559,7 +561,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://weibo.com/2017/08/19/PHP如何与C进行数据交互/">
+    <link itemprop="mainEntityOfPage" href="http://weibo.com/2017/08/16/NodeJs开发Web后台服务/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZhangHy">
@@ -578,7 +580,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/19/PHP如何与C进行数据交互/" itemprop="url">PHP如何与C进行数据交互</a></h1>
+                <a class="post-title-link" href="/2017/08/16/NodeJs开发Web后台服务/" itemprop="url">NodeJs开发Web后台服务</a></h1>
         
 
         <div class="post-meta">
@@ -590,8 +592,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-19T11:29:30+08:00">
-                2017-08-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-16T12:28:11+08:00">
+                2017-08-16
               </time>
             
 
@@ -613,8 +615,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/php-c/" itemprop="url" rel="index">
-                    <span itemprop="name">php,c</span>
+                  <a href="/categories/node-js-web/" itemprop="url" rel="index">
+                    <span itemprop="name">node.js , web</span>
                   </a>
                 </span>
 
@@ -651,10 +653,10 @@
 
       
         
-          <p>今天同事问我，我们前台是如何传递数据给C，通过什么参数和方法。C又是通过什么机制进行接收前台传递过来的数据。我在代码上瞄了瞄，还是没有搞懂C是如何进行数据处理，这个问题留到后面再讲。接下来讲讲我们前台通过PHP是如何获取C的数据，然后进行页面展示的。<br>先上一段代码，待会儿再分析：<br><img src="/2017/08/19/PHP如何与C进行数据交互/code_1.png" alt=""><br></p>
+          <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>什么是Node.js?<br>Node.js 是一个基于Google Chrome V8 引擎的 JavaScript 运行环境。Node.js 使用了一个事件驱动、非阻塞式 I/O 的模型，使其轻量又高效。Node.js 的包管理器 npm，是全球最大的开源库生态系统。<br>能方便地搭建响应速度快、易于扩展的网络应用，Node.js 使用事件驱动， 非阻塞I/O 模型而得以轻量和高效，非常适合在分布式设备上运行的数据密集型的实时应用。<br>简单说Node.js就是运行在服务器端的JavaScript，是现在流行的语言中能同时运行在前端与后台的程序语言，你可以把JavaScript想像成Java与C#。<br><a href="https://nodejs.org/en/" target="_blank" rel="external">官网</a>,<a href="http://nodejs.cn/" target="_blank" rel="external">中文</a>,<a href="http://nodeapi.ucdok.com/#/api/" target="_blank" rel="external">API</a><br>相关技术：<br>数据库：    MongoDB，非关系型数据库，NoSQL（Not only SQL）<br>MVC框架：   AngularJS<br>Web服务器： Express<br>模板引擎：  jade、ejs、htmljs、swig、hogan.js<br></p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/08/19/PHP如何与C进行数据交互/#more" rel="contents">
+            <a class="btn" href="/2017/08/16/NodeJs开发Web后台服务/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -705,7 +707,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://weibo.com/2017/08/17/使用-vue-cli-搭建项目/">
+    <link itemprop="mainEntityOfPage" href="http://weibo.com/2017/08/16/MySQL常用命令详解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZhangHy">
@@ -724,7 +726,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/17/使用-vue-cli-搭建项目/" itemprop="url">使用 vue-cli 搭建项目</a></h1>
+                <a class="post-title-link" href="/2017/08/16/MySQL常用命令详解/" itemprop="url">MySQL常用命令详解</a></h1>
         
 
         <div class="post-meta">
@@ -736,8 +738,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-17T09:56:36+08:00">
-                2017-08-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-16T08:15:22+08:00">
+                2017-08-16
               </time>
             
 
@@ -759,8 +761,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/vue-js/" itemprop="url" rel="index">
-                    <span itemprop="name">vue.js</span>
+                  <a href="/categories/MySQL指令/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL指令</span>
                   </a>
                 </span>
 
@@ -797,12 +799,156 @@
 
       
         
-          <p>在这里向大家介绍一下如何在十分钟之内使用vue-cli搭建自己的项目，步骤和搭建node.js项目有一定的相似性。只是到了最后安装依赖的时候踩了一个坑。待我细细讲来。哈哈~<br>首先介绍一下什么是Vue.js：<br>Vue是一个前端框架，它有两大特点：数据绑定、组件化</p>
-<h2 id="什么是数据绑定？"><a href="#什么是数据绑定？" class="headerlink" title="什么是数据绑定？"></a>什么是数据绑定？</h2><p>比如改变一个Input输入框的值，会[自动同步]更新页面上其他绑定该Input输入框的组件的值。<br><img src="/2017/08/17/使用-vue-cli-搭建项目/data_bind.png" alt=""></p>
-<h2 id="什么是组件化？"><a href="#什么是组件化？" class="headerlink" title="什么是组件化？"></a>什么是组件化？</h2><p>页面上小到一个按钮都可以是一个单独的文件.vue(俗称组件)，这些组件就像乐高积木一样可以通过互相引用组装起来。<br><img src="/2017/08/17/使用-vue-cli-搭建项目/components.png" alt=""><br>好啦，现在开始如何搭建项目吧！<br></p>
+          <p>MySQL是一种开放源代码的关系型数据库管理系统（RDBMS），使用最常用的数据库管理语言–结构化查询语言（SQL）进行数据库管理。<br>MySQL是开放源代码的，因此任何人都可以在General Public License的许可下下载并根据个性化的需要对其进行修改。<br>MySQL因为其速度、可靠性和适应性而备受关注。大多数人都认为在不需要事务化处理的情况下，MySQL是管理内容最好的选择。<br>(以上内容摘自百度百科)<br></p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/08/17/使用-vue-cli-搭建项目/#more" rel="contents">
+            <a class="btn" href="/2017/08/16/MySQL常用命令详解/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://weibo.com/2017/08/15/Linux常见指令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZhangHy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhangHy's Zone!">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/15/Linux常见指令/" itemprop="url">Linux常见指令</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-15T18:09:23+08:00">
+                2017-08-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>Linux，免费开源，多用户多任务系统。基于Linux有多个版本的衍生。RedHat、Ubuntu、Debian<br>安装VMware或VirtualBox虚拟机。具体安装步骤，找百度。<br>再安装Ubuntu。具体安装步骤，找百度。<br>安装完后，可以看到Linux系统的目录结构：<a href="http://www.cnblogs.com/laov/p/3409875.html" target="_blank" rel="external">见链接</a><br></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/15/Linux常见指令/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -844,7 +990,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
