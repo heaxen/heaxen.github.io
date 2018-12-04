@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://weibo.com/"/>
-  <updated>2018-12-04T04:38:32.243Z</updated>
+  <updated>2018-12-04T11:25:11.581Z</updated>
   <id>http://weibo.com/</id>
   
   <author>
@@ -14,6 +14,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Webpack</title>
+    <link href="http://weibo.com/2018/12/04/Webpack/"/>
+    <id>http://weibo.com/2018/12/04/Webpack/</id>
+    <published>2018-12-04T11:13:56.000Z</published>
+    <updated>2018-12-04T11:25:11.581Z</updated>
+    
+    <content type="html"><![CDATA[<p>Webpack(模块打包机)是一种模块化工具，用于分析项目结构，找到JavaScript模块以及一些其他的浏览器不能直接圆形的拓展语言(Scss, TypeScript等)，并将其转换和打包为合适的格式供浏览器使用。</p>
+<p>Webpack对比Grunt和Gulp：<br>Grunt/Gulp是一种优化前端的开发流程的工具；工作方式是:在一个配置文件中，指明对某些文件进行类似编译，组合，压缩等任务的具体步骤，工具之后以自动完成这些任务。</p>
+<p>Webpack是一种模块化解决方案，多场景可替代Grunt/Gulp；工作方式：将项目当作一个整体，通过一个给定的主文件(如：index.js),Webpack将从这个文件开始找到项目的所有依赖文件，使用loaders处理它们，最后打包成一个(或者多个)浏览器可是别的JavaScript文件。</p>
+<p>Webpack的处理速度相对于Grunt/Gulp更快更直接，能打包更多不同类型的文件。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Webpack(模块打包机)是一种模块化工具，用于分析项目结构，找到JavaScript模块以及一些其他的浏览器不能直接圆形的拓展语言(Scss, TypeScript等)，并将其转换和打包为合适的格式供浏览器使用。&lt;/p&gt;
+&lt;p&gt;Webpack对比Grunt和Gulp：&lt;
+    
+    </summary>
+    
+      <category term="Webpack" scheme="http://weibo.com/categories/Webpack/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>npm模块安装问题</title>
@@ -784,31 +809,6 @@
     </summary>
     
       <category term="javascript" scheme="http://weibo.com/categories/javascript/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>PHP如何传递多层不同类型的变量</title>
-    <link href="http://weibo.com/2017/08/19/PHP%E5%A6%82%E4%BD%95%E4%BC%A0%E9%80%92%E5%A4%9A%E5%B1%82%E4%B8%8D%E5%90%8C%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%8F%98%E9%87%8F/"/>
-    <id>http://weibo.com/2017/08/19/PHP如何传递多层不同类型的变量/</id>
-    <published>2017-08-19T06:57:42.000Z</published>
-    <updated>2017-08-19T07:51:09.220Z</updated>
-    
-    <content type="html"><![CDATA[<p>这个问题是上次做网络攻击检测配置时候遇到的一个问题，当时问题是这样的，异常包攻击检测的时候需要配置IP地址，IP范围以及子网地址，后台给我的接口是这样的。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;ipaddr_items&gt;</div><div class="line">    &lt;<span class="built_in">type</span>&gt;subnet&lt;/<span class="built_in">type</span>&gt;</div><div class="line">    &lt;address&gt;192.168.199.0/24&lt;/address&gt;</div><div class="line">&lt;/ipaddr_items&gt;</div><div class="line">&lt;ipaddr_items&gt;</div><div class="line">    &lt;<span class="built_in">type</span>&gt;range&lt;/<span class="built_in">type</span>&gt;</div><div class="line">    &lt;address&gt;192.168.199.1-192.168.199.254&lt;/address&gt;</div><div class="line">&lt;/ipaddr_items&gt;</div><div class="line">&lt;ipaddr_items&gt;</div><div class="line">    &lt;<span class="built_in">type</span>&gt;host&lt;/<span class="built_in">type</span>&gt;</div><div class="line">    &lt;address&gt;192.168.199.10&lt;/address&gt;</div><div class="line">&lt;/ipaddr_items&gt;</div></pre></td></tr></table></figure></p>
-<a id="more"></a>
-<p>平常我传递最多的只是传递一层的接口数据，而这里有两层，而且第二层数据还有两种不同的接口，当时确实不知道怎么做，后来想到这样一种方法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"> <span class="variable">$param</span>[<span class="string">'ipaddr_items'</span>] = array(</div><div class="line">    array(</div><div class="line">        <span class="string">'type'</span>=&gt;<span class="string">'subnet'</span>,</div><div class="line">        <span class="string">'address'</span> =&gt; <span class="string">'192.168.199.0/24'</span></div><div class="line">    ),</div><div class="line">    array(</div><div class="line">        <span class="string">'type'</span>=&gt;<span class="string">'range'</span>,</div><div class="line">        <span class="string">'address'</span> =&gt; <span class="string">'192.168.199.1-192.168.199.254'</span></div><div class="line">    ),</div><div class="line">    array(</div><div class="line">        <span class="string">'type'</span>=&gt;<span class="string">'host'</span>,</div><div class="line">        <span class="string">'address'</span> =&gt; <span class="string">'192.168.199.10'</span></div><div class="line">    ),</div><div class="line">);</div></pre></td></tr></table></figure></p>
-<p>这样数据确实可以传给C后台，但是我传过去的只是写死的数据，不能通过配置框进行自由配置，这样肯定是不行的。<br>那应该怎么样才能把自由配置的数据传给后台进行显示，只能通过配置的数据上想办法了。于是有了下面这样一种方法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(<span class="variable">$_POST</span>[<span class="string">'ipaddr_items'</span>])&#123;</div><div class="line">    <span class="variable">$ipaddr_items</span> = explode(<span class="string">','</span>,formatpost(<span class="variable">$_POST</span>[<span class="string">'ipaddr_items'</span>]));</div><div class="line">    <span class="keyword">if</span>(count(<span class="variable">$ipaddr_items</span>)&gt;0)&#123;</div><div class="line">        foreach(<span class="variable">$ipaddr_items</span> as <span class="variable">$k</span>=&gt;<span class="variable">$v</span>)&#123;</div><div class="line">            <span class="keyword">if</span>(strstr(<span class="variable">$v</span>, <span class="string">'-'</span>))&#123;</div><div class="line">                <span class="variable">$data_temp</span>[<span class="variable">$k</span>][<span class="string">'type'</span>] = <span class="string">'range'</span>;</div><div class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(strstr(<span class="variable">$v</span>, <span class="string">'/'</span>))&#123;</div><div class="line">                <span class="variable">$data_temp</span>[<span class="variable">$k</span>][<span class="string">'type'</span>] = <span class="string">'subnet'</span>;</div><div class="line">            &#125;<span class="keyword">else</span>&#123;</div><div class="line">                <span class="variable">$data_temp</span>[<span class="variable">$k</span>][<span class="string">'type'</span>] = <span class="string">'host'</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="variable">$data_temp</span>[<span class="variable">$k</span>][<span class="string">'address'</span>] = <span class="variable">$v</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="variable">$data_temp</span>[0] = formatpost(<span class="variable">$_POST</span>[<span class="string">'ipaddr_items'</span>]);</div><div class="line">    &#125;</div><div class="line">    <span class="variable">$param</span>[<span class="string">'ipaddr_items'</span>] = <span class="variable">$data_temp</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>先通过explode()函数将以逗号分隔字符串打散成数组，然后对数组包含的数据进行判断；<br>如果数量大于0，则对数组进行遍历，如果等于0，直接进行格式化；<br>此时又要进行第二重判断，对类型进行判断，通过strstr()函数来判断一个字符串中是否含有另外一种字符串，此处也就是判断类型，通过三种类型的特征判定完毕之后就可以进行赋值了。<br>验证过程此处就不写了，结果是可以将配置框配置进去的数据传到后台，然后正常显示到页面上。<br>注：上面提到了explode()函数，与之对应的还有implode()函数，作用是将数组元素组合成字符串。参见下面的的代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>( <span class="variable">$get_url_param</span> == <span class="string">'sec_ipdefend_show'</span>)&#123;</div><div class="line">/*Get model, send msg to system*/</div><div class="line">    <span class="variable">$rspString</span> = getResponse( <span class="variable">$moduleName</span>, <span class="string">"show"</span> , <span class="variable">$param</span>, <span class="variable">$demo_link</span>=<span class="string">'sec_ipdefend_show'</span> );</div><div class="line">    <span class="variable">$res</span> = getAssign(<span class="variable">$rspString</span>,0);</div><div class="line">    <span class="variable">$param</span> = <span class="variable">$res</span>[<span class="string">'group'</span>][0];</div><div class="line">    <span class="keyword">if</span>(<span class="variable">$param</span>[<span class="string">'ipaddr_items'</span>])&#123;</div><div class="line">        foreach(<span class="variable">$param</span>[<span class="string">'ipaddr_items'</span>] as <span class="variable">$k</span>=&gt;<span class="variable">$v</span>)&#123;</div><div class="line">            <span class="variable">$ipaddr_items</span>[<span class="variable">$k</span>] = <span class="variable">$v</span>[<span class="string">'address'</span>];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="variable">$param</span>[<span class="string">'ipaddr_items'</span>] = implode(<span class="string">','</span>,<span class="variable">$ipaddr_items</span>);</div><div class="line">    file_put_contents(<span class="string">'b.txt'</span>,json_encode(<span class="variable">$param</span>));</div><div class="line">    include template(<span class="string">'sec_ipdefend_show'</span>);</div><div class="line">    <span class="built_in">return</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;这个问题是上次做网络攻击检测配置时候遇到的一个问题，当时问题是这样的，异常包攻击检测的时候需要配置IP地址，IP范围以及子网地址，后台给我的接口是这样的。&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;ipaddr_items&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;lt;&lt;span class=&quot;built_in&quot;&gt;type&lt;/span&gt;&amp;gt;subnet&amp;lt;/&lt;span class=&quot;built_in&quot;&gt;type&lt;/span&gt;&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;lt;address&amp;gt;192.168.199.0/24&amp;lt;/address&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;/ipaddr_items&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;ipaddr_items&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;lt;&lt;span class=&quot;built_in&quot;&gt;type&lt;/span&gt;&amp;gt;range&amp;lt;/&lt;span class=&quot;built_in&quot;&gt;type&lt;/span&gt;&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;lt;address&amp;gt;192.168.199.1-192.168.199.254&amp;lt;/address&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;/ipaddr_items&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;ipaddr_items&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;lt;&lt;span class=&quot;built_in&quot;&gt;type&lt;/span&gt;&amp;gt;host&amp;lt;/&lt;span class=&quot;built_in&quot;&gt;type&lt;/span&gt;&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;lt;address&amp;gt;192.168.199.10&amp;lt;/address&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;/ipaddr_items&amp;gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="php" scheme="http://weibo.com/categories/php/"/>
     
     
   </entry>
