@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://weibo.com/"/>
-  <updated>2018-12-06T12:20:28.498Z</updated>
+  <updated>2018-12-06T12:29:33.335Z</updated>
   <id>http://weibo.com/</id>
   
   <author>
@@ -14,6 +14,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>原生js去重的方法</title>
+    <link href="http://weibo.com/2018/12/06/%E5%8E%9F%E7%94%9Fjs%E5%8E%BB%E9%87%8D%E7%9A%84%E6%96%B9%E6%B3%95/"/>
+    <id>http://weibo.com/2018/12/06/原生js去重的方法/</id>
+    <published>2018-12-06T12:22:47.000Z</published>
+    <updated>2018-12-06T12:29:33.335Z</updated>
+    
+    <content type="html"><![CDATA[<p>主要写一下前端面试中经常会用面到的一个题目，不过在实际开发过程中很少使用原生js去重。<br><a id="more"></a></p>
+<h2 id="方法1：循环，比对"><a href="#方法1：循环，比对" class="headerlink" title="方法1：循环，比对"></a>方法1：循环，比对</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var s = ary.join(<span class="string">","</span>)+<span class="string">","</span>;</div><div class="line"><span class="keyword">for</span>(var i=0;i&lt;ary.length;i++)&#123;</div><div class="line">    <span class="keyword">if</span>(s.replace(ary[i]+<span class="string">","</span>,<span class="string">""</span>).indexOf(ary[i]+<span class="string">","</span>)&gt;-1)&#123;</div><div class="line">        alert(<span class="string">"数组中有重复元素："</span>+ary[i])</div><div class="line">        <span class="built_in">break</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="方法2：排序，循环，比对"><a href="#方法2：排序，循环，比对" class="headerlink" title="方法2：排序，循环，比对"></a>方法2：排序，循环，比对</h2><p>sort() : 返回一个元素已经进行了排序的 Array 对象<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var ary = new Array(<span class="string">"111"</span>,<span class="string">"22"</span>,<span class="string">"33"</span>,<span class="string">"111"</span>);</div><div class="line">var nary = ary.sort();</div><div class="line"><span class="keyword">for</span>(var i=0;i&lt;ary.length;i++)&#123;</div><div class="line">    <span class="keyword">if</span> (nary[i]==nary[i+1])&#123;</div><div class="line">        alert(<span class="string">"数组重复内容："</span>+nary[i]);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="方法3-定义函数"><a href="#方法3-定义函数" class="headerlink" title="方法3: 定义函数"></a>方法3: 定义函数</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> isRepeat(arr)&#123;</div><div class="line">    var <span class="built_in">hash</span> = &#123;&#125;;</div><div class="line">    <span class="keyword">for</span>(var i <span class="keyword">in</span> arr) &#123;</div><div class="line">        <span class="keyword">if</span>(<span class="built_in">hash</span>[arr[i]])</div><div class="line">        <span class="built_in">return</span> <span class="literal">true</span>;</div><div class="line">        <span class="built_in">hash</span>[arr[i]] = <span class="literal">true</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">return</span> <span class="literal">false</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;主要写一下前端面试中经常会用面到的一个题目，不过在实际开发过程中很少使用原生js去重。&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="JavaScript" scheme="http://weibo.com/categories/JavaScript/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>解决jQuery表单submit报错的问题</title>
@@ -764,36 +788,6 @@
     
     
       <category term="gulp, webpack" scheme="http://weibo.com/tags/gulp-webpack/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>python实现简单爬虫</title>
-    <link href="http://weibo.com/2017/08/29/python%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%E7%88%AC%E8%99%AB/"/>
-    <id>http://weibo.com/2017/08/29/python实现简单爬虫/</id>
-    <published>2017-08-29T01:29:00.000Z</published>
-    <updated>2017-08-29T02:05:54.151Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="获取整个页面数据"><a href="#获取整个页面数据" class="headerlink" title="获取整个页面数据"></a>获取整个页面数据</h2><p>先获取要下载图片的整个页面信息。<br>getjpg.py<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#coding=utf-8</span></div><div class="line">import urllib</div><div class="line"></div><div class="line">def getHtml(url):</div><div class="line">    page = urllib.urlopen(url)</div><div class="line">    html = page.read()</div><div class="line">    <span class="built_in">return</span> html</div><div class="line"></div><div class="line">html = getHtml(<span class="string">"http://tieba.baidu.com/p/2738151262"</span>)</div><div class="line"></div><div class="line"><span class="built_in">print</span> html</div></pre></td></tr></table></figure></p>
-<a id="more"></a>
-<p>Urllib模块提供了读取web页面数据的接口，可以像读取本地文件一样读取www和ftp上的数据。<br>首先，定义了一个getHtml()函数:<br>urllib.urlopen()方法用于打开一个URL地址。<br>read()方法用于读取URL上的数据，向getHtml()函数传递一个网址，并把整个页面下载下来。执行程序就会把整个网页打印输出。</p>
-<h2 id="筛选页面中想要的数据"><a href="#筛选页面中想要的数据" class="headerlink" title="筛选页面中想要的数据"></a>筛选页面中想要的数据</h2><p>假如找到了几张漂亮的壁纸，通过到前端查看工具。找到了图片的地址，如：src=”<a href="http://desk.zol.com.cn/bizhi/7150_88511_2.html”" target="_blank" rel="external">http://desk.zol.com.cn/bizhi/7150_88511_2.html”</a><br><img src="/2017/08/29/python实现简单爬虫/1.png" alt=""><br>修改代码如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">import re</div><div class="line">import urllib</div><div class="line"></div><div class="line">def getHtml(url):</div><div class="line">    page = urllib.urlopen(url)</div><div class="line">    html = page.read()</div><div class="line">    <span class="built_in">return</span> html</div><div class="line"></div><div class="line">def getImg(html):</div><div class="line">    reg = r<span class="string">'src="(.+?\.jpg)" pic_ext'</span></div><div class="line">    imgre = re.compile(reg)</div><div class="line">    imglist = re.findall(imgre,html)</div><div class="line">    <span class="built_in">return</span> imglist      </div><div class="line">   </div><div class="line">html = getHtml(<span class="string">"http://tieba.baidu.com/p/2460150866"</span>)</div><div class="line"><span class="built_in">print</span> getImg(html)</div></pre></td></tr></table></figure></p>
-<p>此时又创建了getImg()函数，用于在获取的整个页面中筛选需要的图片连接。re模块主要包含了正则表达式：<br>re.compile() 可以把正则表达式编译成一个正则表达式对象.<br>re.findall() 方法读取html 中包含 imgre（正则表达式）的数据。<br>运行脚本将得到整个页面中包含图片的URL地址。</p>
-<h2 id="将页面筛选的数据保存到本地"><a href="#将页面筛选的数据保存到本地" class="headerlink" title="将页面筛选的数据保存到本地"></a>将页面筛选的数据保存到本地</h2><p>把筛选的图片地址通过for循环遍历并保存到本地，代码如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#coding=utf-8</span></div><div class="line">import urllib</div><div class="line">import re</div><div class="line"></div><div class="line">def getHtml(url):</div><div class="line">    page = urllib.urlopen(url)</div><div class="line">    html = page.read()</div><div class="line">    <span class="built_in">return</span> html</div><div class="line"></div><div class="line">def getImg(html):</div><div class="line">    reg = r<span class="string">'src="(.+?\.jpg)" pic_ext'</span></div><div class="line">    imgre = re.compile(reg)</div><div class="line">    imglist = re.findall(imgre,html)</div><div class="line">    x = 0</div><div class="line">    <span class="keyword">for</span> imgurl <span class="keyword">in</span> imglist:</div><div class="line">        urllib.urlretrieve(imgurl,<span class="string">'%s.jpg'</span> % x)</div><div class="line">        x+=1</div><div class="line"></div><div class="line">html = getHtml(<span class="string">"http://tieba.baidu.com/p/2460150866"</span>)</div><div class="line"></div><div class="line"><span class="built_in">print</span> getImg(html)</div></pre></td></tr></table></figure></p>
-<p>这里的核心是用到了urllib.urlretrieve()方法，直接将远程数据下载到本地。<br>通过一个for循环对获取的图片连接进行遍历，为了使图片的文件名看上去更规范，对其进行重命名，命名规则通过x变量加1。保存的位置默认为程序的存放目录。<br>程序运行完成，将在目录下看到下载到本地的文件<br><img src="/2017/08/29/python实现简单爬虫/2.png" alt=""><br>注意：<br>运行上述代码可能会根据python版本的不同报错，我在爬虫的过程中就遇到了以下几个错误：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Missing parentheses <span class="keyword">in</span> call to <span class="string">'print'</span>——python语法错误</div></pre></td></tr></table></figure></p>
-<p>这个消息的意思是你正在试图用python3.x来运行一个只用于python2.x版本的python脚本。<br>print”Hello world”<br>上面的语法在python3中是错误的。在python3中，你需要将helloworld加括号，正确的写法如下<br>print(“Hello world”)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">“AttributeError: <span class="string">'module'</span> object has no attribute <span class="string">'urlopen'</span>”</div></pre></td></tr></table></figure></p>
-<p>原因是Python3里的urllib模块已经发生改变，此处的urllib都应该改成urllib.request。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">TypeError: can<span class="string">'t use a string pattern on a bytes-like object</span></div></pre></td></tr></table></figure></p>
-<p>原因为Python3 findall数据类型用bytes类型，因此在正则表达式前应添加html = html.decode(‘utf-8’)</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;获取整个页面数据&quot;&gt;&lt;a href=&quot;#获取整个页面数据&quot; class=&quot;headerlink&quot; title=&quot;获取整个页面数据&quot;&gt;&lt;/a&gt;获取整个页面数据&lt;/h2&gt;&lt;p&gt;先获取要下载图片的整个页面信息。&lt;br&gt;getjpg.py&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#coding=utf-8&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;import urllib&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;def getHtml(url):&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    page = urllib.urlopen(url)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    html = page.read()&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;return&lt;/span&gt; html&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;html = getHtml(&lt;span class=&quot;string&quot;&gt;&quot;http://tieba.baidu.com/p/2738151262&quot;&lt;/span&gt;)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;print&lt;/span&gt; html&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="python" scheme="http://weibo.com/categories/python/"/>
-    
     
   </entry>
   
