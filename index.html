@@ -266,6 +266,159 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://weibo.com/2018/12/06/PHP获取今日-昨日-上周-本月的起始时间戳和结束时间戳的方法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZhangHy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhangHy's Zone!">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/06/PHP获取今日-昨日-上周-本月的起始时间戳和结束时间戳的方法/" itemprop="url">PHP获取今日/昨日/上周/本月的起始时间戳和结束时间戳的方法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-06T19:50:09+08:00">
+                2018-12-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>php 获取今日、昨日、上周、本月的起始时间戳和结束时间戳的方法，主要使用到了 php 的时间函数 mktime。</p>
+<h2 id="php获取今日开始时间戳和结束时间戳"><a href="#php获取今日开始时间戳和结束时间戳" class="headerlink" title="php获取今日开始时间戳和结束时间戳"></a>php获取今日开始时间戳和结束时间戳</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$beginToday</span> = mktime(0,0,0,date(<span class="string">'m'</span>),date(<span class="string">'d'</span>),date(<span class="string">'Y'</span>));</div><div class="line"><span class="variable">$endToday</span> = mktime(0,0,0,date(<span class="string">'m'</span>),date(<span class="string">'d'</span>)+1,date(<span class="string">'Y'</span>))-1;</div></pre></td></tr></table></figure>
+<h2 id="php获取昨日开始时间戳和结束时间戳"><a href="#php获取昨日开始时间戳和结束时间戳" class="headerlink" title="php获取昨日开始时间戳和结束时间戳"></a>php获取昨日开始时间戳和结束时间戳</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$beginYesterday</span> = mktime(0,0,0,date(<span class="string">'m'</span>),date(<span class="string">'d'</span>)-1,date(<span class="string">'Y'</span>));</div><div class="line"><span class="variable">$endYesterday</span> = mktime(0,0,0,date(<span class="string">'m'</span>),date(<span class="string">'d'</span>),date(<span class="string">'Y'</span>))-1;</div></pre></td></tr></table></figure>
+<h2 id="php获取上周起始时间戳和结束时间戳"><a href="#php获取上周起始时间戳和结束时间戳" class="headerlink" title="php获取上周起始时间戳和结束时间戳"></a>php获取上周起始时间戳和结束时间戳</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$beginLastweek</span>=mktime(0,0,0,date(<span class="string">'m'</span>),date(<span class="string">'d'</span>)-date(<span class="string">'w'</span>)+1-7,date(<span class="string">'Y'</span>));</div><div class="line"><span class="variable">$endLastweek</span>=mktime(23,59,59,date(<span class="string">'m'</span>),date(<span class="string">'d'</span>)-date(<span class="string">'w'</span>)+7-7,date(<span class="string">'Y'</span>));</div></pre></td></tr></table></figure>
+<h2 id="php获取本月起始时间戳和结束时间戳"><a href="#php获取本月起始时间戳和结束时间戳" class="headerlink" title="php获取本月起始时间戳和结束时间戳"></a>php获取本月起始时间戳和结束时间戳</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$beginThismonth</span>=mktime(0,0,0,date(<span class="string">'m'</span>),1,date(<span class="string">'Y'</span>));</div><div class="line"><span class="variable">$endThismonth</span>=mktime(23,59,59,date(<span class="string">'m'</span>),date(<span class="string">'t'</span>),date(<span class="string">'Y'</span>));</div></pre></td></tr></table></figure>
+<h2 id="PHP-mktime-函数用于返回一个日期的-Unix-时间戳。"><a href="#PHP-mktime-函数用于返回一个日期的-Unix-时间戳。" class="headerlink" title="PHP mktime() 函数用于返回一个日期的 Unix 时间戳。"></a>PHP mktime() 函数用于返回一个日期的 Unix 时间戳。</h2><p>语法:<br>mktime(hour,minute,second,month,day,year,is_dst)</p>
+<h2 id="获取今天00-00"><a href="#获取今天00-00" class="headerlink" title="获取今天00:00"></a>获取今天00:00</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$todaystart</span> = strtotime(date(<span class="string">'Y-m-d'</span>.<span class="string">'00:00:00'</span>,time()));</div></pre></td></tr></table></figure>
+<h2 id="获取今天24-00"><a href="#获取今天24-00" class="headerlink" title="获取今天24:00"></a>获取今天24:00</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$todayend</span> = strtotime(date(<span class="string">'Y-m-d'</span>.<span class="string">'00:00:00'</span>,time()+3600*24));</div></pre></td></tr></table></figure>
+<h2 id="统计今天注册的用户"><a href="#统计今天注册的用户" class="headerlink" title="统计今天注册的用户"></a>统计今天注册的用户</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$todayuser</span>[<span class="string">'create_time'</span>] = array(between,<span class="string">"<span class="variable">$todaystart</span>,<span class="variable">$todayend</span>"</span>);</div><div class="line"><span class="variable">$todaysum</span> = <span class="variable">$Users</span>-&gt;<span class="built_in">where</span>(<span class="variable">$todayuser</span>)-&gt;count();</div></pre></td></tr></table></figure>
+<h2 id="获取昨天00-00"><a href="#获取昨天00-00" class="headerlink" title="获取昨天00:00"></a>获取昨天00:00</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$timestart</span> = strtotime(date(<span class="string">'Y-m-d'</span>.<span class="string">'00:00:00'</span>,time()-3600*24));</div></pre></td></tr></table></figure>
+<h2 id="获取今天00-00-1"><a href="#获取今天00-00-1" class="headerlink" title="获取今天00:00"></a>获取今天00:00</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$timeend</span> = strtotime(date(<span class="string">'Y-m-d'</span>.<span class="string">'00:00:00'</span>,time()));</div></pre></td></tr></table></figure>
+<h2 id="统计昨天注册的用户"><a href="#统计昨天注册的用户" class="headerlink" title="统计昨天注册的用户"></a>统计昨天注册的用户</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$map</span>[<span class="string">'create_time'</span>] = array(between,<span class="string">"<span class="variable">$timestart</span>,<span class="variable">$timeend</span>"</span>);</div><div class="line"><span class="variable">$daycount</span> = <span class="variable">$Users</span>-&gt;<span class="built_in">where</span>(<span class="variable">$map</span>)-&gt;count();</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$this</span>-&gt;assign(<span class="string">"todaysum"</span>,<span class="variable">$todaysum</span>);</div><div class="line"><span class="variable">$this</span>-&gt;assign(<span class="string">"daycount"</span>,<span class="variable">$daycount</span>);</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://weibo.com/2018/12/06/Linux下开启SSH/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -843,151 +996,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://weibo.com/2018/12/04/Webpack/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZhangHy">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZhangHy's Zone!">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/04/Webpack/" itemprop="url">Webpack</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-04T19:13:56+08:00">
-                2018-12-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Webpack/" itemprop="url" rel="index">
-                    <span itemprop="name">Webpack</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Webpack(模块打包机)是一种模块化工具，用于分析项目结构，找到JavaScript模块以及一些其他的浏览器不能直接圆形的拓展语言(Scss, TypeScript等)，并将其转换和打包为合适的格式供浏览器使用。</p>
-<p>Webpack对比Grunt和Gulp：<br>Grunt/Gulp是一种优化前端的开发流程的工具；工作方式是:在一个配置文件中，指明对某些文件进行类似编译，组合，压缩等任务的具体步骤，工具之后以自动完成这些任务。</p>
-<p>Webpack是一种模块化解决方案，多场景可替代Grunt/Gulp；工作方式：将项目当作一个整体，通过一个给定的主文件(如：index.js),Webpack将从这个文件开始找到项目的所有依赖文件，使用loaders处理它们，最后打包成一个(或者多个)浏览器可是别的JavaScript文件。</p>
-<p>Webpack的处理速度相对于Grunt/Gulp更快更直接，能打包更多不同类型的文件。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1038,7 +1046,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-count">35</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

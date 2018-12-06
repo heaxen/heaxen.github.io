@@ -266,6 +266,149 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://weibo.com/2018/12/03/PHP获取文件信息相关基础函数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZhangHy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhangHy's Zone!">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/03/PHP获取文件信息相关基础函数/" itemprop="url">PHP获取文件信息相关基础函数</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-03T19:00:09+08:00">
+                2018-12-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//设置临时时区</div><div class="line">&lt;?php</div><div class="line">header(<span class="string">'content-type:text/html;charset=utf-8'</span>);</div><div class="line">date_default_timezone_set(<span class="string">'PRC'</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">* 文件信息相关API</div><div class="line">*/</div><div class="line"><span class="variable">$filename</span>=<span class="string">"./test1.txt"</span>;</div><div class="line"></div><div class="line">// <span class="variable">$filename</span>=<span class="string">"test"</span>;</div><div class="line">//filetype(<span class="variable">$filename</span>):获取文件的类型,返回的是文件的类型</div><div class="line"><span class="built_in">echo</span> <span class="string">'文件类型为：'</span>,filetype(<span class="variable">$filename</span>),<span class="string">'&lt;br/&gt;'</span>;</div><div class="line"></div><div class="line">//filesize(<span class="variable">$filename</span>):获得文件的大小,返回字节</div><div class="line"><span class="built_in">echo</span> <span class="string">'文件大小为：'</span>,filesize(<span class="variable">$filename</span>),<span class="string">'&lt;br/&gt;'</span>;</div><div class="line"></div><div class="line">//filectime(<span class="variable">$filename</span>):获取文件的创建时间</div><div class="line"><span class="built_in">echo</span> <span class="string">'文件创建时间为：'</span>,filectime(<span class="variable">$filename</span>),<span class="string">'&lt;br/&gt;'</span>;</div><div class="line"><span class="built_in">echo</span> <span class="string">'文件创建时间为：'</span>,date(<span class="string">'Y年m月d日 H:i:s'</span>,filectime(<span class="variable">$filename</span>)),<span class="string">'&lt;br/&gt;'</span>;</div><div class="line"></div><div class="line">//filemtime(<span class="variable">$filename</span>):文件的修改时间</div><div class="line"><span class="built_in">echo</span> <span class="string">'文件的修改时间为：'</span>,date(<span class="string">"Y/m/d H:i:s"</span>,filemtime(<span class="variable">$filename</span>)),<span class="string">'&lt;br/&gt;'</span>;</div><div class="line"></div><div class="line">//fileatime(<span class="variable">$filename</span>):文件的最后访问时间</div><div class="line"><span class="built_in">echo</span> <span class="string">'文件的最后访问时间为：'</span>,date(<span class="string">"Y/m/d H:i:s"</span>,fileatime(<span class="variable">$filename</span>)),<span class="string">'&lt;br/&gt;'</span>;</div><div class="line"><span class="built_in">echo</span> <span class="string">'&lt;hr/&gt;'</span>;</div><div class="line"></div><div class="line">//检测文件是否可读、可写、可执行is_readable()、is_writeable()、is_executable();</div><div class="line">var_dump(</div><div class="line">is_readable(<span class="variable">$filename</span>),</div><div class="line">is_writable(<span class="variable">$filename</span>),</div><div class="line">is_writeable(<span class="variable">$filename</span>),</div><div class="line">is_executable(<span class="variable">$filename</span>)</div><div class="line">);</div><div class="line"></div><div class="line">//is_file(<span class="variable">$filename</span>):检测是否为文件,并且文件存在</div><div class="line"><span class="variable">$filename</span>=<span class="string">'./test1.txt'</span>;</div><div class="line"><span class="variable">$filename</span>=<span class="string">'./test2.txt'</span>;</div><div class="line">var_dump(is_file(<span class="variable">$filename</span>));</div><div class="line"></div><div class="line">/**</div><div class="line">* pathinfo():文件路径相关信息</div><div class="line">*/</div><div class="line"></div><div class="line"><span class="variable">$filename</span>=<span class="string">"./test1.txt"</span>;</div><div class="line"><span class="variable">$pathinfo</span>=pathinfo(<span class="variable">$filename</span>);</div><div class="line">print_r(<span class="variable">$pathinfo</span>);</div><div class="line">/*</div><div class="line">Array</div><div class="line">(</div><div class="line">[dirname] =&gt; .</div><div class="line">[basename] =&gt; test1.txt</div><div class="line">[extension] =&gt; txt</div><div class="line">[filename] =&gt; test1</div><div class="line">)</div><div class="line">*/</div><div class="line"><span class="built_in">echo</span> <span class="string">'文件扩展名：'</span>,pathinfo(<span class="variable">$filename</span>,PATHINFO_EXTENSION),<span class="string">'&lt;br/&gt;'</span>;</div><div class="line"><span class="built_in">echo</span> <span class="string">'&lt;hr/&gt;'</span>;</div><div class="line"><span class="variable">$filename</span>=__FILE__;</div><div class="line">// <span class="built_in">echo</span> <span class="variable">$filename</span>;</div><div class="line"></div><div class="line"><span class="built_in">echo</span> pathinfo(<span class="variable">$filename</span>,PATHINFO_DIRNAME),<span class="string">'&lt;br/&gt;'</span>;</div><div class="line"><span class="built_in">echo</span> pathinfo(<span class="variable">$filename</span>,PATHINFO_BASENAME),<span class="string">'&lt;br/&gt;'</span>;</div><div class="line"><span class="built_in">echo</span> pathinfo(<span class="variable">$filename</span>,PATHINFO_EXTENSION),<span class="string">'&lt;br/&gt;'</span>;</div><div class="line"><span class="built_in">echo</span> pathinfo(<span class="variable">$filename</span>,PATHINFO_FILENAME),<span class="string">'&lt;br/&gt;'</span>;</div><div class="line"></div><div class="line">//basename():返回路径中的文件名部分</div><div class="line"><span class="built_in">echo</span> basename(<span class="variable">$filename</span>),<span class="string">'&lt;br/&gt;'</span>;</div><div class="line"></div><div class="line"><span class="built_in">echo</span> basename(<span class="variable">$filename</span>,<span class="string">'.php'</span>),<span class="string">'&lt;br/&gt;'</span>;返回路径中的文件名部分 不包含.php后缀</div><div class="line">//dirname():返回文件名中路径部分</div><div class="line"><span class="built_in">echo</span> dirname(<span class="variable">$filename</span>),<span class="string">'&lt;br/&gt;'</span>;</div><div class="line"></div><div class="line">//file_exists():检测文件或者目录是否存在</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://weibo.com/2018/12/03/PHP操作数组/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -795,132 +938,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://weibo.com/2017/09/10/编写shell脚本最佳实践/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZhangHy">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZhangHy's Zone!">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/10/编写shell脚本最佳实践/" itemprop="url">编写shell脚本最佳实践</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-10T14:47:35+08:00">
-                2017-09-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="代码风格规范"><a href="#代码风格规范" class="headerlink" title="代码风格规范"></a>代码风格规范</h2><h3 id="开头有“蛇棒”"><a href="#开头有“蛇棒”" class="headerlink" title="开头有“蛇棒”"></a>开头有“蛇棒”</h3><p>所谓shebang其实就是在很多脚本的第一行出现的以”#!”开头的注释，他指明了当我们没有指定解释器的时候默认的解释器，一般可能是下面这样:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div></pre></td></tr></table></figure></p>
-<p>当然，解释器有很多种，除了bash之外，我们可以用下面的命令查看本机支持的解释器:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ cat /etc/shells</div><div class="line"><span class="comment">#/etc/shells: valid login shells</span></div><div class="line">/bin/sh</div><div class="line">/bin/dash</div><div class="line">/bin/bash</div><div class="line">/bin/rbash</div><div class="line">/user/bin/screen</div></pre></td></tr></table></figure></p>
-<p>当我们直接使用./a.sh来执行这个脚本的时候，如果没有shebang，那么它就会默认用$SHELL指定的解释器，否则就会用shebang指定的解释器。<br></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/09/10/编写shell脚本最佳实践/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -971,7 +988,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-count">35</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
