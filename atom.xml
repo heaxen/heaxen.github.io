@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://weibo.com/"/>
-  <updated>2018-12-06T03:02:09.929Z</updated>
+  <updated>2018-12-06T03:34:07.395Z</updated>
   <id>http://weibo.com/</id>
   
   <author>
@@ -14,6 +14,38 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Ubuntu14.04使用qemu创建虚拟机并配置桥接网络</title>
+    <link href="http://weibo.com/2018/12/06/Ubuntu14-04%E4%BD%BF%E7%94%A8qemu%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%B9%B6%E9%85%8D%E7%BD%AE%E6%A1%A5%E6%8E%A5%E7%BD%91%E7%BB%9C/"/>
+    <id>http://weibo.com/2018/12/06/Ubuntu14-04使用qemu创建虚拟机并配置桥接网络/</id>
+    <published>2018-12-06T03:05:40.000Z</published>
+    <updated>2018-12-06T03:34:07.395Z</updated>
+    
+    <content type="html"><![CDATA[<p>需要在宿主机中为虚拟机创建一个</p>
+<h5 id="tap虚拟网络接口，"><a href="#tap虚拟网络接口，" class="headerlink" title="tap虚拟网络接口，"></a>tap虚拟网络接口，</h5><p>并创建一个</p>
+<h5 id="虚拟网桥br0，"><a href="#虚拟网桥br0，" class="headerlink" title="虚拟网桥br0，"></a>虚拟网桥br0，</h5><p>并将tap和br0桥接起来就可以实现虚拟机的网络了。<br><a id="more"></a><br>配置的步骤：<br>一、安装两个配置网络所需软件包：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># apt-get install bridge-utils        # 虚拟网桥工具</span></div><div class="line"><span class="comment"># apt-get install uml-utilities       # UML（User-mode linux）工具</span></div></pre></td></tr></table></figure></p>
+<p>二、配置虚拟网桥br0<br>修改网络配置文件 vi /etc/network/interfaces<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">auto lo</div><div class="line">iface lo inet loopback</div><div class="line"></div><div class="line">auto br0</div><div class="line">iface br0 inet static</div><div class="line">        bridge_ports eth0</div><div class="line">address 192.168.199.186</div><div class="line">netmask 255.255.255.0</div><div class="line">gateway 192.168.199.1</div><div class="line">dns-nameserver 8.8.8.8</div><div class="line">bridge_fd 9</div><div class="line">bridge_hello 2</div><div class="line">bridge_maxage 12</div><div class="line">bridge_stp off</div><div class="line"></div><div class="line">auto eth0</div><div class="line">iface eth0 inet static</div><div class="line">address 192.168.199.186</div><div class="line">netmask 255.255.255.0</div><div class="line">gateway 192.168.199.1</div><div class="line">dns-nameserver 8.8.8.8</div></pre></td></tr></table></figure></p>
+<p>在适当的位置填上你的环境对应的参数。<br>配置完成之后一定要重启，不然看不到创建的虚拟网桥。</p>
+<p>三、手动配置TAP设备的操作<br>(最下面有通过interfaces文件在服务器启动时自动配置TAP的步骤)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">tunctl -t tap0 -u root              <span class="comment"># 创建一个tap0接口，只允许root用户访问</span></div><div class="line">brctl addif br0 tap0                <span class="comment"># 在虚拟网桥中增加一个tap0接口</span></div><div class="line">ifconfig tap0 0.0.0.0 promisc up    <span class="comment"># 打开tap0接口</span></div><div class="line">brctl showstp br0                   <span class="comment"># 显示br0的各个接口</span></div></pre></td></tr></table></figure></p>
+<p>四、启动虚拟机</p>
+<p>五、修改虚拟机的网络配置文件<br>vi /etc/network/interfaces<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># and how to activate them. For more information, see interfaces(5).</span></div><div class="line"></div><div class="line"><span class="comment"># The loopback network interface</span></div><div class="line">auto lo</div><div class="line">iface lo inet loopback</div><div class="line"></div><div class="line"><span class="comment"># The primary network interface</span></div><div class="line">auto eth0</div><div class="line">iface eth0 inet static</div><div class="line">address 192.168.199.187</div><div class="line">netmask 255.255.255.0</div><div class="line">gateway 192.168.199.1</div><div class="line">bridge_fp 9</div><div class="line">bridge_hello 2</div><div class="line">bridge_maxage 12</div><div class="line">bridge_stp off</div><div class="line">dns-nameserver 8.8.8.8</div></pre></td></tr></table></figure></p>
+<p>修改完成之后ifdown eth0 &amp;&amp; ifup eth0</p>
+<p>六、为了在系统启动时能够自动配置虚拟网桥和TAP设备，编写<br>vi /etc/network/interfaces<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">auto lo</div><div class="line">iface lo inet loopback</div><div class="line"><span class="comment">#auto p4p1//p4p1网卡的配置要注释掉</span></div><div class="line"><span class="comment">#iface p4p1 inet manual</span></div><div class="line">auto br0</div><div class="line">iface br0 inet static</div><div class="line">        bridge_ports eth0</div><div class="line">address 192.168.199.186</div><div class="line">netmask 255.255.255.0</div><div class="line">gateway 192.168.199.1</div><div class="line">bridge_fd 9</div><div class="line">bridge_hello 2</div><div class="line">bridge_maxage 12</div><div class="line">bridge_stp off</div><div class="line">dns-nameservers 8.8.8.8 114.114.114.114</div><div class="line">auto tap0</div><div class="line">iface tap0 inet manual</div><div class="line">pre-up tunctl -t tap0 -u root</div><div class="line">pre-up ifconfig tap0 0.0.0.0 promisc up</div><div class="line">post-up brctl addif br0 tap0</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;需要在宿主机中为虚拟机创建一个&lt;/p&gt;
+&lt;h5 id=&quot;tap虚拟网络接口，&quot;&gt;&lt;a href=&quot;#tap虚拟网络接口，&quot; class=&quot;headerlink&quot; title=&quot;tap虚拟网络接口，&quot;&gt;&lt;/a&gt;tap虚拟网络接口，&lt;/h5&gt;&lt;p&gt;并创建一个&lt;/p&gt;
+&lt;h5 id=&quot;虚拟网桥br0，&quot;&gt;&lt;a href=&quot;#虚拟网桥br0，&quot; class=&quot;headerlink&quot; title=&quot;虚拟网桥br0，&quot;&gt;&lt;/a&gt;虚拟网桥br0，&lt;/h5&gt;&lt;p&gt;并将tap和br0桥接起来就可以实现虚拟机的网络了。&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://weibo.com/categories/Linux/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>在Ubuntu中安装和使用kvm</title>
@@ -798,39 +830,6 @@
     
     
       <category term="socket" scheme="http://weibo.com/tags/socket/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>设计模式：MVC和MVVM</title>
-    <link href="http://weibo.com/2017/08/21/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9AMVC%E5%92%8CMVVM/"/>
-    <id>http://weibo.com/2017/08/21/设计模式：MVC和MVVM/</id>
-    <published>2017-08-21T06:41:27.000Z</published>
-    <updated>2017-08-21T09:08:20.874Z</updated>
-    
-    <content type="html"><![CDATA[<p>想起来写这篇文章主要是今天早上上班的途中，想到以前找工作的时候面试的一家单位说他们的使用的框架主要是AngularJs，然后就自然而然的想到了的MVC，什么是Angular后面一篇文章再写，这里就先把MVC和MVVM整明白。<br>看过很多文章写MVC的，然后一上来就是给你介绍什么是Model（数据模型–数据保存），什么是View（视图层–用户界面），什么是Controller（控制器–业务逻辑），再给你介绍他们之间的通信，看完之后基本上还是云里雾里。<br>先放几张在阮一峰老师的博客里贴的图，还是比较直观的介绍了什么是MVC：<br><img src="/2017/08/21/设计模式：MVC和MVVM/mvc_1.png" alt=""><br><a id="more"></a><br>通信方式（所有的通信都是单向的）：<br>1、View 发送指令到 Controller；<br>2、Controller 进行业务逻辑处理，要求 Model 改变状态；<br>3、Model 将新的数据发送到 View ， 用户得到反馈。</p>
-<p>在接收用户指令是可以分为两种方式：<br><img src="/2017/08/21/设计模式：MVC和MVVM/mvc_2.png" alt=""><br>View 接收指令，然后传递给Controller，这也是工作中最常见的。<br>另外一种是直接通过Controller接受指令：<br><img src="/2017/08/21/设计模式：MVC和MVVM/mvc_3.png" alt=""><br>这种方式和服务器是对应的，因为服务器根本就没有View。<br>在服务器端，view根据model直接生成HTML，然后直接扔给浏览器去渲染和展示，通过Ajax或者js post告诉服务器controller view的响应事件，controller真的做的只是业务数据的处理，出来的结果其实还是数据，根本没有去做UI相关的事情。<br>MVC本质就是将数据展示和数据进行进行隔离，提高代码的复用性和扩展性。<br>接下来看一看下面这张图，更好的解释了MVC的之间的通信以及关系：<br><img src="/2017/08/21/设计模式：MVC和MVVM/mvc.png" alt=""><br>Controller可以和Model通信，也可以和View进行通信。<br>Controller和Model的关系：<br>绿色的箭头代表Controller可以直接进行对Model进行访问，也就是说Model对于Controller来说就是透明的。但是Model并不知道Controller是谁。如果Model发生了变化，那么就通过Notification和KVO的方式传递给Controller。<br>Controller和View的关系：<br>View对Controller来说就是透明的。Controller可以直接根据Model决定View的展示。View如果接受响应事件则通过delegate，target-action，block等方式告诉Controller的状态变化。Controller进行业务的处理，然后再控制View的展示。<br>到这里你会发现Model和View并不能直接的进行通信，都必须通过Controller。那这样Model和View就是相互独立的。<br>View只负责页面的展示，Model只是数据的存储，那么也就达到了解耦和重用的目的。<br>如果业务复杂起来，再加上其他乱七八糟的验证，controller就会变得很大，越来越难以维护。这个也是MVC比较明显的缺点。<br>在实际的项目开发中，往往采用更灵活的方式，阮一峰老师是这样解释的：<br><img src="/2017/08/21/设计模式：MVC和MVVM/mvc_4.png" alt=""></p>
-<ol>
-<li>用户可以向 View 发送指令（DOM 事件），再由 View 直接要求 Model 改变状态。</li>
-<li>用户也可以直接向 Controller 发送指令（改变 URL 触发 hashChange 事件），再由 Controller 发送给 View。</li>
-<li>Controller 非常薄，只起到路由的作用，而 View 非常厚，业务逻辑都部署在 View。所以，Backbone 索性取消了 Controller，只保留一个 Router（路由器） 。<br>同时阮一峰老师还说明了MVP和MVVM：<br><img src="/2017/08/21/设计模式：MVC和MVVM/mvp.png" alt=""></li>
-<li>各部分之间的通信，都是双向的。</li>
-<li>View 与 Model 不发生联系，都通过 Presenter 传递。</li>
-<li>View 非常薄，不部署任何业务逻辑，称为”被动视图”（Passive View），即没有任何主动性，而 Presenter非常厚，所有逻辑都部署在那里。<br><img src="/2017/08/21/设计模式：MVC和MVVM/mvvm_1.png" alt=""><br>MVVM 模式将 Presenter 改名为 ViewModel，基本上与 MVP 模式完全一致。<br>唯一的区别是，它采用双向绑定（data-binding）：View的变动，自动反映在 ViewModel，反之亦然。Angular 和 Ember 都采用这种模式。<br>可是我们为什么要采用MVVM这种设计模式呢？<br>原因是controller越来越臃肿，越来越难以维护，这就需要优化和瘦身了。所谓的业务逻辑，无非就是根据几个数据得出一个数据用来控制view的显示。比如展示的是什么文案，按钮能不能响应，页面能不能跳转等等。那MVVM就干了这件事，帮忙分担一下controller里面的部分业务逻辑。MVVM更合理的应该叫做MV-CM。<br><img src="/2017/08/21/设计模式：MVC和MVVM/mvvm.png" alt=""><br>这个时候，controller将不再直接和真实的model进行绑定了，而通过ViewModel,viewModel进行持有真实的Model。<br>关于MVVM的优点：<br>方便测试<br>在MVC下，Controller基本是无法测试的，里面混杂了个各种逻辑，而且分散在不同的地方。有了MVVM我们就可以测试里面的viewModel，来验证我们的处理结果对不对（Xcode7的测试已经越来越完善了）。<br>便于代码的移植<br>比如iOS里面有iPhone版本和iPad版本，除了交互展示不一样外，业务逻辑的model是一致的。这样，我们就可以以很小的代价去开发另一个app。<br>兼容MVC<br>MVVM是MVC的一个升级版，目前的MVC也可以很快的转换到MVVM这个模式。VC可以省去一大部分展示逻辑。<br>缺点：<br>类会增多<br>每个VC都附带一个viewModel，类的数量*2<br>viewModel会越来越庞大<br>我们把逻辑给了viewModel，那势必Model也会变得很复杂，里面的属性和方法越来越多。可能重写的方法比较多，因为涉及到一些数据的转换以及和controller之间的通信。<br>调用复杂度增加<br>由于数据都是从viewModel来，想想突然来了一个新人，一看代码，不知道真实的模型是谁。比如常用tableview的数据源，一般都是一个数组，如果不断的通过viewModel去取，沟通上没有那么直接。况且每封一层，意味着要写很多代码去融合他们的转换。</li>
-</ol>
-<p>参考文档：<br><a href="http://www.ruanyifeng.com/blog/2015/02/mvcmvp_mvvm.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2015/02/mvcmvp_mvvm.html</a><br><a href="http://www.jianshu.com/p/f4faa720f00d" target="_blank" rel="external">http://www.jianshu.com/p/f4faa720f00d</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;想起来写这篇文章主要是今天早上上班的途中，想到以前找工作的时候面试的一家单位说他们的使用的框架主要是AngularJs，然后就自然而然的想到了的MVC，什么是Angular后面一篇文章再写，这里就先把MVC和MVVM整明白。&lt;br&gt;看过很多文章写MVC的，然后一上来就是给你介绍什么是Model（数据模型–数据保存），什么是View（视图层–用户界面），什么是Controller（控制器–业务逻辑），再给你介绍他们之间的通信，看完之后基本上还是云里雾里。&lt;br&gt;先放几张在阮一峰老师的博客里贴的图，还是比较直观的介绍了什么是MVC：&lt;br&gt;&lt;img src=&quot;/2017/08/21/设计模式：MVC和MVVM/mvc_1.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="设计模式" scheme="http://weibo.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    
-    
-      <category term="mvc,mvvm" scheme="http://weibo.com/tags/mvc-mvvm/"/>
     
   </entry>
   
