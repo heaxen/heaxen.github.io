@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://weibo.com/"/>
-  <updated>2018-12-04T11:25:11.581Z</updated>
+  <updated>2018-12-05T05:38:29.077Z</updated>
   <id>http://weibo.com/</id>
   
   <author>
@@ -14,6 +14,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>在Ubuntu中安装和使用kvm</title>
+    <link href="http://weibo.com/2018/12/05/%E5%9C%A8Ubuntu%E4%B8%AD%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8kvm/"/>
+    <id>http://weibo.com/2018/12/05/在Ubuntu中安装和使用kvm/</id>
+    <published>2018-12-05T04:43:30.000Z</published>
+    <updated>2018-12-05T05:38:29.077Z</updated>
+    
+    <content type="html"><![CDATA[<p>首先解决一个我的x86设备重启之后就不能上网的问题，虽然无法完全根治，之恩那个每次重启之后进行如下操作：<br>手动设置静态IP<br>1、vim /etc/network/interfaces</p>
+<p>2、修改文件内容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">auto lo</div><div class="line">iface lo inet loopback</div><div class="line"></div><div class="line">auto eth0</div><div class="line">iface eth0 inet static</div><div class="line">address 192.168.199.186</div><div class="line">netmask 255.255.255.0</div><div class="line">gateway 192.168.199.1</div><div class="line">dns-nameserver 8.8.8.8</div></pre></td></tr></table></figure></p>
+<p>3、配置DNS解析器<br>vim /etc/reslov.conf，输入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nameserver 8.8.8.8  //(8.8.8.8谷歌的DNS解析器，可能比较慢)</div><div class="line">nameserver 114.114.114.114  //(国内的DNS解析器)</div></pre></td></tr></table></figure></p>
+<p>4、重启网络sudo /etc/init.d/networking restart</p>
+<p>su命令不能切换root，提示su: Authentication failure，只要你sudo passwd root过一次之后，下次再su的时候只要输入密码就可以成功登录了。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;首先解决一个我的x86设备重启之后就不能上网的问题，虽然无法完全根治，之恩那个每次重启之后进行如下操作：&lt;br&gt;手动设置静态IP&lt;br&gt;1、vim /etc/network/interfaces&lt;/p&gt;
+&lt;p&gt;2、修改文件内容&lt;br&gt;&lt;figure class=&quot;highl
+    
+    </summary>
+    
+      <category term="linux" scheme="http://weibo.com/categories/linux/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>Webpack</title>
@@ -772,44 +798,6 @@
     
     
       <category term="mvc,mvvm" scheme="http://weibo.com/tags/mvc-mvvm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>5种跨域方式以及原理</title>
-    <link href="http://weibo.com/2017/08/19/5%E7%A7%8D%E8%B7%A8%E5%9F%9F%E6%96%B9%E5%BC%8F%E4%BB%A5%E5%8F%8A%E5%8E%9F%E7%90%86/"/>
-    <id>http://weibo.com/2017/08/19/5种跨域方式以及原理/</id>
-    <published>2017-08-19T08:05:30.000Z</published>
-    <updated>2017-08-19T08:56:53.657Z</updated>
-    
-    <content type="html"><![CDATA[<p>如果想从浏览器的一个网站访问去执行另外一个网站的脚本，显然是不可行的，因为受到了浏览器同源策略的影响，同源策略是浏览器对JavaScript施加的安全限制。<br>同源策略：如果两个页面拥有相同的协议（protocol），端口（port，如果指定）和主机（host），那么这两个页面就属于同一个源（origin）。<br>如果想要通过浏览器中的一个页面去执行另一个页面的脚本，那么就需要通过跨域。<br>下面介绍几种常见的跨域方式：</p>
-<h2 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h2><p>script标签是不受同源策略的影响的，它可以引入来自任何地方的js文件。<br>jsonp的原理就是在客户端和服务端定义一个函数，当客户端发起一个请求时，服务端返回一段javascript代码，其中调用了在客户端定义的函数，并将相应的数据作为参数传入该函数。<br><a id="more"></a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> jsonp_cb(data) &#123;</div><div class="line">    console.log(data);</div><div class="line">&#125;</div><div class="line"><span class="keyword">function</span> <span class="function"><span class="title">ajax</span></span>()&#123;</div><div class="line">    var url = <span class="string">"http://xx.com/test.php?jsonp_callback=jsonp_cb"</span>;</div><div class="line">    var script = document.createElement(<span class="string">'script'</span>);</div><div class="line">    // 发送请求</div><div class="line">    script.src = url;</div><div class="line">    document.head.appendChild(script);</div><div class="line">&#125;</div><div class="line">ajax()</div></pre></td></tr></table></figure></p>
-<p>服务端获取到jsonp_callback传递的函数名jsonp_cb，返回一段对该函数调用的js代码<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">jsonp_cb(&#123;</div><div class="line">   <span class="string">"name"</span>: <span class="string">"story"</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<h2 id="img-ping"><a href="#img-ping" class="headerlink" title="img ping"></a>img ping</h2><p>img标签也是没有跨域限制的，但它只能用来发送GET请求，且无法获取服务端的响应文本，可以利用它实现一些简单的、单向的跨域通信，例如跟踪用户的点击<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var img = new Image();</div><div class="line">img.onload = <span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">    console.log(<span class="string">'done'</span>)</div><div class="line">    img.onload = null;</div><div class="line">    img = null;</div><div class="line">&#125;</div><div class="line">img.src = <span class="string">"http://xx/xx.gif"</span></div></pre></td></tr></table></figure></p>
-<h2 id="window-name"><a href="#window-name" class="headerlink" title="window.name"></a>window.name</h2><p>window对象拥有name属性，它有一个特点：相同协议下，在一个页面中，不随URL的改变而改变。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">window.name = <span class="string">'string'</span> // 字符串，一般允许的最大值为2M</div><div class="line">console.log(window.name)</div><div class="line">location = <span class="string">'http://funteas.com/'</span></div></pre></td></tr></table></figure></p>
-<p>此时，在控制台输入window.name，结果依然是”string”<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">window.name // <span class="string">"string"</span></div></pre></td></tr></table></figure></p>
-<p>window.name的值只能是字符串，任何其他类型的值都会“转化”为字符串<br>例如<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">window.name = <span class="function"><span class="title">function</span></span>()&#123;&#125;</div><div class="line">console.log(window.name)</div><div class="line">// <span class="string">"function()&#123;&#125;"</span></div></pre></td></tr></table></figure></p>
-<p>通过window.name实现跨域也很简单，iframe拥有contentWindow属性，其指向该iframe的window对象的引用，如果在iframe的src指向的页面中设置window.name值，那么就可以通过iframe.contentWindow.name就可以拿到这个值了<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var url = <span class="string">"http://funteas.com/lab/windowName"</span>;</div><div class="line">var iframe = document.createElement(<span class="string">'iframe'</span>)</div><div class="line">iframe.onload = <span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">    var data = iframe.contentWindow.name</div><div class="line">    console.log(data)</div><div class="line">&#125;</div><div class="line">iframe.src = url</div><div class="line">document.body.appendChild(iframe)</div></pre></td></tr></table></figure></p>
-<p>然而，chrome会提示你跨域了！<br>而我们已经知道window.name不随URL的改变而改版，也就是说，onload时，已经获取到了name，只不过因为不同源，当前页面的脚本无法拿到iframe.contentWindow.name，此时只需要把iframe.src改为同源即可<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var url = <span class="string">"http://funteas.com/lab/windowName"</span>;</div><div class="line">var iframe = document.createElement(<span class="string">'iframe'</span>)</div><div class="line">iframe.onload = <span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">    iframe.src = <span class="string">'favicon.ico'</span>;</div><div class="line">    var data = iframe.contentWindow.name</div><div class="line">    console.log(data)</div><div class="line">&#125;</div><div class="line">iframe.src = url</div><div class="line">document.body.appendChild(iframe)</div></pre></td></tr></table></figure></p>
-<p>刷新页面，你会发现iframe不断刷新，这是因为每次onload，iframe的src被修改，然后再次触发onload，从而导致iframe循环刷新，修改下即可<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">var url = <span class="string">"http://funteas.com/lab/windowName"</span>;</div><div class="line">var iframe = document.createElement(<span class="string">'iframe'</span>)</div><div class="line">var state = <span class="literal">true</span>;</div><div class="line">iframe.onload = <span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">    <span class="keyword">if</span>(state === <span class="literal">true</span>)&#123;</div><div class="line">        iframe.src = <span class="string">'favicon.ico'</span>;</div><div class="line">        state = <span class="literal">false</span>;</div><div class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(state === <span class="literal">false</span>)&#123;</div><div class="line">        state = null</div><div class="line">        var data = iframe.contentWindow.name</div><div class="line">        console.log(data)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">iframe.src = url</div><div class="line">document.body.appendChild(iframe)</div></pre></td></tr></table></figure></p>
-<p>上面请求的是一个静态页面，而服务端通常需要的是动态数据<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">echo</span> <span class="string">'&lt;script&gt; window.name = "&#123;\"name\":\"story\"&#125;"&lt;/script&gt;'</span>;</div></pre></td></tr></table></figure></p>
-<h2 id="postMessage"><a href="#postMessage" class="headerlink" title="postMessage"></a>postMessage</h2><p>postMessage允许不同源之间的脚本进行通信，用法<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">otherWindow.postMessage(message, targetOrigin);</div></pre></td></tr></table></figure></p>
-<p>otherWindow 引用窗口 iframe.contentwindow 或 window.open返回的对象<br>message 为要传递的数据<br>targetOrigin 为目标源<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">// http://127.0.0.1:80</div><div class="line">var iframe = document.createElement(<span class="string">'iframe'</span>)</div><div class="line">iframe.onload = <span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">    var popup = iframe.contentWindow</div><div class="line">    popup.postMessage(<span class="string">"hello"</span>, <span class="string">"http://127.0.0.1:5000"</span>);</div><div class="line">&#125;</div><div class="line">iframe.src = <span class="string">'http://127.0.0.1:5000/lab/postMessage'</span></div><div class="line">document.body.appendChild(iframe)</div><div class="line">// 监听返回的postMessage</div><div class="line">window.addEventListener(<span class="string">"message"</span>, <span class="keyword">function</span>(event)&#123;</div><div class="line">    <span class="keyword">if</span> (event.origin !== <span class="string">"http://127.0.0.1:5000"</span>) <span class="built_in">return</span>;</div><div class="line">    console.log(event.data)</div><div class="line">&#125;, <span class="literal">false</span>)</div><div class="line">// http://127.0.0.1:5000/lab/postMessage</div><div class="line">window.addEventListener(<span class="string">"message"</span>, <span class="keyword">function</span>(event)&#123;</div><div class="line">    // 验证消息来源</div><div class="line">    <span class="keyword">if</span> (event.origin !== <span class="string">"http://127.0.0.1"</span>) <span class="built_in">return</span>;</div><div class="line">    console.log(event.source); // 消息源 popup</div><div class="line">    console.log(event.origin); // 消息源URI https://secure.example.net </div><div class="line">    console.log(event.data); // 来自消息源的数据 hello</div><div class="line">    // 返回数据</div><div class="line">    var message = <span class="string">'world'</span>;</div><div class="line">    event.source.postMessage(message, event.origin);</div><div class="line">&#125;, <span class="literal">false</span>);</div></pre></td></tr></table></figure></p>
-<h2 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h2><p>CORS（跨域资源共享）是一种跨域访问的机制，可以让AJAX实现跨域访问。它允许一个域上的脚本向另一个域提交跨域 AJAX 请求。实现此功能非常简单，只需由服务器发送一个响应标头即可。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Access-Control-Allow-Origin: * // 允许来自任何域的请求</div><div class="line">Access-Control-Allow-Origin: http://funteas.com/ // 仅允许来自http://</div></pre></td></tr></table></figure></p>
-<p>funteas.com/的请求<br>当客户端的ajax请求的url为其他域时，对于支持CORS的浏览器，请求头会自动添加Origin，值为当前host<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var xhr = new XMLHttpRequest();</div><div class="line">var url = <span class="string">'http://bar.other/resources/public-data/'</span>;</div><div class="line">xhr.open(<span class="string">'GET'</span>, url, <span class="literal">true</span>);</div><div class="line">xhr.send();</div></pre></td></tr></table></figure></p>
-<p>CORS默认不发送cookie，如果要发送cookie，需要设置withCredentials<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var xhr = new XMLHttpRequest();</div><div class="line">xhr.withCredentials = <span class="literal">true</span>;</div></pre></td></tr></table></figure></p>
-<p>同时，服务端也要设置<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Access-Control-Allow-Credentials: <span class="literal">true</span></div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;如果想从浏览器的一个网站访问去执行另外一个网站的脚本，显然是不可行的，因为受到了浏览器同源策略的影响，同源策略是浏览器对JavaScript施加的安全限制。&lt;br&gt;同源策略：如果两个页面拥有相同的协议（protocol），端口（port，如果指定）和主机（host），那么这两个页面就属于同一个源（origin）。&lt;br&gt;如果想要通过浏览器中的一个页面去执行另一个页面的脚本，那么就需要通过跨域。&lt;br&gt;下面介绍几种常见的跨域方式：&lt;/p&gt;
-&lt;h2 id=&quot;jsonp&quot;&gt;&lt;a href=&quot;#jsonp&quot; class=&quot;headerlink&quot; title=&quot;jsonp&quot;&gt;&lt;/a&gt;jsonp&lt;/h2&gt;&lt;p&gt;script标签是不受同源策略的影响的，它可以引入来自任何地方的js文件。&lt;br&gt;jsonp的原理就是在客户端和服务端定义一个函数，当客户端发起一个请求时，服务端返回一段javascript代码，其中调用了在客户端定义的函数，并将相应的数据作为参数传入该函数。&lt;br&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="javascript" scheme="http://weibo.com/categories/javascript/"/>
-    
     
   </entry>
   
