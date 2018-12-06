@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://weibo.com/"/>
-  <updated>2018-12-06T02:47:10.357Z</updated>
+  <updated>2018-12-06T02:49:29.266Z</updated>
   <id>http://weibo.com/</id>
   
   <author>
@@ -20,14 +20,14 @@
     <link href="http://weibo.com/2018/12/05/%E5%9C%A8Ubuntu%E4%B8%AD%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8kvm/"/>
     <id>http://weibo.com/2018/12/05/在Ubuntu中安装和使用kvm/</id>
     <published>2018-12-05T04:43:30.000Z</published>
-    <updated>2018-12-06T02:47:10.357Z</updated>
+    <updated>2018-12-06T02:49:29.266Z</updated>
     
     <content type="html"><![CDATA[<p>首先解决设备不能上网的问题，虽然无法完全根治，每次重启之后进行如下操作：<br>手动设置静态IP<br>1、vim /etc/network/interfaces</p>
 <p>2、修改文件内容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">auto lo</div><div class="line">iface lo inet loopback</div><div class="line"></div><div class="line">auto eth0</div><div class="line">iface eth0 inet static</div><div class="line">address 192.168.199.186</div><div class="line">netmask 255.255.255.0</div><div class="line">gateway 192.168.199.1</div><div class="line">dns-nameserver 8.8.8.8</div></pre></td></tr></table></figure></p>
 <p>3、配置DNS解析器<br>vim /etc/reslov.conf，输入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nameserver 8.8.8.8  //(8.8.8.8谷歌的DNS解析器，可能比较慢)</div><div class="line">nameserver 114.114.114.114  //(国内的DNS解析器)</div></pre></td></tr></table></figure></p>
 <p>4、重启网络sudo /etc/init.d/networking restart<br>   重启网卡还有以下几种方法：</p>
 <a id="more"></a>
-<h2 id="Linux重启网卡的三种方法："><a href="#Linux重启网卡的三种方法：" class="headerlink" title="Linux重启网卡的三种方法："></a>Linux重启网卡的三种方法：</h2><h3 id="一、network"><a href="#一、network" class="headerlink" title="一、network"></a>一、network</h3><p>利用root帐户<br>service network restart<br>或者/etc/init.d/networking restart</p>
+<h2 id="Linux重启网卡的三种方法"><a href="#Linux重启网卡的三种方法" class="headerlink" title="Linux重启网卡的三种方法"></a>Linux重启网卡的三种方法</h2><h3 id="一、network"><a href="#一、network" class="headerlink" title="一、network"></a>一、network</h3><p>利用root帐户<br>service network restart<br>或者/etc/init.d/networking restart</p>
 <h3 id="二、ifdown-ifup"><a href="#二、ifdown-ifup" class="headerlink" title="二、ifdown/ifup"></a>二、ifdown/ifup</h3><p>ifdown eth0<br>ifup eth0</p>
 <h3 id="三、ifconfig"><a href="#三、ifconfig" class="headerlink" title="三、ifconfig"></a>三、ifconfig</h3><p>ifconfig eth0 down<br>ifconfig eth0 up</p>
 <h3 id="重启失效"><a href="#重启失效" class="headerlink" title="重启失效"></a>重启失效</h3><p>Ubuntu14.04修改配置，重启网卡没有生效，出现如下问题：<br>service  networking restart //重启网络服务<br>stop: Job failed while stopping<br>start: Job is already running: networking</p>
