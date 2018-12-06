@@ -79,7 +79,7 @@
     <link href="http://weibo.com/2018/12/05/%E5%9C%A8Ubuntu%E4%B8%AD%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8kvm/"/>
     <id>http://weibo.com/2018/12/05/在Ubuntu中安装和使用kvm/</id>
     <published>2018-12-05T04:43:30.000Z</published>
-    <updated>2018-12-06T03:02:09.929Z</updated>
+    <updated>2018-12-06T04:27:28.646Z</updated>
     
     <content type="html"><![CDATA[<p>首先解决设备不能上网的问题，虽然无法完全根治，每次重启之后进行如下操作：<br>手动设置静态IP<br>1、vim /etc/network/interfaces</p>
 <p>2、修改文件内容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">auto lo</div><div class="line">iface lo inet loopback</div><div class="line"></div><div class="line">auto eth0</div><div class="line">iface eth0 inet static</div><div class="line">address 192.168.199.186</div><div class="line">netmask 255.255.255.0</div><div class="line">gateway 192.168.199.1</div><div class="line">dns-nameserver 8.8.8.8</div></pre></td></tr></table></figure></p>
@@ -113,7 +113,7 @@
 <h3 id="七、使用虚拟机GUI管理工具创建虚拟机"><a href="#七、使用虚拟机GUI管理工具创建虚拟机" class="headerlink" title="七、使用虚拟机GUI管理工具创建虚拟机"></a>七、使用虚拟机GUI管理工具创建虚拟机</h3><p>搜索Virtual Machine Manager,打开虚拟机管理工具进行虚拟机的创建<br>创建虚拟机时使用准备好的iso文件，然后按照说明Forward</p>
 <h2 id="Xshell连接不上Ubuntu的问题"><a href="#Xshell连接不上Ubuntu的问题" class="headerlink" title="Xshell连接不上Ubuntu的问题"></a>Xshell连接不上Ubuntu的问题</h2><p>通常报错: … … (port:22): connection failed.<br>原因：没有真正开启ssh-server服务<br>解决方法：</p>
 <h3 id="一、安装ssh-server服务"><a href="#一、安装ssh-server服务" class="headerlink" title="一、安装ssh-server服务"></a>一、安装ssh-server服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install openssh-server</div></pre></td></tr></table></figure>
-<h3 id="二、确认sshserver是否启动"><a href="#二、确认sshserver是否启动" class="headerlink" title="二、确认sshserver是否启动"></a>二、确认sshserver是否启动</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ps -e |grep ssh</div></pre></td></tr></table></figure>
+<h3 id="二、确认ssh-server是否启动"><a href="#二、确认ssh-server是否启动" class="headerlink" title="二、确认ssh-server是否启动"></a>二、确认ssh-server是否启动</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ps -e |grep ssh</div></pre></td></tr></table></figure>
 <h3 id="三、启动ssh"><a href="#三、启动ssh" class="headerlink" title="三、启动ssh"></a>三、启动ssh</h3><p>如果只有ssh-agent，表示ssh-server还没有启动，需要：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/etc/init.d/ssh start</div></pre></td></tr></table></figure></p>
 <p>如果看到sshd，则ssh-server已经启动了。</p>
 <h3 id="四、补充"><a href="#四、补充" class="headerlink" title="四、补充"></a>四、补充</h3><p>ssh-server配置文件位于：<br>/etc/ssh/sshd_config<br>在这里可以定义SSH的服务端口，默认端口是22，你可以自己定义成其他端口号，<br>如21。然后重启SSH服务：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo /etc/init.d/ssh resart</div></pre></td></tr></table></figure></p>
