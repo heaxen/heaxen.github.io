@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="ZhangHy&#39;s Zone!">
 <meta property="og:description" content="首先解决设备不能上网的问题，虽然无法完全根治，每次重启之后进行如下操作：手动设置静态IP1、vim /etc/network/interfaces 2、修改文件内容123456789auto loiface lo inet loopbackauto eth0iface eth0 inet staticaddress 192.168.199.186netmask 255.255.255.0gatew">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-06T02:43:39.730Z">
+<meta property="og:updated_time" content="2018-12-06T02:45:16.294Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在Ubuntu中安装和使用kvm">
 <meta name="twitter:description" content="首先解决设备不能上网的问题，虽然无法完全根治，每次重启之后进行如下操作：手动设置静态IP1、vim /etc/network/interfaces 2、修改文件内容123456789auto loiface lo inet loopbackauto eth0iface eth0 inet staticaddress 192.168.199.186netmask 255.255.255.0gatew">
@@ -374,8 +374,7 @@
 <h3 id="二、使用root用户给当前用户增加sudo的权限，避免在安装是需要输入root密码"><a href="#二、使用root用户给当前用户增加sudo的权限，避免在安装是需要输入root密码" class="headerlink" title="二、使用root用户给当前用户增加sudo的权限，避免在安装是需要输入root密码"></a>二、使用root用户给当前用户增加sudo的权限，避免在安装是需要输入root密码</h3><p>输入如下命令:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">echo</span> <span class="string">"zhy ALL=(ALL) ALL"</span> &gt;&gt;/etc/sudoers</div><div class="line"><span class="built_in">echo</span> <span class="string">"zhy ALL=(ALL) NOPASSWD:ALL"</span> &gt;&gt;/etc/sudoers</div></pre></td></tr></table></figure></p>
 <p>其中zhy是用户名</p>
 <h3 id="三、重新登录Ubuntu，验证sudo权限"><a href="#三、重新登录Ubuntu，验证sudo权限" class="headerlink" title="三、重新登录Ubuntu，验证sudo权限"></a>三、重新登录Ubuntu，验证sudo权限</h3><p>输入sudo apt-get update命令，如果没有提示要求输入密码则表示设置sudo权限成功</p>
-<h3 id="四、安装KVM程序包"><a href="#四、安装KVM程序包" class="headerlink" title="四、安装KVM程序包"></a>四、安装KVM程序包</h3><p>root权限下输入命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># apt-get install qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils</span></div></pre></td></tr></table></figure></p>
-<p>安装完成后需要重新登录系统，输入命令groups，确保用户已经加入libvirtd群组中</p>
+<h3 id="四、安装KVM程序包"><a href="#四、安装KVM程序包" class="headerlink" title="四、安装KVM程序包"></a>四、安装KVM程序包</h3><p>root权限下输入命令：<br>sudo apt-get install qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils<br>安装完成后需要重新登录系统，输入命令groups，确保用户已经加入libvirtd群组中</p>
 <h4 id="踩坑-Ubuntu不支持yum安装kvm，适用于CentOS。"><a href="#踩坑-Ubuntu不支持yum安装kvm，适用于CentOS。" class="headerlink" title="踩坑 || Ubuntu不支持yum安装kvm，适用于CentOS。"></a>踩坑 || Ubuntu不支持yum安装kvm，适用于CentOS。</h4><p><a href="https://www.cnblogs.com/lk-fxtx/p/7692773.html" target="_blank" rel="external">参见文档</a></p>
 <h3 id="五、验证KVM安装是否成功"><a href="#五、验证KVM安装是否成功" class="headerlink" title="五、验证KVM安装是否成功"></a>五、验证KVM安装是否成功</h3><p>输入命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">virsh list --all</div></pre></td></tr></table></figure></p>
 <p>如果没有错误提示则安装成功</p>
