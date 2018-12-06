@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://weibo.com/"/>
-  <updated>2018-12-06T12:05:51.651Z</updated>
+  <updated>2018-12-06T12:07:27.619Z</updated>
   <id>http://weibo.com/</id>
   
   <author>
@@ -20,9 +20,9 @@
     <link href="http://weibo.com/2018/12/06/PHP%E8%8E%B7%E5%8F%96%E4%BB%8A%E6%97%A5-%E6%98%A8%E6%97%A5-%E4%B8%8A%E5%91%A8-%E6%9C%AC%E6%9C%88%E7%9A%84%E8%B5%B7%E5%A7%8B%E6%97%B6%E9%97%B4%E6%88%B3%E5%92%8C%E7%BB%93%E6%9D%9F%E6%97%B6%E9%97%B4%E6%88%B3%E7%9A%84%E6%96%B9%E6%B3%95/"/>
     <id>http://weibo.com/2018/12/06/PHP获取今日-昨日-上周-本月的起始时间戳和结束时间戳的方法/</id>
     <published>2018-12-06T11:50:09.000Z</published>
-    <updated>2018-12-06T12:05:51.651Z</updated>
+    <updated>2018-12-06T12:07:27.619Z</updated>
     
-    <content type="html"><![CDATA[<p>php 获取今日、昨日、上周、本月的起始时间戳和结束时间戳的方法，主要使用到了 php 的时间函数 mktime。</p>
+    <content type="html"><![CDATA[<p>php 获取今日、昨日、上周、本月的起始时间戳和结束时间戳的方法，主要使用到了 php 的时间函数 mktime。<br><a id="more"></a></p>
 <h2 id="php获取今日开始时间戳和结束时间戳"><a href="#php获取今日开始时间戳和结束时间戳" class="headerlink" title="php获取今日开始时间戳和结束时间戳"></a>php获取今日开始时间戳和结束时间戳</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$beginToday</span> = mktime(0,0,0,date(<span class="string">'m'</span>),date(<span class="string">'d'</span>),date(<span class="string">'Y'</span>));</div><div class="line"><span class="variable">$endToday</span> = mktime(0,0,0,date(<span class="string">'m'</span>),date(<span class="string">'d'</span>)+1,date(<span class="string">'Y'</span>))-1;</div></pre></td></tr></table></figure>
 <h2 id="php获取昨日开始时间戳和结束时间戳"><a href="#php获取昨日开始时间戳和结束时间戳" class="headerlink" title="php获取昨日开始时间戳和结束时间戳"></a>php获取昨日开始时间戳和结束时间戳</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$beginYesterday</span> = mktime(0,0,0,date(<span class="string">'m'</span>),date(<span class="string">'d'</span>)-1,date(<span class="string">'Y'</span>));</div><div class="line"><span class="variable">$endYesterday</span> = mktime(0,0,0,date(<span class="string">'m'</span>),date(<span class="string">'d'</span>),date(<span class="string">'Y'</span>))-1;</div></pre></td></tr></table></figure>
 <h2 id="php获取上周起始时间戳和结束时间戳"><a href="#php获取上周起始时间戳和结束时间戳" class="headerlink" title="php获取上周起始时间戳和结束时间戳"></a>php获取上周起始时间戳和结束时间戳</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$beginLastweek</span>=mktime(0,0,0,date(<span class="string">'m'</span>),date(<span class="string">'d'</span>)-date(<span class="string">'w'</span>)+1-7,date(<span class="string">'Y'</span>));</div><div class="line">// date(<span class="string">"Y-m-d H:i:s"</span>,mktime(0, 0 , 0,date(<span class="string">"m"</span>),date(<span class="string">"d"</span>)-date(<span class="string">"w"</span>)+1-7,date(<span class="string">"Y"</span>)));</div><div class="line"><span class="variable">$endLastweek</span>=mktime(23,59,59,date(<span class="string">'m'</span>),date(<span class="string">'d'</span>)-date(<span class="string">'w'</span>)+7-7,date(<span class="string">'Y'</span>));</div><div class="line">// date(<span class="string">"Y-m-d H:i:s"</span>,mktime(23,59,59,date(<span class="string">"m"</span>),date(<span class="string">"d"</span>)-date(<span class="string">"w"</span>)+7-7,date(<span class="string">"Y"</span>)));</div></pre></td></tr></table></figure>
@@ -38,8 +38,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;php 获取今日、昨日、上周、本月的起始时间戳和结束时间戳的方法，主要使用到了 php 的时间函数 mktime。&lt;/p&gt;
-&lt;h2 id=&quot;php获取今日开始时间戳和结束时间戳&quot;&gt;&lt;a href=&quot;#php获取今日开始时间戳和结束时间戳&quot; class=&quot;headerlink
+      &lt;p&gt;php 获取今日、昨日、上周、本月的起始时间戳和结束时间戳的方法，主要使用到了 php 的时间函数 mktime。&lt;br&gt;&lt;/p&gt;
     
     </summary>
     
