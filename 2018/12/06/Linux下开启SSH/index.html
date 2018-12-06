@@ -96,17 +96,17 @@
 
 
 
-<meta name="description" content="1、允许root用户远程登录修改ssh服务配置文件1sudo vi /etc/ssh/sshd_config 调整PermitRootLogin参数值为yes 2、允许无密码登录同上，修改ssh服务配置文件，两种情况：1） 将PermitEmptyPasswords yes前面的#号去掉2） 将PermitEmptyPasswords 参数值修改为yes 以上两种配置，均需要重启ssh服务123s">
+<meta name="description" content="发现PhpStorm通过sftp上传文件的时候一直上传失败，后来发现是因为ssh不允许root用户远程登录。 1、允许root用户远程登录修改ssh服务配置文件1sudo vi /etc/ssh/sshd_config 调整PermitRootLogin参数值为yes 2、允许无密码登录同上，修改ssh服务配置文件，两种情况：1） 将PermitEmptyPasswords yes前面的#号去掉2">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux下开启SSH">
 <meta property="og:url" content="http://weibo.com/2018/12/06/Linux下开启SSH/index.html">
 <meta property="og:site_name" content="ZhangHy&#39;s Zone!">
-<meta property="og:description" content="1、允许root用户远程登录修改ssh服务配置文件1sudo vi /etc/ssh/sshd_config 调整PermitRootLogin参数值为yes 2、允许无密码登录同上，修改ssh服务配置文件，两种情况：1） 将PermitEmptyPasswords yes前面的#号去掉2） 将PermitEmptyPasswords 参数值修改为yes 以上两种配置，均需要重启ssh服务123s">
+<meta property="og:description" content="发现PhpStorm通过sftp上传文件的时候一直上传失败，后来发现是因为ssh不允许root用户远程登录。 1、允许root用户远程登录修改ssh服务配置文件1sudo vi /etc/ssh/sshd_config 调整PermitRootLogin参数值为yes 2、允许无密码登录同上，修改ssh服务配置文件，两种情况：1） 将PermitEmptyPasswords yes前面的#号去掉2">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-06T10:33:03.567Z">
+<meta property="og:updated_time" content="2018-12-06T10:38:58.973Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux下开启SSH">
-<meta name="twitter:description" content="1、允许root用户远程登录修改ssh服务配置文件1sudo vi /etc/ssh/sshd_config 调整PermitRootLogin参数值为yes 2、允许无密码登录同上，修改ssh服务配置文件，两种情况：1） 将PermitEmptyPasswords yes前面的#号去掉2） 将PermitEmptyPasswords 参数值修改为yes 以上两种配置，均需要重启ssh服务123s">
+<meta name="twitter:description" content="发现PhpStorm通过sftp上传文件的时候一直上传失败，后来发现是因为ssh不允许root用户远程登录。 1、允许root用户远程登录修改ssh服务配置文件1sudo vi /etc/ssh/sshd_config 调整PermitRootLogin参数值为yes 2、允许无密码登录同上，修改ssh服务配置文件，两种情况：1） 将PermitEmptyPasswords yes前面的#号去掉2">
 
 
 
@@ -357,7 +357,8 @@
       
 
       
-        <h2 id="1、允许root用户远程登录"><a href="#1、允许root用户远程登录" class="headerlink" title="1、允许root用户远程登录"></a>1、允许root用户远程登录</h2><p>修改ssh服务配置文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo vi /etc/ssh/sshd_config</div></pre></td></tr></table></figure></p>
+        <p>发现PhpStorm通过sftp上传文件的时候一直上传失败，后来发现是因为ssh不允许root用户远程登录。</p>
+<h2 id="1、允许root用户远程登录"><a href="#1、允许root用户远程登录" class="headerlink" title="1、允许root用户远程登录"></a>1、允许root用户远程登录</h2><p>修改ssh服务配置文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo vi /etc/ssh/sshd_config</div></pre></td></tr></table></figure></p>
 <p>调整PermitRootLogin参数值为yes</p>
 <h2 id="2、允许无密码登录"><a href="#2、允许无密码登录" class="headerlink" title="2、允许无密码登录"></a>2、允许无密码登录</h2><p>同上，修改ssh服务配置文件，两种情况：<br>1） 将PermitEmptyPasswords yes前面的#号去掉<br>2） 将PermitEmptyPasswords 参数值修改为yes</p>
 <h2 id="以上两种配置，均需要重启ssh服务"><a href="#以上两种配置，均需要重启ssh服务" class="headerlink" title="以上两种配置，均需要重启ssh服务"></a>以上两种配置，均需要重启ssh服务</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">service sshd restart  //或者</div><div class="line">/etc/init.d/ssh restart //或者</div><div class="line">/etc/init.d/sshd restart</div></pre></td></tr></table></figure>
