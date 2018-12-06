@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://weibo.com/"/>
-  <updated>2018-12-06T02:49:29.266Z</updated>
+  <updated>2018-12-06T03:02:09.929Z</updated>
   <id>http://weibo.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://weibo.com/2018/12/05/%E5%9C%A8Ubuntu%E4%B8%AD%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8kvm/"/>
     <id>http://weibo.com/2018/12/05/在Ubuntu中安装和使用kvm/</id>
     <published>2018-12-05T04:43:30.000Z</published>
-    <updated>2018-12-06T02:49:29.266Z</updated>
+    <updated>2018-12-06T03:02:09.929Z</updated>
     
     <content type="html"><![CDATA[<p>首先解决设备不能上网的问题，虽然无法完全根治，每次重启之后进行如下操作：<br>手动设置静态IP<br>1、vim /etc/network/interfaces</p>
 <p>2、修改文件内容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">auto lo</div><div class="line">iface lo inet loopback</div><div class="line"></div><div class="line">auto eth0</div><div class="line">iface eth0 inet static</div><div class="line">address 192.168.199.186</div><div class="line">netmask 255.255.255.0</div><div class="line">gateway 192.168.199.1</div><div class="line">dns-nameserver 8.8.8.8</div></pre></td></tr></table></figure></p>
@@ -30,7 +30,7 @@
 <h2 id="Linux重启网卡的三种方法"><a href="#Linux重启网卡的三种方法" class="headerlink" title="Linux重启网卡的三种方法"></a>Linux重启网卡的三种方法</h2><h3 id="一、network"><a href="#一、network" class="headerlink" title="一、network"></a>一、network</h3><p>利用root帐户<br>service network restart<br>或者/etc/init.d/networking restart</p>
 <h3 id="二、ifdown-ifup"><a href="#二、ifdown-ifup" class="headerlink" title="二、ifdown/ifup"></a>二、ifdown/ifup</h3><p>ifdown eth0<br>ifup eth0</p>
 <h3 id="三、ifconfig"><a href="#三、ifconfig" class="headerlink" title="三、ifconfig"></a>三、ifconfig</h3><p>ifconfig eth0 down<br>ifconfig eth0 up</p>
-<h3 id="重启失效"><a href="#重启失效" class="headerlink" title="重启失效"></a>重启失效</h3><p>Ubuntu14.04修改配置，重启网卡没有生效，出现如下问题：<br>service  networking restart //重启网络服务<br>stop: Job failed while stopping<br>start: Job is already running: networking</p>
+<h3 id="四、重启失效"><a href="#四、重启失效" class="headerlink" title="四、重启失效"></a>四、重启失效</h3><p>Ubuntu14.04修改配置，重启网卡没有生效，出现如下问题：<br>service  networking restart //重启网络服务<br>stop: Job failed while stopping<br>start: Job is already running: networking</p>
 <p>tail -f /var/log/upstart/networking.log //查看错误日志<br>Stopping or restarting the networking job is notsupported.<br>Use ifdown &amp; ifup to reconfigure desired interface.</p>
 <p>从以上日志内容可以看出，传统的service重启和停止网络已经不再支持了，需要通过使用ifdown &amp;ifup来实现相应的操作。<br>重启指定网卡：<br>ifdown eth0 &amp;&amp; ifup eth0</p>
 <h2 id="su命令不能切换root的问题"><a href="#su命令不能切换root的问题" class="headerlink" title="su命令不能切换root的问题"></a>su命令不能切换root的问题</h2><p>提示su: Authentication failure，只要你sudo passwd root过一次之后，下次再su的时候只要输入密码就可以成功登录了。</p>
@@ -52,6 +52,12 @@
 <h5 id="4、去-var-run-libvirt-给-libvirt-sock-libvirt-sock-ro-virtlockd-sock-这三个文件加权限"><a href="#4、去-var-run-libvirt-给-libvirt-sock-libvirt-sock-ro-virtlockd-sock-这三个文件加权限" class="headerlink" title="4、去 /var/run/libvirt  给 libvirt-sock  libvirt-sock-ro virtlockd-sock 这三个文件加权限"></a>4、去 /var/run/libvirt  给 libvirt-sock  libvirt-sock-ro virtlockd-sock 这三个文件加权限</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo chmod -R 777 libvirt-sock</div><div class="line">sudo chmod -R 777 libvirt-sock-ro </div><div class="line">sudo chmod -R 777 virtlockd-sock</div></pre></td></tr></table></figure>
 <h5 id="5、重启服务"><a href="#5、重启服务" class="headerlink" title="5、重启服务"></a>5、重启服务</h5><p>service libvirtd restart</p>
 <h3 id="七、使用虚拟机GUI管理工具创建虚拟机"><a href="#七、使用虚拟机GUI管理工具创建虚拟机" class="headerlink" title="七、使用虚拟机GUI管理工具创建虚拟机"></a>七、使用虚拟机GUI管理工具创建虚拟机</h3><p>搜索Virtual Machine Manager,打开虚拟机管理工具进行虚拟机的创建<br>创建虚拟机时使用准备好的iso文件，然后按照说明Forward</p>
+<h2 id="Xshell连接不上Ubuntu的问题"><a href="#Xshell连接不上Ubuntu的问题" class="headerlink" title="Xshell连接不上Ubuntu的问题"></a>Xshell连接不上Ubuntu的问题</h2><p>通常报错: … … (port:22): connection failed.<br>原因：没有真正开启ssh-server服务<br>解决方法：</p>
+<h3 id="一、安装ssh-server服务"><a href="#一、安装ssh-server服务" class="headerlink" title="一、安装ssh-server服务"></a>一、安装ssh-server服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install openssh-server</div></pre></td></tr></table></figure>
+<h3 id="二、确认sshserver是否启动"><a href="#二、确认sshserver是否启动" class="headerlink" title="二、确认sshserver是否启动"></a>二、确认sshserver是否启动</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ps -e |grep ssh</div></pre></td></tr></table></figure>
+<h3 id="三、启动ssh"><a href="#三、启动ssh" class="headerlink" title="三、启动ssh"></a>三、启动ssh</h3><p>如果只有ssh-agent，表示ssh-server还没有启动，需要：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/etc/init.d/ssh start</div></pre></td></tr></table></figure></p>
+<p>如果看到sshd，则ssh-server已经启动了。</p>
+<h3 id="四、补充"><a href="#四、补充" class="headerlink" title="四、补充"></a>四、补充</h3><p>ssh-server配置文件位于：<br>/etc/ssh/sshd_config<br>在这里可以定义SSH的服务端口，默认端口是22，你可以自己定义成其他端口号，<br>如21。然后重启SSH服务：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo /etc/init.d/ssh resart</div></pre></td></tr></table></figure></p>
 ]]></content>
     
     <summary type="html">
