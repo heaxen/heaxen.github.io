@@ -358,14 +358,17 @@
 
       
         
-          
-            <p>首先解决一个我的x86设备重启之后就不能上网的问题，虽然无法完全根治，之恩那个每次重启之后进行如下操作：<br>手动设置静态IP<br>1、vim /etc/network/interfaces</p>
+          <p>首先解决设备不能上网的问题，虽然无法完全根治，每次重启之后进行如下操作：<br>手动设置静态IP<br>1、vim /etc/network/interfaces</p>
 <p>2、修改文件内容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">auto lo</div><div class="line">iface lo inet loopback</div><div class="line"></div><div class="line">auto eth0</div><div class="line">iface eth0 inet static</div><div class="line">address 192.168.199.186</div><div class="line">netmask 255.255.255.0</div><div class="line">gateway 192.168.199.1</div><div class="line">dns-nameserver 8.8.8.8</div></pre></td></tr></table></figure></p>
 <p>3、配置DNS解析器<br>vim /etc/reslov.conf，输入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nameserver 8.8.8.8  //(8.8.8.8谷歌的DNS解析器，可能比较慢)</div><div class="line">nameserver 114.114.114.114  //(国内的DNS解析器)</div></pre></td></tr></table></figure></p>
-<p>4、重启网络sudo /etc/init.d/networking restart</p>
-<p>su命令不能切换root，提示su: Authentication failure，只要你sudo passwd root过一次之后，下次再su的时候只要输入密码就可以成功登录了。</p>
-
-          
+<p>4、重启网络sudo /etc/init.d/networking restart<br>   重启网卡还有以下几种方法：</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/05/在Ubuntu中安装和使用kvm/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
