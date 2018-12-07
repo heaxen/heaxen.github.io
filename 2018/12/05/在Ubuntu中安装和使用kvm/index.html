@@ -96,17 +96,17 @@
 
 
 
-<meta name="description" content="首先解决设备不能上网的问题，虽然无法完全根治，每次重启之后进行如下操作：手动设置静态IP1、vim /etc/network/interfaces 2、修改文件内容123456789auto loiface lo inet loopbackauto eth0iface eth0 inet staticaddress 192.168.199.186netmask 255.255.255.0gatew">
+<meta name="description" content="首先解决设备不能上网的问题：手动设置静态IP1、vim /etc/network/interfaces 2、修改文件内容123456789auto loiface lo inet loopbackauto eth0iface eth0 inet staticaddress 192.168.199.186netmask 255.255.255.0gateway 192.168.199.1dns-na">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在Ubuntu中安装和使用kvm">
 <meta property="og:url" content="http://weibo.com/2018/12/05/在Ubuntu中安装和使用kvm/index.html">
 <meta property="og:site_name" content="ZhangHy&#39;s Zone!">
-<meta property="og:description" content="首先解决设备不能上网的问题，虽然无法完全根治，每次重启之后进行如下操作：手动设置静态IP1、vim /etc/network/interfaces 2、修改文件内容123456789auto loiface lo inet loopbackauto eth0iface eth0 inet staticaddress 192.168.199.186netmask 255.255.255.0gatew">
+<meta property="og:description" content="首先解决设备不能上网的问题：手动设置静态IP1、vim /etc/network/interfaces 2、修改文件内容123456789auto loiface lo inet loopbackauto eth0iface eth0 inet staticaddress 192.168.199.186netmask 255.255.255.0gateway 192.168.199.1dns-na">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-06T04:27:28.646Z">
+<meta property="og:updated_time" content="2018-12-07T03:26:56.433Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在Ubuntu中安装和使用kvm">
-<meta name="twitter:description" content="首先解决设备不能上网的问题，虽然无法完全根治，每次重启之后进行如下操作：手动设置静态IP1、vim /etc/network/interfaces 2、修改文件内容123456789auto loiface lo inet loopbackauto eth0iface eth0 inet staticaddress 192.168.199.186netmask 255.255.255.0gatew">
+<meta name="twitter:description" content="首先解决设备不能上网的问题：手动设置静态IP1、vim /etc/network/interfaces 2、修改文件内容123456789auto loiface lo inet loopbackauto eth0iface eth0 inet staticaddress 192.168.199.186netmask 255.255.255.0gateway 192.168.199.1dns-na">
 
 
 
@@ -357,9 +357,10 @@
       
 
       
-        <p>首先解决设备不能上网的问题，虽然无法完全根治，每次重启之后进行如下操作：<br>手动设置静态IP<br>1、vim /etc/network/interfaces</p>
+        <p>首先解决设备不能上网的问题：<br>手动设置静态IP<br>1、vim /etc/network/interfaces</p>
 <p>2、修改文件内容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">auto lo</div><div class="line">iface lo inet loopback</div><div class="line"></div><div class="line">auto eth0</div><div class="line">iface eth0 inet static</div><div class="line">address 192.168.199.186</div><div class="line">netmask 255.255.255.0</div><div class="line">gateway 192.168.199.1</div><div class="line">dns-nameserver 8.8.8.8</div></pre></td></tr></table></figure></p>
 <p>3、配置DNS解析器<br>vim /etc/reslov.conf，输入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nameserver 8.8.8.8  //(8.8.8.8谷歌的DNS解析器，可能比较慢)</div><div class="line">nameserver 114.114.114.114  //(国内的DNS解析器)</div></pre></td></tr></table></figure></p>
+<p>但是Ubuntu Server 中resolv.conf重启时会被覆盖，解决方法如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">1.需要创建一个文件/etc/resolvconf/resolv.conf.d/tail</div><div class="line">sudo vi /etc/resolvconf/resolv.conf.d/tail</div><div class="line"></div><div class="line">2.在该文件中写入自己需要的dns服务器，格式与/etc/resolv.conf相同</div><div class="line">nameserver 8.8.8.8  </div><div class="line"></div><div class="line">3.重启下resolvconf程序</div><div class="line">sudo /etc/init.d/resolvconf restart </div><div class="line"></div><div class="line">再去看看/etc/resolv.conf文件,可以看到自己添加的dns服务器已经加到该文件中</div></pre></td></tr></table></figure></p>
 <p>4、重启网络sudo /etc/init.d/networking restart<br>   重启网卡还有以下几种方法：</p>
 <a id="more"></a>
 <h2 id="Linux重启网卡的三种方法"><a href="#Linux重启网卡的三种方法" class="headerlink" title="Linux重启网卡的三种方法"></a>Linux重启网卡的三种方法</h2><h3 id="一、network"><a href="#一、network" class="headerlink" title="一、network"></a>一、network</h3><p>利用root帐户<br>service network restart<br>或者/etc/init.d/networking restart</p>
