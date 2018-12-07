@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://weibo.com/"/>
-  <updated>2018-12-07T04:21:32.687Z</updated>
+  <updated>2018-12-07T05:30:02.990Z</updated>
   <id>http://weibo.com/</id>
   
   <author>
@@ -14,6 +14,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>原生js合并两个数组以及call,apply,bind</title>
+    <link href="http://weibo.com/2018/12/07/%E5%8E%9F%E7%94%9Fjs%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E4%BB%A5%E5%8F%8Acall-apply-bind/"/>
+    <id>http://weibo.com/2018/12/07/原生js合并两个数组以及call-apply-bind/</id>
+    <published>2018-12-07T05:06:29.000Z</published>
+    <updated>2018-12-07T05:30:02.990Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="js合并两个数组"><a href="#js合并两个数组" class="headerlink" title="js合并两个数组"></a>js合并两个数组</h2><p>如：<br>var a = [1,2,3];<br>var b = [4,5,6];</p>
+<h3 id="1、concat"><a href="#1、concat" class="headerlink" title="1、concat"></a>1、concat</h3><p>var c = a.concat(b); //c=[1,2,3,4,5,6]<br>问题：concat方法连接a、b两个数组后，a、b两个数组的数据不变，同时会返回一个新的数组。这样当我们需要进行多次的数组合并时，会造成很大的内存浪费</p>
+<h3 id="2、for循环"><a href="#2、for循环" class="headerlink" title="2、for循环"></a>2、for循环</h3><p>遍历其中一个数组，把该数组中的所有元素依次添加到另外一个数组中<br>for(var i in b) {<br>    a.push(b[i]);<br>}</p>
+<h3 id="3、apply"><a href="#3、apply" class="headerlink" title="3、apply"></a>3、apply</h3><p>push.apply(a,b)   等同于  a.push.apply(a,[4,5,6])</p>
+<h3 id="4、说明："><a href="#4、说明：" class="headerlink" title="4、说明："></a>4、说明：</h3><p>　　1）以上3种合并方法并没有考虑过a、b两个数组谁的长度更小。<br>　　所以好的做法是预先判断a、b两个数组哪个更大，然后使用大数组合并小数组，这样就减少了数组元素操作的次数！<br>　　2）有时候我们不希望原数组（a、b）改变，这时就只能使用concat了。</p>
+<h2 id="call-apply-bind"><a href="#call-apply-bind" class="headerlink" title="call(), apply(), bind()"></a>call(), apply(), bind()</h2><h3 id="示例1："><a href="#示例1：" class="headerlink" title="示例1："></a>示例1：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var name=<span class="string">'zhang'</span>,age=17;</div><div class="line">var obj = &#123;</div><div class="line">    name: <span class="string">'hong'</span>,</div><div class="line">    objAge: this.age,</div><div class="line">    myFun: <span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">        console.log(this.name+<span class="string">','</span>+this.age);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">obj.objAge;  //17</div><div class="line">obj.myFun()  //hong,undefined</div></pre></td></tr></table></figure>
+<h3 id="示例2："><a href="#示例2：" class="headerlink" title="示例2："></a>示例2：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var name = <span class="string">'yuan'</span>;</div><div class="line"><span class="keyword">function</span> <span class="function"><span class="title">show</span></span>()&#123;</div><div class="line">    console.log(this.name);</div><div class="line">&#125;</div><div class="line"></div><div class="line">show() //yuan</div></pre></td></tr></table></figure>
+<h4 id="比较一下这两者this-的差别，第一个this指向obj，第二个全局声明的shows-函数this是window"><a href="#比较一下这两者this-的差别，第一个this指向obj，第二个全局声明的shows-函数this是window" class="headerlink" title="比较一下这两者this 的差别，第一个this指向obj，第二个全局声明的shows()函数this是window;"></a>比较一下这两者this 的差别，第一个this指向obj，第二个全局声明的shows()函数this是window;</h4><h3 id="call-、apply-、bind-都是用来重定义-this这个对象的"><a href="#call-、apply-、bind-都是用来重定义-this这个对象的" class="headerlink" title="call()、apply()、bind() 都是用来重定义 this这个对象的"></a>call()、apply()、bind() 都是用来重定义 this这个对象的</h3><p>如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">var name=<span class="string">'zhang'</span>,age=17;</div><div class="line">var obj = &#123;</div><div class="line">    name: <span class="string">'hong'</span>,</div><div class="line">    objAge: this.age,</div><div class="line">    myFun: <span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">        console.log(this.name+<span class="string">','</span>+this.age);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var db = &#123;</div><div class="line">    name: <span class="string">'yuan'</span>,</div><div class="line">    age: 20</div><div class="line">&#125;</div><div class="line"></div><div class="line">obj.myFun.call(db)；　　　//yuan,20</div><div class="line">obj.myFun.apply(db);　　　//yuan,20</div><div class="line">obj.myFun.bind(db)();　　 //yuan,20</div></pre></td></tr></table></figure></p>
+<p>以上出了bind方法后面多了个()外 ，结果返回都一致。<br>由此得出结论，bind返回的是一个新的函数，你必须调用它才会被执行。</p>
+<h3 id="对比call-、bind-、-apply-传参情况下"><a href="#对比call-、bind-、-apply-传参情况下" class="headerlink" title="对比call 、bind 、 apply 传参情况下"></a>对比call 、bind 、 apply 传参情况下</h3><p>如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">var name=<span class="string">'zhang'</span>,age=17;</div><div class="line">var obj = &#123;</div><div class="line">    name: <span class="string">'hong'</span>,</div><div class="line">    objAge: this.age,</div><div class="line">    myFun: <span class="keyword">function</span>(fm,t)&#123;</div><div class="line">        console.log(this.name+<span class="string">', '</span>+this.age+<span class="string">', '</span>+fm+<span class="string">'&amp;&amp;'</span>+t);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var db = &#123;</div><div class="line">    name: <span class="string">'yuan'</span>,</div><div class="line">    age: 20</div><div class="line">&#125;</div><div class="line"></div><div class="line">obj.myFun.call(db,<span class="string">'one'</span>,<span class="string">'two'</span>)；　　　//yuan, 20, one&amp;&amp;two</div><div class="line">obj.myFun.apply(db,[<span class="string">'one'</span>,<span class="string">'two'</span>]);　　　//yuan, 20, one&amp;&amp;two</div><div class="line">obj.myFun.bind(db,<span class="string">'one'</span>,<span class="string">'two'</span>)();　　 //yuan, 20, one&amp;&amp;two</div><div class="line">obj.myFun.bind(db,[<span class="string">'one'</span>,<span class="string">'two'</span>])();　　 //yuan, 20, one,two&amp;&amp;undefined</div></pre></td></tr></table></figure></p>
+<p>从上面四个结果不难看出call 、bind 、 apply这三个函数的第一个参数都是this的指向对象，第二个参数差别就来了：<br>call的参数是直接放进去的，第二、第三、第n个参数全都用逗号分隔，直接放到后面  obj.myFun.call(db,’one’, … ,’string’ );<br>apply的所有参数都必须放在一个数组里面传进去obj.myFun.apply(db,[‘one’, …, ‘string’ ]);<br>bind除了返回是函数以外，它的参数和call一样。<br>当然，三者的参数不限定是string类型，允许是各种类型，包括函数 、 object 等等。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;js合并两个数组&quot;&gt;&lt;a href=&quot;#js合并两个数组&quot; class=&quot;headerlink&quot; title=&quot;js合并两个数组&quot;&gt;&lt;/a&gt;js合并两个数组&lt;/h2&gt;&lt;p&gt;如：&lt;br&gt;var a = [1,2,3];&lt;br&gt;var b = [4,5,6];&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="JavaScript" scheme="http://weibo.com/categories/JavaScript/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>Linux下打包和解压缩命令并通过PHP进行页面下载</title>
@@ -746,40 +777,6 @@
     
     </summary>
     
-    
-  </entry>
-  
-  <entry>
-    <title>S.O.L.I.D 原则</title>
-    <link href="http://weibo.com/2017/09/10/S-O-L-I-D-%E5%8E%9F%E5%88%99/"/>
-    <id>http://weibo.com/2017/09/10/S-O-L-I-D-原则/</id>
-    <published>2017-09-10T05:57:20.000Z</published>
-    <updated>2017-09-10T06:15:57.274Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="单一责任原则-SRP"><a href="#单一责任原则-SRP" class="headerlink" title="单一责任原则(SRP)"></a>单一责任原则(SRP)</h2><p>当需要修改某个类的时候原因有且只有一个。换句话说就是让一个类只做一种类型责任，当这个类需要承当其他类型的责任的时候，就需要分解这个类。 类被修改的几率很大，因此应该专注于单一的功能。如果你把多个功能放在同一个类中，功能之间就形成了关联，改变其中一个功能，有可能中止另一个功能，这时就需要新一轮的测试来避免可能出现的问题，非常耗时耗力。</p>
-<h2 id="开放封闭原则-OCP"><a href="#开放封闭原则-OCP" class="headerlink" title="开放封闭原则(OCP)"></a>开放封闭原则(OCP)</h2><p>软件实体应该是可扩展，而不可修改的。也就是说，对扩展是开放的，而对修改是封闭的。这个原则是诸多面向对象编程原则中最抽象、最难理解的一个。<br>(1)通过增加代码来扩展功能，而不是修改已经存在的代码。<br>(2)若客户模块和服务模块遵循同一个接口来设计，则客户模块可以不关心服务模块的类型，服务模块可以方便扩展服务(代码)。<br>(3)OCP支持替换的服务，而不用修改客户模块。<br><a id="more"></a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">public boolean sendByEmail(String addr, String title, String content) &#123;</div><div class="line"></div><div class="line">&#125;</div><div class="line">public boolean sendBySMS(String addr, String content) &#123;</div><div class="line"></div><div class="line">&#125;</div><div class="line">// 在其它地方调用上述方法发送信息</div><div class="line">sendByEmail(addr, title, content);</div><div class="line">sendBySMS(addr, content);</div></pre></td></tr></table></figure></p>
-<p>如果现在又多了一种发送信息的方式，比如可以通过QQ发送信息，那么不仅需要增加一个方法sendByQQ()，还需要在调用它的地方进行修改，违反了OCP原则，更好的方式是<br>抽象出一个Send接口，里面有个send()方法，然后让SendByEmail和SendBySMS去实现它既可。这样即使多了一个通过QQ发送的请求，那么只要再添加一个SendByQQ实现类实现Send接口既可。这样就不需要修改已有的接口定义和已实现类，很好的遵循了OCP原则。</p>
-<h2 id="里氏替换原则-LSP"><a href="#里氏替换原则-LSP" class="headerlink" title="里氏替换原则(LSP)"></a>里氏替换原则(LSP)</h2><p>子类必须能够用来当作基类使用。如果类A继承类B，任何能使用A的地方，B也同样可以使用。例如，是否还记得，正方形可以看作是矩形！当进行扩展时：前提条件不许绕过，后置条件不能放宽限制，可见常量不能被修改(?)。常量：在扩展之前或之后，用户都需要依靠这个常量来传递信息。正确的使用set形式的继承关系。不遵守set语义是非常危险的。归纳：使用超类的引用的任何上下文中也可以使用其子类的引用替代。这个原则极大的限制了在纯扩展(继承)机制里可以做的事情。不遵守会带来风险。</p>
-<h2 id="接口分离原则-ISP"><a href="#接口分离原则-ISP" class="headerlink" title="接口分离原则(ISP)"></a>接口分离原则(ISP)</h2><p>一个类对另一个类的依赖应该限制在最小化的接口上。</p>
-<h2 id="依赖倒置原则-DIP"><a href="#依赖倒置原则-DIP" class="headerlink" title="依赖倒置原则(DIP)"></a>依赖倒置原则(DIP)</h2><p>1、高层模块不应该依赖于低层模块，二者都应该依赖于抽象<br>2.、抽象不应该依赖于细节，细节应该依赖于抽象<br>这个设计原则的亮点在于任何被DI框架注入的类很容易用mock对象进行测试和维护，因为对象创建代码集中在框架中，客户端代码也不混乱。有很多方式可以实现依赖倒置，比如像AspectJ等的AOP（Aspect Oriented programming）框架使用的字节码技术，或Spring框架使用的代理等。<br>(1).高层模块不要依赖低层模块；<br>(2).高层和低层模块都要依赖于抽象；<br>(3).抽象不要依赖于具体实现；<br>(4).具体实现要依赖于抽象；<br>(5).抽象和接口使模块之间的依赖分离。</p>
-<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>1、一个对象只承担一种责任，所有服务接口只通过它来执行这种任务。<br>2、程序实体，比如类和对象，向扩展行为开放，向修改行为关闭。<br>3、子类应该可以用来替代它所继承的类。<br>4、一个类对另一个类的依赖应该限制在最小化的接口上。<br>5、依赖抽象层(接口)，而不是具体类。</p>
-<h2 id="其它重要原则"><a href="#其它重要原则" class="headerlink" title="其它重要原则"></a>其它重要原则</h2><h3 id="Demeter定律"><a href="#Demeter定律" class="headerlink" title="Demeter定律"></a>Demeter定律</h3><p>也被称做封锁信息原则：只跟朋友交流<br>一个对象O的任何一个方法M只能调用下列类型的对象的方法：<br>1、它自己<br>2、它的参量<br>3、它创建/实例化的对象<br>4、它的直接组件对象</p>
-<h3 id="好莱坞原则"><a href="#好莱坞原则" class="headerlink" title="好莱坞原则"></a>好莱坞原则</h3><p>不要调用我，我会调用你的。</p>
-<h3 id="不要自我重复-DRY"><a href="#不要自我重复-DRY" class="headerlink" title="不要自我重复(DRY)"></a>不要自我重复(DRY)</h3><p>去掉重复代码。</p>
-<h3 id="对接口编程，而不是对实现"><a href="#对接口编程，而不是对实现" class="headerlink" title="对接口编程，而不是对实现"></a>对接口编程，而不是对实现</h3><p>反向依赖的另外一种说法。</p>
-<h3 id="你不需要它-YAGNI"><a href="#你不需要它-YAGNI" class="headerlink" title="你不需要它(YAGNI)"></a>你不需要它(YAGNI)</h3><p>不要添加你“认为以后可能有用”的代码。只在“事到临头”时才添加代码。</p>
-<h3 id="简单化，傻瓜化-KISS"><a href="#简单化，傻瓜化-KISS" class="headerlink" title="简单化，傻瓜化(KISS)"></a>简单化，傻瓜化(KISS)</h3><p>让它能工作的最简单的方法是什么</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;单一责任原则-SRP&quot;&gt;&lt;a href=&quot;#单一责任原则-SRP&quot; class=&quot;headerlink&quot; title=&quot;单一责任原则(SRP)&quot;&gt;&lt;/a&gt;单一责任原则(SRP)&lt;/h2&gt;&lt;p&gt;当需要修改某个类的时候原因有且只有一个。换句话说就是让一个类只做一种类型责任，当这个类需要承当其他类型的责任的时候，就需要分解这个类。 类被修改的几率很大，因此应该专注于单一的功能。如果你把多个功能放在同一个类中，功能之间就形成了关联，改变其中一个功能，有可能中止另一个功能，这时就需要新一轮的测试来避免可能出现的问题，非常耗时耗力。&lt;/p&gt;
-&lt;h2 id=&quot;开放封闭原则-OCP&quot;&gt;&lt;a href=&quot;#开放封闭原则-OCP&quot; class=&quot;headerlink&quot; title=&quot;开放封闭原则(OCP)&quot;&gt;&lt;/a&gt;开放封闭原则(OCP)&lt;/h2&gt;&lt;p&gt;软件实体应该是可扩展，而不可修改的。也就是说，对扩展是开放的，而对修改是封闭的。这个原则是诸多面向对象编程原则中最抽象、最难理解的一个。&lt;br&gt;(1)通过增加代码来扩展功能，而不是修改已经存在的代码。&lt;br&gt;(2)若客户模块和服务模块遵循同一个接口来设计，则客户模块可以不关心服务模块的类型，服务模块可以方便扩展服务(代码)。&lt;br&gt;(3)OCP支持替换的服务，而不用修改客户模块。&lt;br&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="SOLID" scheme="http://weibo.com/tags/SOLID/"/>
     
   </entry>
   
