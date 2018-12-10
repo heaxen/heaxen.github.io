@@ -266,6 +266,152 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://weibo.com/2018/12/03/PHP读取文件内容的五种方式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZhangHy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhangHy's Zone!">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/03/PHP读取文件内容的五种方式/" itemprop="url">PHP读取文件内容的五种方式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-03T19:33:02+08:00">
+                2018-12-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>实际应用当中，请注意关闭 fclose($fp);</p>
+<h2 id="fread"><a href="#fread" class="headerlink" title="fread()"></a>fread()</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">    <span class="variable">$file_path</span> = <span class="string">"test.txt"</span>;</div><div class="line">    <span class="keyword">if</span>(file_exists(<span class="variable">$file_path</span>))&#123;</div><div class="line">        <span class="variable">$fp</span> = fopen(<span class="variable">$file_path</span>,<span class="string">"r"</span>);</div><div class="line">        <span class="variable">$str</span> = fread(<span class="variable">$fp</span>,filesize(<span class="variable">$file_path</span>));//指定读取大小，这里把整个文件内容读取出来</div><div class="line">        <span class="built_in">echo</span> <span class="variable">$str</span> = str_replace(<span class="string">"\r\n"</span>,<span class="string">"&lt;br /&gt;"</span>,<span class="variable">$str</span>);</div><div class="line">    &#125;</div><div class="line">?&gt;</div></pre></td></tr></table></figure>
+<h2 id="file-get-contents"><a href="#file-get-contents" class="headerlink" title="file_get_contents()"></a>file_get_contents()</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">    <span class="variable">$file_path</span> = <span class="string">"test.txt"</span>;</div><div class="line">    <span class="keyword">if</span>(file_exists(<span class="variable">$file_path</span>))&#123;</div><div class="line">        <span class="variable">$str</span> = file_get_contents(<span class="variable">$file_path</span>);//将整个文件内容读入到一个字符串中</div><div class="line">        <span class="variable">$str</span> = str_replace(<span class="string">"\r\n"</span>,<span class="string">"&lt;br /&gt;"</span>,<span class="variable">$str</span>);</div><div class="line">            <span class="built_in">echo</span> <span class="variable">$str</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">?&gt;</div></pre></td></tr></table></figure>
+<h2 id="feof-fread"><a href="#feof-fread" class="headerlink" title="feof() fread()"></a>feof() fread()</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">    <span class="variable">$file_path</span> = <span class="string">"test.txt"</span>;</div><div class="line">    <span class="keyword">if</span>(file_exists(<span class="variable">$file_path</span>))&#123;</div><div class="line">        <span class="variable">$fp</span> = fopen(<span class="variable">$file_path</span>,<span class="string">"r"</span>);</div><div class="line">        <span class="variable">$str</span> = <span class="string">""</span>;</div><div class="line">        <span class="variable">$buffer</span> = 1024;//每次读取 1024 字节</div><div class="line">        <span class="keyword">while</span>(!feof(<span class="variable">$fp</span>))&#123;//循环读取，直至读取完整个文件</div><div class="line">            <span class="variable">$str</span> .= fread(<span class="variable">$fp</span>,<span class="variable">$buffer</span>);</div><div class="line">        &#125; </div><div class="line">        <span class="variable">$str</span> = str_replace(<span class="string">"\r\n"</span>,<span class="string">"&lt;br /&gt;"</span>,<span class="variable">$str</span>);</div><div class="line">            <span class="built_in">echo</span> <span class="variable">$str</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">?&gt;</div></pre></td></tr></table></figure>
+<h2 id="count"><a href="#count" class="headerlink" title="count()"></a>count()</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">    <span class="variable">$file_path</span> = <span class="string">"test.txt"</span>;</div><div class="line">    <span class="keyword">if</span>(file_exists(<span class="variable">$file_path</span>))&#123;</div><div class="line">        <span class="variable">$file_arr</span> = file(<span class="variable">$file_path</span>);</div><div class="line">        <span class="keyword">for</span>(<span class="variable">$i</span>=0;<span class="variable">$i</span>&lt;count(<span class="variable">$file_arr</span>);<span class="variable">$i</span>++)&#123;//逐行读取文件内容</div><div class="line">            <span class="built_in">echo</span> <span class="variable">$file_arr</span>[<span class="variable">$i</span>].<span class="string">"&lt;br /&gt;"</span>;</div><div class="line">        &#125;</div><div class="line">        /*</div><div class="line">        foreach(<span class="variable">$file_arr</span> as <span class="variable">$value</span>)&#123;</div><div class="line">            <span class="built_in">echo</span> <span class="variable">$value</span>.<span class="string">"&lt;br /&gt;"</span>;</div><div class="line">        &#125;*/</div><div class="line">    &#125;</div><div class="line">?&gt;</div></pre></td></tr></table></figure>
+<h2 id="fgets"><a href="#fgets" class="headerlink" title="fgets()"></a>fgets()</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">    <span class="variable">$file_path</span> = <span class="string">"test.txt"</span>;</div><div class="line">    <span class="keyword">if</span>(file_exists(<span class="variable">$file_path</span>))&#123;</div><div class="line">        <span class="variable">$fp</span> = fopen(<span class="variable">$file_path</span>,<span class="string">"r"</span>);</div><div class="line">        <span class="variable">$str</span> =<span class="string">""</span>;</div><div class="line">        <span class="keyword">while</span>(!feof(<span class="variable">$fp</span>))&#123;</div><div class="line">            <span class="variable">$str</span> .= fgets(<span class="variable">$fp</span>);//逐行读取。如果fgets不写length参数，默认是读取1k。</div><div class="line">        &#125;</div><div class="line">        <span class="variable">$str</span> = str_replace(<span class="string">"\r\n"</span>,<span class="string">"&lt;br /&gt;"</span>,<span class="variable">$str</span>);</div><div class="line">            <span class="built_in">echo</span> <span class="variable">$str</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">?&gt;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://weibo.com/2018/12/03/PHP获取文件信息相关基础函数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1189,131 +1335,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://weibo.com/2017/09/10/gulp/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZhangHy">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZhangHy's Zone!">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/10/gulp/" itemprop="url">gulp</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-10T09:41:35+08:00">
-                2017-09-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>前段时间开发进度紧，没时间更新博客；<br>今天主要讲一下前端工程化构建工具–gulp和模块化管理工具–webpack。</p>
-<h2 id="gulp是一个基于流的构建工具，可以自动执行指定的任务，简洁且高效"><a href="#gulp是一个基于流的构建工具，可以自动执行指定的任务，简洁且高效" class="headerlink" title="gulp是一个基于流的构建工具，可以自动执行指定的任务，简洁且高效"></a>gulp是一个基于流的构建工具，可以自动执行指定的任务，简洁且高效</h2><h2 id="gulp能干什么？"><a href="#gulp能干什么？" class="headerlink" title="gulp能干什么？"></a>gulp能干什么？</h2><p>1、开发环境下，想要能够按模块组织代码，监听实时变化<br>2、css/js预编译，postcss等方案，浏览器前缀自动补全等<br>3、条件输出不同的网页，比如app页面和mobile页面<br>4、线上环境下，我想要合并、压缩 html/css/javascritp/图片，减少网络请求，同时降低网络负担<br>5、等等…<br></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/09/10/gulp/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1364,7 +1385,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">42</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1375,7 +1396,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
