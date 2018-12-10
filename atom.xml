@@ -46,10 +46,10 @@
     <link href="http://weibo.com/2018/12/10/15%E6%AC%BEChrome%E6%8F%92%E4%BB%B6%E6%8E%A8%E8%8D%90/"/>
     <id>http://weibo.com/2018/12/10/15款Chrome插件推荐/</id>
     <published>2018-12-10T09:08:52.000Z</published>
-    <updated>2018-12-10T09:42:41.632Z</updated>
+    <updated>2018-12-10T09:43:20.315Z</updated>
     
     <content type="html"><![CDATA[<p><a href="https://mp.weixin.qq.com/s/uaQFaaU54sx98BcyI2jskA?" target="_blank" rel="external">原文链接</a><br>相信很多人都在使用 Chrome 浏览器，其流畅的浏览体验得到了不少用户的偏爱，但流畅只是一方面， Chrome 最大的优势还是其支持众多强大好用的扩展程序（Extensions）。</p>
-<h2 id="Data-Saver：为你省下一些流量"><a href="#Data-Saver：为你省下一些流量" class="headerlink" title="Data Saver：为你省下一些流量"></a>Data Saver：为你省下一些流量</h2><p>Google 官方推出的省流量扩展程序，启用之后 Chrome 会自动压缩被访问网页的数据来节省流量，但不包括 SSL 加密协议的网页，这个版本还处在测试阶段。另外，iOS 和 Android 版本的 Chrome 可以在设置中启用。<br>在 Chrome Web Store 下载 Data Saver (Beta)。</p>
+<h2 id="Data-Saver：为你省下一些流量"><a href="#Data-Saver：为你省下一些流量" class="headerlink" title="Data Saver：为你省下一些流量"></a>Data Saver：为你省下一些流量</h2><p>Google 官方推出的省流量扩展程序，启用之后 Chrome 会自动压缩被访问网页的数据来节省流量，但不包括 SSL 加密协议的网页，这个版本还处在测试阶段。另外，iOS 和 Android 版本的 Chrome 可以在设置中启用。<br>在 Chrome Web Store 下载 Data Saver (Beta)。<br><a id="more"></a></p>
 <h2 id="Lucidchart-Diagrams-Desktop：在线绘制多种图表"><a href="#Lucidchart-Diagrams-Desktop：在线绘制多种图表" class="headerlink" title="Lucidchart Diagrams - Desktop：在线绘制多种图表"></a>Lucidchart Diagrams - Desktop：在线绘制多种图表</h2><p>这个扩展程序是一款多功能绘制程序，支持绘制流程图，思维导图，版面设计等，并且有在线和离线两种模式，可谓功能强大。<br>在 Chrome Web Store 下载 Lucidchart Diagrams - Desktop</p>
 <h2 id="Trackr：追踪你的上网习惯"><a href="#Trackr：追踪你的上网习惯" class="headerlink" title="Trackr：追踪你的上网习惯"></a>Trackr：追踪你的上网习惯</h2><p>这个扩展程序做的事情就是记录你使用 Chrome 上网的习惯，包括上了哪些网站、每个网站呆多长时间，并且还用图表的形式反馈出来，总之装了这个扩展程序就不要上奇奇怪怪的网站了。<br>在 Chrome Web Store 下载 Trackr。</p>
 <h2 id="Reader-View：Chrome-也有-Safari-的阅读模式"><a href="#Reader-View：Chrome-也有-Safari-的阅读模式" class="headerlink" title="Reader View：Chrome 也有 Safari 的阅读模式"></a>Reader View：Chrome 也有 Safari 的阅读模式</h2><p>将网页转换成 Safari 阅读模式的样式，让你更方便舒适的阅读网页文字，当你访问文章网页的时候，扩展程序的按钮会显示在地址栏末端，点击就能轻松享受更好的阅读模式。<br>在 Chrome Web Store 下载 Reader View。</p>
@@ -68,7 +68,8 @@
     
     <summary type="html">
     
-      &lt;p&gt;&lt;a href=&quot;https://mp.weixin.qq.com/s/uaQFaaU54sx98BcyI2jskA?&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;原文链接&lt;/a&gt;&lt;br&gt;相信很多人都在使用 Chrome 浏览器，其流畅的浏览体验得到了不
+      &lt;p&gt;&lt;a href=&quot;https://mp.weixin.qq.com/s/uaQFaaU54sx98BcyI2jskA?&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;原文链接&lt;/a&gt;&lt;br&gt;相信很多人都在使用 Chrome 浏览器，其流畅的浏览体验得到了不少用户的偏爱，但流畅只是一方面， Chrome 最大的优势还是其支持众多强大好用的扩展程序（Extensions）。&lt;/p&gt;
+&lt;h2 id=&quot;Data-Saver：为你省下一些流量&quot;&gt;&lt;a href=&quot;#Data-Saver：为你省下一些流量&quot; class=&quot;headerlink&quot; title=&quot;Data Saver：为你省下一些流量&quot;&gt;&lt;/a&gt;Data Saver：为你省下一些流量&lt;/h2&gt;&lt;p&gt;Google 官方推出的省流量扩展程序，启用之后 Chrome 会自动压缩被访问网页的数据来节省流量，但不包括 SSL 加密协议的网页，这个版本还处在测试阶段。另外，iOS 和 Android 版本的 Chrome 可以在设置中启用。&lt;br&gt;在 Chrome Web Store 下载 Data Saver (Beta)。&lt;br&gt;&lt;/p&gt;
     
     </summary>
     
