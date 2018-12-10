@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://weibo.com/"/>
-  <updated>2018-12-07T05:43:16.883Z</updated>
+  <updated>2018-12-10T08:37:15.827Z</updated>
   <id>http://weibo.com/</id>
   
   <author>
@@ -14,6 +14,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>js滚动事件无法触发的处理</title>
+    <link href="http://weibo.com/2018/12/10/js%E6%BB%9A%E5%8A%A8%E4%BA%8B%E4%BB%B6%E6%97%A0%E6%B3%95%E8%A7%A6%E5%8F%91%E7%9A%84%E5%A4%84%E7%90%86/"/>
+    <id>http://weibo.com/2018/12/10/js滚动事件无法触发的处理/</id>
+    <published>2018-12-10T08:22:24.000Z</published>
+    <updated>2018-12-10T08:37:15.827Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天修改Bug的时候需要用到scroll()相关的东西，发现却无法触发滚动事件，于是总结了以下几点原因：<br><a id="more"></a></p>
+<h2 id="问题原因："><a href="#问题原因：" class="headerlink" title="问题原因："></a>问题原因：</h2><p>1、少字符<br>2、错中英文符号<br>3、运用方式有问题（js jq运用方式有问题）一种是onscroll  后者是scroll<br>4、触发原理：没有达到触发条件 这是一种很难发现与改正的问题</p>
+<p>scroll触发条件为 事件在元素滚动条在滚动时候触发。</p>
+<p>很奇怪对吧！有滚动条滚动了却没有触发这是什么问题。。。。这时候要看看滚动条在哪里 是不是在window上面的滚动条，如果不是那有可能在哪里，自己定义的大盒子（和body一样大的盒子包含所有的内容）里面。</p>
+<p>当 html,body{width:100%;height:100%;} 绑定在window或者body无法触发onscroll和scroll  即jq和js都不会触发scroll事件！</p>
+<h2 id="在开发中我们经常会遇到这样的需求"><a href="#在开发中我们经常会遇到这样的需求" class="headerlink" title="在开发中我们经常会遇到这样的需求"></a>在开发中我们经常会遇到这样的需求</h2><p>1、当页面滑动到顶部的时候<br>2、当页面滑动到底部的时候（滑动到底部加载更多数据）<br>3、某个元素进入可视区范围的时候(图片懒加载)</p>
+<h3 id="通常要实现这些判断的话就必须对网页中的各种高度有个清晰的了解，如页面可视高度，页面总内容高度以及页面滚动的高度等"><a href="#通常要实现这些判断的话就必须对网页中的各种高度有个清晰的了解，如页面可视高度，页面总内容高度以及页面滚动的高度等" class="headerlink" title="通常要实现这些判断的话就必须对网页中的各种高度有个清晰的了解，如页面可视高度，页面总内容高度以及页面滚动的高度等"></a>通常要实现这些判断的话就必须对网页中的各种高度有个清晰的了解，如页面可视高度，页面总内容高度以及页面滚动的高度等</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var scrollTop = $(this).scrollTop();//滚动条的高度，即页面滚动的高度</div><div class="line">var scrollHeight = $(document).height();//页面总内容的高度</div><div class="line">var windowHeight = $(this).height();//页面可视区的高度即设备的高度</div></pre></td></tr></table></figure>
+<h3 id="当页面滑动到底部的时候也就是说，滚动的高度和可视区的高度二者相加等于页面内容的高度"><a href="#当页面滑动到底部的时候也就是说，滚动的高度和可视区的高度二者相加等于页面内容的高度" class="headerlink" title="当页面滑动到底部的时候也就是说，滚动的高度和可视区的高度二者相加等于页面内容的高度."></a>当页面滑动到底部的时候也就是说，滚动的高度和可视区的高度二者相加等于页面内容的高度.</h3><p>当页面滑动到顶部的时候也就是说滚动的高度等于0<br>因此通常需要采用以下两个判断函数：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">//判断页面是否滚动到了底部</div><div class="line"><span class="keyword">function</span> <span class="function"><span class="title">judgeIfTop</span></span>()&#123;</div><div class="line">    var scrollTop = $(this).scrollTop();//滚动条的高度，即页面滚动的高度</div><div class="line">    <span class="keyword">if</span>(scrollTop == 0)&#123;</div><div class="line">        <span class="built_in">return</span> <span class="literal">true</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//判断页面是否滚动到了底部</div><div class="line"><span class="keyword">function</span> <span class="function"><span class="title">judgeIfBottom</span></span>()&#123;</div><div class="line">    var scrollTop = $(this).scrollTop();//滚动条的高度，即页面滚动的高度</div><div class="line">    var scrollHeight = $(document).height();//页面总内容的高度</div><div class="line">    var windowHeight = $(this).height();//页面可视区的高度即设备的高度</div><div class="line">    <span class="keyword">if</span>(scrollTop + windowHeight == scrollHeight)&#123;</div><div class="line">        <span class="built_in">return</span> <span class="literal">true</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="还有一种经常应用的场景就是图片懒加载，懒加载一个最重要的核心就是要判断图片是否进入了可视区，获元素的offsetTop，如果offsetTop的值大于或等于滚动的高度则该元素进入可视区内"><a href="#还有一种经常应用的场景就是图片懒加载，懒加载一个最重要的核心就是要判断图片是否进入了可视区，获元素的offsetTop，如果offsetTop的值大于或等于滚动的高度则该元素进入可视区内" class="headerlink" title="还有一种经常应用的场景就是图片懒加载，懒加载一个最重要的核心就是要判断图片是否进入了可视区，获元素的offsetTop，如果offsetTop的值大于或等于滚动的高度则该元素进入可视区内"></a>还有一种经常应用的场景就是图片懒加载，懒加载一个最重要的核心就是要判断图片是否进入了可视区，获元素的offsetTop，如果offsetTop的值大于或等于滚动的高度则该元素进入可视区内</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//判断元素是否进入了可视区域</div><div class="line"><span class="keyword">function</span> judgeIfView(ele)&#123;</div><div class="line">    var offsetTop = document.getElementById(ele).offsetTop;</div><div class="line">    var scrollTop = $(this).scrollTop();//滚动条的高度，即页面滚动的高度</div><div class="line">    var windowHeight = $(this).height();//页面可视区的高度即设备的高度</div><div class="line">    <span class="keyword">if</span> (offsetTop &gt;= scrollTop&amp;&amp; offsetTop &lt; scrollTop+windowHeight ) &#123;</div><div class="line">        console.log(<span class="string">"图片开始进入可视范围"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天修改Bug的时候需要用到scroll()相关的东西，发现却无法触发滚动事件，于是总结了以下几点原因：&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="JavaScript" scheme="http://weibo.com/categories/JavaScript/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>js常见正则表达式和控制输入框输入</title>
@@ -733,43 +761,6 @@
     </summary>
     
       <category term="JavaScript" scheme="http://weibo.com/categories/JavaScript/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>ThinkPHP多层MVC</title>
-    <link href="http://weibo.com/2017/09/11/ThinkPHP%E5%A4%9A%E5%B1%82MVC/"/>
-    <id>http://weibo.com/2017/09/11/ThinkPHP多层MVC/</id>
-    <published>2017-09-11T01:08:08.000Z</published>
-    <updated>2017-09-11T12:40:11.661Z</updated>
-    
-    <content type="html"><![CDATA[<p>ThinkPHP基于MVC（Model-View-Controller，模型-视图-控制器）模式，并且均支持多层（multi-Layer）设计。</p>
-<h2 id="模型（Model）层"><a href="#模型（Model）层" class="headerlink" title="模型（Model）层"></a>模型（Model）层</h2><p>默认的模型层由Model类构成，但是随着项目的增大和业务体系的复杂化，单一的模型层很难解决要求，ThinkPHP支持多层Model，设计思路很简单，不同的模型层仍然都继承自系统的Model类，但是在目录结构和命名规范上做了区分。<br><a id="more"></a><br>例如在某个项目设计中需要区分数据层、逻辑层、服务层等不同的模型层，我们可以在模块目录下面创建Model、Logic和Service目录，把对用户表的所有模型操作分成三层：<br>1、数据层：Model/UserModel 用于定义数据相关的自动验证和自动完成和数据存取接口<br>2、逻辑层：Logic/UserLogic 用于定义用户相关的业务逻辑<br>3、服务层：Service/UserService 用于定义用户相关的服务接口等<br>而这三个模型操作类统一都继承Model类即可，例如：<br>数据层：Home/Model/UserModel.class.php<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">namespace Home\Model;</div><div class="line">use Think\Model;</div><div class="line">class UserModel extends Model&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>逻辑层：Home/Logic/UserLogic.class.php<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">namespace Home\Logic;</div><div class="line">use Think\Model;</div><div class="line">class UserLogic extends Model&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>服务层：Home/Service/UserService.class.php<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">namespace Home\Service;</div><div class="line">use Think\Model;</div><div class="line">class UserService extends Model&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>这样区分不同的模型层之后对用户数据的操作就非常清晰，在调用的时候，我们也可以用内置的D方法很方便的调用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">D(<span class="string">'User'</span>) //实例化UserModel</div><div class="line">D(<span class="string">'User'</span>,<span class="string">'Logic'</span>) //实例化UserLogic</div><div class="line">D(<span class="string">'User'</span>,<span class="string">'Service'</span>) //实例化UserService</div></pre></td></tr></table></figure></p>
-<p>默认的模型层是Model，我们也可以更改设置，例如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">'DEFAULT_M_LAYER'</span>       =&gt;  <span class="string">'Logic'</span>, // 更改默认的模型层名称为Logic</div></pre></td></tr></table></figure></p>
-<p>更改之后，实例化的时候需要改成：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">D(<span class="string">'User'</span>) //实例化UserLogic</div><div class="line">D(<span class="string">'User'</span>,<span class="string">'Model'</span>) //实例化UserModel</div><div class="line">D(<span class="string">'User'</span>,<span class="string">'Service'</span>) //实例化UserService</div></pre></td></tr></table></figure></p>
-<p>对模型层的分层划分是很灵活的，开发人员可以根据项目的需要自由定义和增加模型分层，你也完全可以只使用Model层。</p>
-<h2 id="视图（View）层"><a href="#视图（View）层" class="headerlink" title="视图（View）层"></a>视图（View）层</h2><p>视图层由模板和模板引擎组成，在模板中可以直接使用PHP代码，通过驱动也可以支持其他第三方的模板引擎。视图的多层可以简单的通过目录（也就是模板主题）区分，例如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">View/default/User/add.html</div><div class="line">View/blue/User/add.html</div></pre></td></tr></table></figure></p>
-<p>复杂一点的多层视图还可以更进一步，采用不同的视图目录来完成，例如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">view 普通视图层目录</div><div class="line">mobile 手机端访问视图层目录</div></pre></td></tr></table></figure></p>
-<p>这样做的好处是每个不同的视图层都可以支持不同的模板主题功能。<br>默认的视图层是View目录，我们可以调整设置如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">'DEFAULT_V_LAYER'</span>       =&gt;  <span class="string">'Mobile'</span>, // 默认的视图层名称更改为Mobile</div></pre></td></tr></table></figure></p>
-<p>非默认视图层目录的模板获取需要使用T函数</p>
-<h2 id="控制器（Controller）层"><a href="#控制器（Controller）层" class="headerlink" title="控制器（Controller）层"></a>控制器（Controller）层</h2><p>ThinkPHP的控制器层由核心控制器和业务控制器组成，核心控制器由系统内部的App类完成，负责应用（包括模块、控制器和操作）的调度控制，包括HTTP请求拦截和转发、加载配置等。业务控制器则由用户定义的控制器类完成。多层业务控制器的实现原理和模型的分层类似，例如业务控制器和事件控制器：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Controller/UserController //用于用户的业务逻辑控制和调度</div><div class="line">Event/UserEvent //用于用户的事件响应操作</div></pre></td></tr></table></figure></p>
-<p>访问控制器 Home/Controller/UserController.class.php 定义如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">namespace Home\Controller;</div><div class="line">use Think\Controller;</div><div class="line">class UserController extends Controller&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>事件控制器 Home/Event/UserEvent.class.php 定义如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">namespace Home\Event;</div><div class="line">use Think\Controller;</div><div class="line">class UserEvent extends Controller&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>UserController负责外部交互响应，通过URL请求响应，例如 <a href="http://serverName/User/index,而" target="_blank" rel="external">http://serverName/User/index,而</a> UserEvent负责内部的事件响应，并且只能在内部调用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">A(<span class="string">'User'</span>,<span class="string">'Event'</span>);</div></pre></td></tr></table></figure></p>
-<p>默认的访问控制器层是Controller，我们可以调整设置如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">'DEFAULT_C_LAYER'</span>       =&gt;  <span class="string">'Event'</span>, // 默认的控制器层名称改为Event</div></pre></td></tr></table></figure></p>
-<p>所以是和外部隔离的。<br>多层控制器的划分也不是强制的，可以根据应用的需要自由分层。控制器分层里面可以根据需要调用分层模型，也可以调用不同的分层视图（主题）。<br>在MVC三层中，ThinkPHP并不依赖M或者V，甚至可以只有C或者只有V，这个在ThinkPHP的设计里面是一个很重要的用户体验设计，用户只需要定义视图，在没有C的情况下也能自动识别。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;ThinkPHP基于MVC（Model-View-Controller，模型-视图-控制器）模式，并且均支持多层（multi-Layer）设计。&lt;/p&gt;
-&lt;h2 id=&quot;模型（Model）层&quot;&gt;&lt;a href=&quot;#模型（Model）层&quot; class=&quot;headerlink&quot; title=&quot;模型（Model）层&quot;&gt;&lt;/a&gt;模型（Model）层&lt;/h2&gt;&lt;p&gt;默认的模型层由Model类构成，但是随着项目的增大和业务体系的复杂化，单一的模型层很难解决要求，ThinkPHP支持多层Model，设计思路很简单，不同的模型层仍然都继承自系统的Model类，但是在目录结构和命名规范上做了区分。&lt;br&gt;&lt;/p&gt;
-    
-    </summary>
     
     
   </entry>
