@@ -358,7 +358,7 @@
 
       
         
-          <p>如果要设置物体拖拽，那么必须使用三个事件，并且这三个事件的使用顺序不能颠倒。<br>onmousedown：鼠标按下事件<br>onmousemove：鼠标移动事件<br>onmouseup：鼠标抬起事件<br>拖拽的基本原理:<br>鼠标左键按下的状态下,根据鼠标的移动来移动被拖拽的元素。鼠标的移动也就是x、y坐标的变化;元素的移动就是style.position的 top和left的改变。<br></p>
+          <p>想要实现拖拽，那么必须使用三个事件，并且这三个事件的使用顺序必须是down，move，up。<br>onmousedown：按下事件<br>onmousemove：移动事件<br>onmouseup：抬起事件<br>基本原理:<br>鼠标左键按下的状态下,根据鼠标的移动来移动被拖拽的元素。<br>鼠标的移动也就是x、y坐标的变化;<br>元素的移动就是style.position的top和left的改变。<br></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/12/11/原生js实现拖拽功能/#more" rel="contents">
