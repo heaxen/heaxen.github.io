@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://weibo.com/"/>
-  <updated>2018-12-13T04:09:43.593Z</updated>
+  <updated>2018-12-13T04:50:11.473Z</updated>
   <id>http://weibo.com/</id>
   
   <author>
@@ -20,10 +20,22 @@
     <link href="http://weibo.com/2018/12/13/Ubuntu14-04%E5%AE%89%E8%A3%85%E5%B9%B6%E9%85%8D%E7%BD%AEFTP/"/>
     <id>http://weibo.com/2018/12/13/Ubuntu14-04安装并配置FTP/</id>
     <published>2018-12-13T03:50:54.000Z</published>
-    <updated>2018-12-13T04:09:43.593Z</updated>
+    <updated>2018-12-13T04:50:11.473Z</updated>
     
     <content type="html"><![CDATA[<p>之前在Ubuntu上装的虚拟机的空间不够，拉取两个分支的时候就会显示disk不足，虚拟机上只能存在一个分支代码，想要从宿主机把分支代码通过FTP传输到虚拟机，但是宿主机并不支持FTP，接下来就是主要接受我在宿主机和虚拟机安装和配置FTP的步骤。<br><a id="more"></a></p>
-<h2 id="安装vsftpd"><a href="#安装vsftpd" class="headerlink" title="安装vsftpd"></a>安装vsftpd</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#sudo apt-get update  //防止出现"有 几个软件包无法下载，您可以运行apt-get update------"的错误提示，导致无法安装</span></div><div class="line"><span class="comment">#sudo apt-get install vsftpd</span></div></pre></td></tr></table></figure>]]></content>
+<h2 id="安装vsftpd"><a href="#安装vsftpd" class="headerlink" title="安装vsftpd"></a>安装vsftpd</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#sudo apt-get update  //防止出现"有 几个软件包无法下载，您可以运行apt-get update------"的错误提示，导致无法安装</span></div><div class="line"><span class="comment">#sudo apt-get install vsftpd</span></div></pre></td></tr></table></figure>
+<h2 id="判断vsftpd是否安装成功"><a href="#判断vsftpd是否安装成功" class="headerlink" title="判断vsftpd是否安装成功"></a>判断vsftpd是否安装成功</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#sudo service vsftpd restart</span></div></pre></td></tr></table></figure>
+<p><img src="/2018/12/13/Ubuntu14-04安装并配置FTP/restart_vsftpd.png" alt=""><br>上图表示处于运行状态，安装服务成功。</p>
+<h2 id="以”-home-ubuntu-zhy-version”目录作为用户主目录"><a href="#以”-home-ubuntu-zhy-version”目录作为用户主目录" class="headerlink" title="以”/home/ubuntu_zhy/version”目录作为用户主目录"></a>以”/home/ubuntu_zhy/version”目录作为用户主目录</h2><p>同样可以新建目录作为用户主目录，使用以下命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo mkdir /home/uftp</div></pre></td></tr></table></figure></p>
+<h2 id="新建用户uftp并设置密码"><a href="#新建用户uftp并设置密码" class="headerlink" title="新建用户uftp并设置密码"></a>新建用户uftp并设置密码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#sudo useradd -d /home/ubuntu_zhy/version -s /bin/bash uftp</span></div><div class="line"><span class="comment">#sudo passwd uftp //输入两次</span></div></pre></td></tr></table></figure>
+<h2 id="修改配置文件-etc-vsftpd-conf"><a href="#修改配置文件-etc-vsftpd-conf" class="headerlink" title="修改配置文件/etc/vsftpd.conf"></a>修改配置文件/etc/vsftpd.conf</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#sudo vi /etc/vsftpd.conf</span></div></pre></td></tr></table></figure>
+<p>新增：<br>userlist_deny=NO      //指定user_list的文件，里面放允许ftp登陆的本地用户<br>userlist_enable=YES   //指定user_list的文件，里面放允许ftp登陆的本地用户<br>userlist_file=/etc/allowed_users   //记录允许本地登陆用户名的文件<br>seccomp_sandbox=NO    //不配置可能导致530的问题<br>修改：<br>local_enable=YES      //允许本地用户登陆</p>
+<h2 id="新建-etc-allowed-users文件"><a href="#新建-etc-allowed-users文件" class="headerlink" title="新建/etc/allowed_users文件"></a>新建/etc/allowed_users文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#sudo vi /etc/allowed_users</span></div></pre></td></tr></table></figure>
+<p>输入uftp</p>
+<h2 id="查看-etc-ftpusers文件中的内容"><a href="#查看-etc-ftpusers文件中的内容" class="headerlink" title="查看/etc/ftpusers文件中的内容"></a>查看/etc/ftpusers文件中的内容</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#sudo vi /etc/ftpusers</span></div></pre></td></tr></table></figure>
+<p>看一看有没有uftp这个用户名;<br>如果没有，就直接退出。<br>如果有就删除uftp,因为这个文件中记录的是不能访问FTP服务器的用户清单。</p>
+<h2 id="使用WinSCP登录FTP服务器"><a href="#使用WinSCP登录FTP服务器" class="headerlink" title="使用WinSCP登录FTP服务器"></a>使用WinSCP登录FTP服务器</h2><p>运行WinSCP(没有就下载安装WinSCP)–&gt;输入IP、用户名、密码–&gt;保存–&gt;勾选”保存密码”–&gt;确定–&gt;登录–&gt;登录成功。<br><img src="/2018/12/13/Ubuntu14-04安装并配置FTP/winscp.png" alt=""></p>
+]]></content>
     
     <summary type="html">
     
