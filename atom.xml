@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://weibo.com/"/>
-  <updated>2018-12-13T04:50:11.473Z</updated>
+  <updated>2018-12-13T06:05:09.324Z</updated>
   <id>http://weibo.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://weibo.com/2018/12/13/Ubuntu14-04%E5%AE%89%E8%A3%85%E5%B9%B6%E9%85%8D%E7%BD%AEFTP/"/>
     <id>http://weibo.com/2018/12/13/Ubuntu14-04安装并配置FTP/</id>
     <published>2018-12-13T03:50:54.000Z</published>
-    <updated>2018-12-13T04:50:11.473Z</updated>
+    <updated>2018-12-13T06:05:09.324Z</updated>
     
     <content type="html"><![CDATA[<p>之前在Ubuntu上装的虚拟机的空间不够，拉取两个分支的时候就会显示disk不足，虚拟机上只能存在一个分支代码，想要从宿主机把分支代码通过FTP传输到虚拟机，但是宿主机并不支持FTP，接下来就是主要接受我在宿主机和虚拟机安装和配置FTP的步骤。<br><a id="more"></a></p>
 <h2 id="安装vsftpd"><a href="#安装vsftpd" class="headerlink" title="安装vsftpd"></a>安装vsftpd</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#sudo apt-get update  //防止出现"有 几个软件包无法下载，您可以运行apt-get update------"的错误提示，导致无法安装</span></div><div class="line"><span class="comment">#sudo apt-get install vsftpd</span></div></pre></td></tr></table></figure>
@@ -35,6 +35,8 @@
 <h2 id="查看-etc-ftpusers文件中的内容"><a href="#查看-etc-ftpusers文件中的内容" class="headerlink" title="查看/etc/ftpusers文件中的内容"></a>查看/etc/ftpusers文件中的内容</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#sudo vi /etc/ftpusers</span></div></pre></td></tr></table></figure>
 <p>看一看有没有uftp这个用户名;<br>如果没有，就直接退出。<br>如果有就删除uftp,因为这个文件中记录的是不能访问FTP服务器的用户清单。</p>
 <h2 id="使用WinSCP登录FTP服务器"><a href="#使用WinSCP登录FTP服务器" class="headerlink" title="使用WinSCP登录FTP服务器"></a>使用WinSCP登录FTP服务器</h2><p>运行WinSCP(没有就下载安装WinSCP)–&gt;输入IP、用户名、密码–&gt;保存–&gt;勾选”保存密码”–&gt;确定–&gt;登录–&gt;登录成功。<br><img src="/2018/12/13/Ubuntu14-04安装并配置FTP/winscp.png" alt=""></p>
+<h2 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get remove --purge vsftpd</div></pre></td></tr></table></figure>
+<p>(–purge 选项表示彻底删除改软件和相关文件)</p>
 ]]></content>
     
     <summary type="html">
