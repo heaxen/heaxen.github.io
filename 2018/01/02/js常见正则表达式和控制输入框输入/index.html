@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ZhangHy's Zone!" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="在日常工作中常常会使用到正则表达式，主要是输入框。1234567891011验证数字：^[0-9]*$验证n位的数字：^\d&amp;#123;n&amp;#125;$验证至少n位数字：^\d&amp;#123;n,&amp;#125;$验证m-n位的数字：^\d&amp;#123;m,n&amp;#125;$验证零和非零开头的数字：^(0|[1-9][0-9]*)$验证有两位小数的正实数：^[0-9]+(.[0-9]&amp;#123;2&amp;#125;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js常见正则表达式和控制输入框输入">
+<meta property="og:url" content="http://weibo.com/2018/01/02/js常见正则表达式和控制输入框输入/index.html">
+<meta property="og:site_name" content="ZhangHy&#39;s Zone!">
+<meta property="og:description" content="在日常工作中常常会使用到正则表达式，主要是输入框。1234567891011验证数字：^[0-9]*$验证n位的数字：^\d&amp;#123;n&amp;#125;$验证至少n位数字：^\d&amp;#123;n,&amp;#125;$验证m-n位的数字：^\d&amp;#123;m,n&amp;#125;$验证零和非零开头的数字：^(0|[1-9][0-9]*)$验证有两位小数的正实数：^[0-9]+(.[0-9]&amp;#123;2&amp;#125;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-14T09:45:37.993Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="js常见正则表达式和控制输入框输入">
+<meta name="twitter:description" content="在日常工作中常常会使用到正则表达式，主要是输入框。1234567891011验证数字：^[0-9]*$验证n位的数字：^\d&amp;#123;n&amp;#125;$验证至少n位数字：^\d&amp;#123;n,&amp;#125;$验证m-n位的数字：^\d&amp;#123;m,n&amp;#125;$验证零和非零开头的数字：^(0|[1-9][0-9]*)$验证有两位小数的正实数：^[0-9]+(.[0-9]&amp;#123;2&amp;#125;">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":4},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://weibo.com/2018/01/02/js常见正则表达式和控制输入框输入/"/>
+
+
+
+
+
+  <title>js常见正则表达式和控制输入框输入 | ZhangHy's Zone!</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ZhangHy's Zone!</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-search">
+          <a href="/search/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-search"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://weibo.com/2018/01/02/js常见正则表达式和控制输入框输入/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZhangHy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhangHy's Zone!">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">js常见正则表达式和控制输入框输入</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-02T13:33:08+08:00">
+                2018-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在日常工作中常常会使用到正则表达式，主要是输入框。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">验证数字：^[0-9]*$</div><div class="line">验证n位的数字：^\d&#123;n&#125;$</div><div class="line">验证至少n位数字：^\d&#123;n,&#125;$</div><div class="line">验证m-n位的数字：^\d&#123;m,n&#125;$</div><div class="line">验证零和非零开头的数字：^(0|[1-9][0-9]*)$</div><div class="line">验证有两位小数的正实数：^[0-9]+(.[0-9]&#123;2&#125;)?$</div><div class="line">验证有1-3位小数的正实数：^[0-9]+(.[0-9]&#123;1,3&#125;)?$</div><div class="line">验证非零的正整数：^\+?[1-9][0-9]*$</div><div class="line">验证非零的负整数：^\-[1-9][0-9]*$</div><div class="line">验证非负整数（正整数 + 0） ^\d+$</div><div class="line">验证非正整数（负整数 + 0） ^((-\d+)|(0+))$</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">验证长度为3的字符：^.&#123;3&#125;$</div><div class="line">验证由26个英文字母组成的字符串：^[A-Za-z]+$</div><div class="line">验证由26个大写英文字母组成的字符串：^[A-Z]+$</div><div class="line">验证由26个小写英文字母组成的字符串：^[a-z]+$</div><div class="line">验证由数字和26个英文字母组成的字符串：^[A-Za-z0-9]+$</div><div class="line">验证由数字、26个英文字母或者下划线组成的字符串：^\w+$</div><div class="line">验证用户密码:^[a-zA-Z]\w&#123;5,17&#125;$ 正确格式为：以字母开头，长度在6-18之间，只能包含字符、数字和下划线。</div><div class="line">验证是否含有 ^%&amp;<span class="string">',;=?$\" 等字符：[^%&amp;'</span>,;=?$\x22]+</div><div class="line">验证汉字：^[\u4e00-\u9fa5],&#123;0,&#125;$</div><div class="line">验证Email地址：</div><div class="line">^\w+[-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$</div><div class="line">验证URL：</div><div class="line">^http://([\w-]+\.)+[\w-]+(/[\w-./?%&amp;=]*)?$ ；^[a-zA-z]+://(w+(-w+)*)(.(w+(-w+)*))*(?S*)?$</div><div class="line">验证电话号码：</div><div class="line">^(\(\d&#123;3,4&#125;\)|\d&#123;3,4&#125;-)?\d&#123;7,8&#125;$：--正确格式为：XXXX-XXXXXXX，XXXX-XXXXXXXX，XXX-XXXXXXX，XXX-XXXXXXXX，XXXXXXX，XXXXXXXX。</div><div class="line">验证身份证号（15位或18位数字）：^\d&#123;15&#125;|\d&#123;&#125;18$</div><div class="line">验证一年的12个月：^(0?[1-9]|1[0-2])$ 正确格式为：“01”-“09”和“1”“12”</div><div class="line">验证一个月的31天：</div><div class="line">^((0?[1-9])|((1|2)[0-9])|30|31)$ 正确格式为：01、09和1、31。</div><div class="line">整数：^-?\d+$</div><div class="line">非负浮点数（正浮点数 + 0）：^\d+(\.\d+)?$</div><div class="line">正浮点数 ^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$</div><div class="line">非正浮点数（负浮点数 + 0） ^((-\d+(\.\d+)?)|(0+(\.0+)?))$</div><div class="line">负浮点数 ^(-(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*)))$</div><div class="line">浮点数 ^(-?\d+)(\.\d+)?$</div></pre></td></tr></table></figure>
+<h2 id="用js控制输入框input数字、汉字、字符"><a href="#用js控制输入框input数字、汉字、字符" class="headerlink" title="用js控制输入框input数字、汉字、字符"></a>用js控制输入框input数字、汉字、字符</h2><p>1.文本框只能输入数字代码(小数点也不能输入)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input onkeyup=<span class="string">"this.value=this.value.replace(/\D/g,'')"</span> onafterpaste=<span class="string">"this.value=this.value.replace(/\D/g,'')"</span>&gt;</div></pre></td></tr></table></figure></p>
+<p>2.只能输入数字,能输小数点.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;input onkeyup=<span class="string">"if(isNaN(value))execCommand('undo')"</span> onafterpaste=<span class="string">"if(isNaN(value))execCommand('undo')"</span>&gt;</div><div class="line">&lt;input name=txt1 onchange=<span class="string">"if(/\D/.test(this.value))&#123;alert('只能输入数字');this.value='';&#125;"</span>&gt;</div></pre></td></tr></table></figure></p>
+<p>3.数字和小数点方法二<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input <span class="built_in">type</span>=text t_value=<span class="string">""</span> o_value=<span class="string">""</span> onkeypress=<span class="string">"if(!this.value.match(/^[\+\-]?\d*?\.?\d*?$/))this.value=this.t_value;else this.t_value=this.value;if(this.value.match(/^(?:[\+\-]?\d+(?:\.\d+)?)?$/))this.o_value=this.value"</span> onkeyup=<span class="string">"if(!this.value.match(/^[\+\-]?\d*?\.?\d*?$/))this.value=this.t_value;else this.t_value=this.value;if(this.value.match(/^(?:[\+\-]?\d+(?:\.\d+)?)?$/))this.o_value=this.value"</span> onblur=<span class="string">"if(!this.value.match(/^(?:[\+\-]?\d+(?:\.\d+)?|\.\d*?)?$/))this.value=this.o_value;else&#123;if(this.value.match(/^\.\d+$/))this.value=0+this.value;if(this.value.match(/^\.$/))this.value=0;this.o_value=this.value&#125;"</span>&gt;</div></pre></td></tr></table></figure></p>
+<p>4.只能输入字母和汉字<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input onkeyup=<span class="string">"value=value.replace(/[\d]/g,'') "</span>onbeforepaste=<span class="string">"clipboardData.setData('text',clipboardData.getData('text').replace(/[\d]/g,''))"</span> maxlength=10 name=<span class="string">"Numbers"</span>&gt;</div></pre></td></tr></table></figure></p>
+<p>5.只能输入英文字母和数字,不能输入中文<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input onkeyup=<span class="string">"value=value.replace(/[^\w\.\/]/ig,'')"</span>&gt;</div></pre></td></tr></table></figure></p>
+<p>6.只能输入数字和英文<font color="Red">chun</font><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input onKeyUp=<span class="string">"value=value.replace(/[^\d|chun]/g,'')"</span>&gt;</div></pre></td></tr></table></figure></p>
+<p>7.小数点后只能有最多两位(数字,中文都可输入),不能输入字母和运算符号:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input onKeyPress=<span class="string">"if((event.keyCode&lt;48 || event.keyCode&gt;57) &amp;&amp; event.keyCode!=46 || /\.\d\d$/.test(value))event.returnValue=false"</span>&gt;</div></pre></td></tr></table></figure></p>
+<p>8.小数点后只能有最多两位(数字,字母,中文都可输入),可以输入运算符号:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;input onkeyup=<span class="string">"this.value=this.value.replace(/^(\-)*(\d+)\.(\d\d).*$/,'<span class="variable">$1</span><span class="variable">$2</span>.<span class="variable">$3</span>')"</span>&gt;</div><div class="line">只能是数字和小数点和加减乘際</div><div class="line">onkeypress=<span class="string">"return event.keyCode&gt;=4&amp;&amp;event.keyCode&lt;=57"</span></div></pre></td></tr></table></figure></p>
+<h2 id="以下未经测试，请验证后使用"><a href="#以下未经测试，请验证后使用" class="headerlink" title="以下未经测试，请验证后使用"></a>以下未经测试，请验证后使用</h2><p>1.只能输入数字和英文的：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input onkeyup=<span class="string">"value=value.replace(/[\W]/g,'') "</span> onbeforepaste=<span class="string">"clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"</span> ID=<span class="string">"Text1"</span> NAME=<span class="string">"Text1"</span>&gt;</div></pre></td></tr></table></figure></p>
+<p>2.只能输入数字的：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input onkeyup=<span class="string">"value=value.replace(/[^\d]/g,'') "</span> onbeforepaste=<span class="string">"clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"</span> ID=<span class="string">"Text2"</span> NAME=<span class="string">"Text2"</span>&gt;</div></pre></td></tr></table></figure></p>
+<p>3.只能输入全角的：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input onkeyup=<span class="string">"value=value.replace(/[^\uFF00-\uFFFF]/g,'')"</span> onbeforepaste=<span class="string">"clipboardData.setData('text',clipboardData.getData('text').replace(/[^\uFF00-\uFFFF]/g,''))"</span> ID=<span class="string">"Text3"</span> NAME=<span class="string">"Text3"</span>&gt;</div></pre></td></tr></table></figure></p>
+<p>4.只能输入汉字的：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input onkeyup=<span class="string">"value=value.replace(/[^\u4E00-\u9FA5]/g,'')"</span> onbeforepaste=<span class="string">"clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))"</span> ID=<span class="string">"Text4"</span> NAME=<span class="string">"Text4"</span>&gt;</div></pre></td></tr></table></figure></p>
+<p>5.邮件地址验证：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var regu = <span class="string">"^(([0-9a-zA-Z]+)|([0-9a-zA-Z]+[_.0-9a-zA-Z-]*[0-9a-zA-Z]+))@([a-zA-Z0-9-]+[.])+([a-zA-Z]&#123;2&#125;|net|NET|com|COM|gov|GOV|mil|MIL|org|ORG|edu|EDU|int|INT)$"</span></div><div class="line">var re = new RegExp(regu);</div><div class="line"><span class="keyword">if</span> (s.search(re) != -1) &#123;</div><div class="line">    <span class="built_in">return</span> <span class="literal">true</span>;</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    window.alert (<span class="string">"请输入有效合法的E-mail地址 ！"</span>)</div><div class="line">    <span class="built_in">return</span> <span class="literal">false</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>6.身份证：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">"^\\d&#123;17&#125;(\\d|x)$"</span></div></pre></td></tr></table></figure></p>
+<p>7.17种正则表达式<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">/^[a-zA-Z0-9\u4e00-\u9fa5]+$/  数字文字字母</div><div class="line"><span class="string">"^\\d+$"</span>　　//非负整数（正整数 + 0）</div><div class="line"><span class="string">"^[0-9]*[1-9][0-9]*$"</span>　　//正整数</div><div class="line"><span class="string">"^((-\\d+)|(0+))$"</span>　　//非正整数（负整数 + 0）</div><div class="line"><span class="string">"^-[0-9]*[1-9][0-9]*$"</span>　　//负整数</div><div class="line"><span class="string">"^-?\\d+$"</span>　　　　//整数</div><div class="line"><span class="string">"^\\d+(\\.\\d+)?$"</span>　　//非负浮点数（正浮点数 + 0）</div><div class="line"><span class="string">"^(([0-9]+\\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\\.[0-9]+)|([0-9]*[1-9][0-9]*))$"</span>　　//正浮点数</div><div class="line"><span class="string">"^((-\\d+(\\.\\d+)?)|(0+(\\.0+)?))$"</span>　　//非正浮点数（负浮点数 + 0）</div><div class="line"><span class="string">"^(-(([0-9]+\\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\\.[0-9]+)|([0-9]*[1-9][0-9]*)))$"</span>　　//负浮点数</div><div class="line"><span class="string">"^(-?\\d+)(\\.\\d+)?$"</span>　　//浮点数</div><div class="line"><span class="string">"^[A-Za-z]+$"</span>　　//由26个英文字母组成的字符串</div><div class="line"><span class="string">"^[A-Z]+$"</span>　　//由26个英文字母的大写组成的字符串</div><div class="line"><span class="string">"^[a-z]+$"</span>　　//由26个英文字母的小写组成的字符串</div><div class="line"><span class="string">"^[A-Za-z0-9]+$"</span>　　//由数字和26个英文字母组成的字符串</div><div class="line"><span class="string">"^\\w+$"</span>　　//由数字、26个英文字母或者下划线组成的字符串</div><div class="line"><span class="string">"^[\\w-]+(\\.[\\w-]+)*@[\\w-]+(\\.[\\w-]+)+$"</span>　　　　//email地址</div><div class="line"><span class="string">"^[a-zA-z]+://(\\w+(-\\w+)*)(\\.(\\w+(-\\w+)*))*(\\?\\S*)?$"</span>　　//url</div></pre></td></tr></table></figure></p>
+<h2 id="控制输入框输入"><a href="#控制输入框输入" class="headerlink" title="控制输入框输入"></a>控制输入框输入</h2><p>1.取消按钮按下时的虚线框<br>　　在input里添加属性值 hideFocus 或者 HideFocus=true<br>2.只读文本框内容<br>    在input里添加属性值 readonly<br>3.防止退后清空的TEXT文档(可把style内容做做为类引用)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;INPUT style=behavior:url(<span class="comment">#default#savehistory); type=text id=oPersistInput&gt;</span></div></pre></td></tr></table></figure></p>
+<p>4.ENTER键可以让光标移到下一个输入框<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input onkeydown=<span class="string">"if(event.keyCode==13)event.keyCode=9"</span> &gt;</div></pre></td></tr></table></figure></p>
+<p>5.只能为中文(有闪动)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input onkeyup=<span class="string">"value="</span>/value.replace(/[<span class="string">"-~]/g,’’)"</span> onkeydown=<span class="string">"if(event.keyCode==13)event.keyCode=9"</span>&gt;</div></pre></td></tr></table></figure></p>
+<p>6.只能为数字(有闪动)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input onkeyup=<span class="string">"value="</span>/value.replace(/[<span class="string">"^\d]/g,’’) "</span>onbeforepaste=<span class="string">"clipboardData.setData(’text’,clipboardData.getData(’text’).replace(/[^\d]/g,’’))"</span>&gt;</div></pre></td></tr></table></figure></p>
+<p>7.只能为数字(无闪动)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input ime-mode:disabled<span class="string">" onkeydown="</span><span class="keyword">if</span>(event.keyCode==13)event.keyCode=9<span class="string">" onKeyPress="</span><span class="keyword">if</span> ((event.keyCode&lt;48 || event.keyCode&gt;57)) event.returnValue=<span class="literal">false</span><span class="string">"&gt;</span></div></pre></td></tr></table></figure></p>
+<p>8.只能输入英文和数字(有闪动)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input onkeyup=<span class="string">"value="</span>/value.replace(/[\W]/g,<span class="string">"’’)"</span> onbeforepaste=<span class="string">"clipboardData.setData(’text’,clipboardData.getData(’text’).replace(/[^\d]/g,’’))"</span>&gt;</div></pre></td></tr></table></figure></p>
+<p>9.屏蔽输入法<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input <span class="built_in">type</span>=<span class="string">"text"</span> name=<span class="string">"url"</span> ime-mode:disabled<span class="string">" onkeydown="</span><span class="keyword">if</span>(event.keyCode==13)event.keyCode=9<span class="string">"&gt;</span></div></pre></td></tr></table></figure></p>
+<p>10.只能输入 数字，小数点，减号（-） 字符(无闪动)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input onKeyPress=<span class="string">"if (event.keyCode!=46 &amp;&amp; event.keyCode!=45 &amp;&amp; (event.keyCode&lt;48 || event.keyCode&gt;57)) event.returnValue=false"</span>&gt;</div></pre></td></tr></table></figure></p>
+<p>11.只能输入两位小数，三位小数(有闪动)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&lt;input maxlength=9 onkeyup=<span class="string">"if(value.match(/^\d&#123;3&#125;$/))value="</span>/value.replace(value,parseInt(value/10))<span class="string">" ;value="</span>/value.replace(/\.\d*\./g,’.<span class="string">"’)"</span> onKeyPress=<span class="string">"if((event.keyCode&lt;48 || event.keyCode&gt;57) &amp;&amp; event.keyCode!=46 &amp;&amp; event.keyCode!=45 || value.match(/^\d&#123;3&#125;$/) || /\.\d&#123;3&#125;$/.test(value)) &#123;event.returnValue=false&#125;"</span> id=text_kfxe name=text_kfxe&gt;</div><div class="line"><span class="string">"^\\d+$"</span>　　//非负整数（正整数 + 0）</div><div class="line"><span class="string">"^[0-9]*[1-9][0-9]*$"</span>　　//正整数</div><div class="line"><span class="string">"^((-\\d+)|(0+))$"</span>　　//非正整数（负整数 + 0）</div><div class="line"><span class="string">"^-[0-9]*[1-9][0-9]*$"</span>　　//负整数</div><div class="line"><span class="string">"^-?\\d+$"</span>　　　　//整数</div><div class="line"><span class="string">"^\\d+(\\.\\d+)?$"</span>　　//非负浮点数（正浮点数 + 0）</div><div class="line"><span class="string">"^(([0-9]+\\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\\.[0-9]+)|([0-9]*[1-9][0-9]*))$"</span>　　//正浮点数</div><div class="line"><span class="string">"^((-\\d+(\\.\\d+)?)|(0+(\\.0+)?))$"</span>　　//非正浮点数（负浮点数 + 0）</div><div class="line"><span class="string">"^(-(([0-9]+\\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\\.[0-9]+)|([0-9]*[1-9][0-9]*)))$"</span>　　//负浮点数</div><div class="line"><span class="string">"^(-?\\d+)(\\.\\d+)?$"</span>　　//浮点数</div><div class="line"><span class="string">"^[A-Za-z]+$"</span>　　//由26个英文字母组成的字符串</div><div class="line"><span class="string">"^[A-Z]+$"</span>　　//由26个英文字母的大写组成的字符串</div><div class="line"><span class="string">"^[a-z]+$"</span>　　//由26个英文字母的小写组成的字符串</div><div class="line"><span class="string">"^[A-Za-z0-9]+$"</span>　　//由数字和26个英文字母组成的字符串</div><div class="line"><span class="string">"^\\w+$"</span>　　//由数字、26个英文字母或者下划线组成的字符串</div><div class="line"><span class="string">"^[\\w-]+(\\.[\\w-]+)*@[\\w-]+(\\.[\\w-]+)+$"</span>　　　　//email地址</div><div class="line"><span class="string">"^[a-zA-z]+://(\\w+(-\\w+)*)(\\.(\\w+(-\\w+)*))*(\\?\\S*)?$"</span>　　//url</div><div class="line"><span class="string">"^((\d&#123;1,3&#125;(,\d&#123;3&#125;)*?)|\d+)(\.\d+)?$ //带逗号的decimal</span></div></pre></td></tr></table></figure></p>
+<h3 id="具体的使用"><a href="#具体的使用" class="headerlink" title="具体的使用"></a>具体的使用</h3><p>``` bash</p>
+<p><script language="JavaScript"><br>var mm=/^\d+$/;<br>function formCheck(){<br>    if(!mm.test(document.f1.PropertyAmount.value)){<br>        alert(“请输入合法的数字”);<br>        document.f1.PropertyAmount.focus();<br>        return false;<br>    }<br>    return true;<br>}</p>
+</script></p>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/30/js滚动事件无法触发的处理/" rel="next" title="js滚动事件无法触发的处理">
+                <i class="fa fa-chevron-left"></i> js滚动事件无法触发的处理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/02/Webpack/" rel="prev" title="Webpack">
+                Webpack <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="ZhangHy" />
+          <p class="site-author-name" itemprop="name">ZhangHy</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#用js控制输入框input数字、汉字、字符"><span class="nav-number">1.</span> <span class="nav-text">用js控制输入框input数字、汉字、字符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#以下未经测试，请验证后使用"><span class="nav-number">2.</span> <span class="nav-text">以下未经测试，请验证后使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#控制输入框输入"><span class="nav-number">3.</span> <span class="nav-text">控制输入框输入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#具体的使用"><span class="nav-number">3.1.</span> <span class="nav-text">具体的使用</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZhangHy</span>
+
+  
+</div>
+
+
+  <div class="powered-by">
+    由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+  </div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">
+    主题 &mdash;
+    <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+      NexT.Pisces
+    </a>
+  </div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

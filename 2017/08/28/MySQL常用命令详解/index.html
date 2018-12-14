@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="MySQL," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ZhangHy's Zone!" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="MySQL是一种开放源代码的关系型数据库管理系统（RDBMS），使用最常用的数据库管理语言–结构化查询语言（SQL）进行数据库管理。MySQL是开放源代码的，因此任何人都可以在General Public License的许可下下载并根据个性化的需要对其进行修改。MySQL因为其速度、可靠性和适应性而备受关注。大多数人都认为在不需要事务化处理的情况下，MySQL是管理内容最好的选择。(以上内容摘自">
+<meta name="keywords" content="MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL常用命令详解">
+<meta property="og:url" content="http://weibo.com/2017/08/28/MySQL常用命令详解/index.html">
+<meta property="og:site_name" content="ZhangHy&#39;s Zone!">
+<meta property="og:description" content="MySQL是一种开放源代码的关系型数据库管理系统（RDBMS），使用最常用的数据库管理语言–结构化查询语言（SQL）进行数据库管理。MySQL是开放源代码的，因此任何人都可以在General Public License的许可下下载并根据个性化的需要对其进行修改。MySQL因为其速度、可靠性和适应性而备受关注。大多数人都认为在不需要事务化处理的情况下，MySQL是管理内容最好的选择。(以上内容摘自">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-14T09:36:56.813Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL常用命令详解">
+<meta name="twitter:description" content="MySQL是一种开放源代码的关系型数据库管理系统（RDBMS），使用最常用的数据库管理语言–结构化查询语言（SQL）进行数据库管理。MySQL是开放源代码的，因此任何人都可以在General Public License的许可下下载并根据个性化的需要对其进行修改。MySQL因为其速度、可靠性和适应性而备受关注。大多数人都认为在不需要事务化处理的情况下，MySQL是管理内容最好的选择。(以上内容摘自">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":4},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://weibo.com/2017/08/28/MySQL常用命令详解/"/>
+
+
+
+
+
+  <title>MySQL常用命令详解 | ZhangHy's Zone!</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ZhangHy's Zone!</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-search">
+          <a href="/search/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-search"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://weibo.com/2017/08/28/MySQL常用命令详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZhangHy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhangHy's Zone!">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">MySQL常用命令详解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-28T08:15:22+08:00">
+                2017-08-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL指令/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL指令</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>MySQL是一种开放源代码的关系型数据库管理系统（RDBMS），使用最常用的数据库管理语言–结构化查询语言（SQL）进行数据库管理。<br>MySQL是开放源代码的，因此任何人都可以在General Public License的许可下下载并根据个性化的需要对其进行修改。<br>MySQL因为其速度、可靠性和适应性而备受关注。大多数人都认为在不需要事务化处理的情况下，MySQL是管理内容最好的选择。<br>(以上内容摘自百度百科)<br><a id="more"></a></p>
+<h2 id="MySQL安装目录"><a href="#MySQL安装目录" class="headerlink" title="MySQL安装目录"></a>MySQL安装目录</h2><h3 id="数据库目录"><a href="#数据库目录" class="headerlink" title="数据库目录"></a>数据库目录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/var/lib/mysql/</div></pre></td></tr></table></figure>
+<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/share/mysql（mysql.server命令及配置文件）</div></pre></td></tr></table></figure>
+<h3 id="相关命令"><a href="#相关命令" class="headerlink" title="相关命令"></a>相关命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/bin(mysqladmin mysqldump等命令)</div></pre></td></tr></table></figure>
+<h3 id="启动脚本"><a href="#启动脚本" class="headerlink" title="启动脚本"></a>启动脚本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/etc/init.d/mysql（启动脚本文件mysql的目录）</div></pre></td></tr></table></figure>
+<h2 id="系统管理"><a href="#系统管理" class="headerlink" title="系统管理"></a>系统管理</h2><h3 id="连接MySQL"><a href="#连接MySQL" class="headerlink" title="连接MySQL"></a>连接MySQL</h3><p>格式: mysql -h 主机地址 -u用户名 -p用户密码<br>例 1:连接到本机上的 MySQL。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hadoop@ubuntu:~$ mysql -uroot -pmysql;</div></pre></td></tr></table></figure></p>
+<p>例 2:连接到远程主机上的 MYSQL。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hadoop@ubuntu:~$ mysql -h 127.0.0.1 -uroot -pmysql;</div></pre></td></tr></table></figure></p>
+<h3 id="修改新密码"><a href="#修改新密码" class="headerlink" title="修改新密码"></a>修改新密码</h3><p>在终端输入：mysql -u用户名 -p密码，回车进入Mysql。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; use mysql;</div><div class="line">&gt; update user <span class="built_in">set</span> password=PASSWORD(<span class="string">'新密码'</span>) <span class="built_in">where</span> user=<span class="string">'用户名'</span>;</div><div class="line">&gt; flush privileges; <span class="comment">#更新权限</span></div><div class="line">&gt; quit; <span class="comment">#退出</span></div></pre></td></tr></table></figure></p>
+<h3 id="增加新用户"><a href="#增加新用户" class="headerlink" title="增加新用户"></a>增加新用户</h3><p>格式:grant select on 数据库.* to 用户名@登录主机 identified by ‘密码’<br>举例:<br>例 1:增加一个用户 test1 密码为 abc,让他可以在任何主机上登录,并对所有数据库有<br>查询、插入、修改、删除的权限。首先用以 root 用户连入 MySQL,然后键入以下命令:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt;grant select,insert,update,delete on *.* to root@localhost identified by <span class="string">'mysql'</span>;</div></pre></td></tr></table></figure></p>
+<p>或者<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grant all privileges on *.* to root@localhost identified by <span class="string">'mysql'</span>;</div></pre></td></tr></table></figure></p>
+<p>然后刷新权限设置。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">flush privileges;</div></pre></td></tr></table></figure></p>
+<p>例 2:如果你不想 root 有密码操作数据库“mydb”里的数据表,可以再打一个命令将密码消掉。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grant select,insert,update,delete on mydb.* to root@localhost identified by <span class="string">''</span>;</div></pre></td></tr></table></figure></p>
+<h3 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hadoop@ubuntu:~$ mysql -u用户名 -p密码</div><div class="line">mysql&gt;delete from user <span class="built_in">where</span> user=<span class="string">'用户名'</span> and host=<span class="string">'localhost'</span>;</div><div class="line">mysql&gt;flush privileges;</div></pre></td></tr></table></figure>
+<h3 id="删除用户的数据库"><a href="#删除用户的数据库" class="headerlink" title="删除用户的数据库"></a>删除用户的数据库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt;drop database dbname;</div></pre></td></tr></table></figure>
+<h2 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h2><h3 id="显示所有的数据库"><a href="#显示所有的数据库" class="headerlink" title="显示所有的数据库"></a>显示所有的数据库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt; show databases;(注意:最后有个 s)</div></pre></td></tr></table></figure>
+<h3 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt; create database <span class="built_in">test</span>;</div></pre></td></tr></table></figure>
+<h3 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt; use <span class="built_in">test</span>;</div></pre></td></tr></table></figure>
+<h3 id="查看当前使用的数据库"><a href="#查看当前使用的数据库" class="headerlink" title="查看当前使用的数据库"></a>查看当前使用的数据库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt; select database();</div></pre></td></tr></table></figure>
+<h3 id="当前数据库包含的表信息"><a href="#当前数据库包含的表信息" class="headerlink" title="当前数据库包含的表信息"></a>当前数据库包含的表信息</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt; show tables; (注意:最后有个 s)</div></pre></td></tr></table></figure>
+<h3 id="删除数据库"><a href="#删除数据库" class="headerlink" title="删除数据库"></a>删除数据库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt; drop database <span class="built_in">test</span>;</div></pre></td></tr></table></figure>
+<h2 id="表操作"><a href="#表操作" class="headerlink" title="表操作"></a>表操作</h2><p>备注:操作之前使用“use &lt;数据库名&gt;”应连接某个数据库。</p>
+<h3 id="建表"><a href="#建表" class="headerlink" title="建表"></a>建表</h3><p>命令:create table &lt;表名&gt; (&lt;字段名 1&gt; &lt;类型 1&gt; [,..&lt;字段名 n&gt; &lt;类型 n&gt;]);<br>例子：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">mysql&gt; create table MyClass(</div><div class="line">&gt; id int(4) not null primary key auto_increment,</div><div class="line">&gt; name char(20) not null,</div><div class="line">&gt; sex int(4) not null default <span class="string">'0'</span>,</div><div class="line">&gt; degree double(16,2));</div></pre></td></tr></table></figure></p>
+<h3 id="获取表结构"><a href="#获取表结构" class="headerlink" title="获取表结构"></a>获取表结构</h3><p>命令: desc 表名，或者show columns from 表名<br>例子：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mysql&gt; describe MyClass</div><div class="line">mysql&gt; desc MyClass;</div><div class="line">mysql&gt; show columns from MyClass;</div></pre></td></tr></table></figure></p>
+<h3 id="删除表"><a href="#删除表" class="headerlink" title="删除表"></a>删除表</h3><p>命令:drop table &lt;表名&gt;<br>例如:删除表名为 MyClass 的表<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt; drop table MyClass;</div></pre></td></tr></table></figure></p>
+<h3 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h3><p>命令:insert into &lt;表名&gt; [( &lt;字段名 1&gt;[,..&lt;字段名 n &gt; ])] values ( 值 1 )[, ( 值 n )]<br>例子：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt; insert into MyClass values(1,<span class="string">'Tom'</span>,96.45),(2,<span class="string">'Joan'</span>,82.99), (2,<span class="string">'Wang'</span>, 96.59);</div></pre></td></tr></table></figure></p>
+<h3 id="查询表中的数据"><a href="#查询表中的数据" class="headerlink" title="查询表中的数据"></a>查询表中的数据</h3><p>查询所有行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt; select * from MyClass;</div></pre></td></tr></table></figure></p>
+<p>查询前几行数据<br>例如:查看表 MyClass 中前 2 行数据<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt; select * from MyClass order by id <span class="built_in">limit</span> 0,2;</div></pre></td></tr></table></figure></p>
+<p>或者<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt; select * from MyClass <span class="built_in">limit</span> 0,2;</div></pre></td></tr></table></figure></p>
+<h3 id="删除表中数据"><a href="#删除表中数据" class="headerlink" title="删除表中数据"></a>删除表中数据</h3><p>命令:delete from 表名 where 表达式<br>例如:删除表 MyClass 中编号为 1 的记录<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt; delete from MyClass <span class="built_in">where</span> id=1;</div></pre></td></tr></table></figure></p>
+<h3 id="修改表中数据"><a href="#修改表中数据" class="headerlink" title="修改表中数据"></a>修改表中数据</h3><p>命令:update 表名 set 字段=新值,… where 条件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt; update MyClass <span class="built_in">set</span> name=<span class="string">'Mary'</span> <span class="built_in">where</span> id=1;</div></pre></td></tr></table></figure></p>
+<h3 id="在表中增加字段"><a href="#在表中增加字段" class="headerlink" title="在表中增加字段"></a>在表中增加字段</h3><p>命令:alter table 表名 add 字段 类型 其他;<br>例如:在表 MyClass 中添加了一个字段 passtest,类型为 int(4),默认值为 0<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt; alter table MyClass add passtest int(4) default <span class="string">'0'</span></div></pre></td></tr></table></figure></p>
+<h3 id="更改表名"><a href="#更改表名" class="headerlink" title="更改表名"></a>更改表名</h3><p>命令:rename table 原表名 to 新表名;<br>例如:在表 MyClass 名字更改为 YouClass<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt; rename table MyClass to YouClass;</div></pre></td></tr></table></figure></p>
+<h3 id="更新字段内容"><a href="#更新字段内容" class="headerlink" title="更新字段内容"></a>更新字段内容</h3><p>命令:update 表名 set 字段名 = 新内容<br>update 表名 set 字段名 = replace(字段名, ‘旧内容’, ‘新内容’);<br>例如:文章前面加入 4 个空格<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">update article <span class="built_in">set</span> content=concat(<span class="string">'    '</span>, content);</div></pre></td></tr></table></figure></p>
+<h2 id="数据库导入导出"><a href="#数据库导入导出" class="headerlink" title="数据库导入导出"></a>数据库导入导出</h2><h3 id="从数据库导出数据库文件"><a href="#从数据库导出数据库文件" class="headerlink" title="从数据库导出数据库文件"></a>从数据库导出数据库文件</h3><p>使用“mysqldump”命令<br>首先进入 DOS 界面,然后进行下面操作。<br>1)导出所有数据库<br>格式:mysqldump -u [数据库用户名] -p -A&gt;[备份文件的保存路径]<br>2)导出数据和数据结构<br>格式:mysqldump -u [数据库用户名] -p [要备份的数据库名称]&gt;[备份文件的保存路径]<br>举例:<br>例 1:将数据库 mydb 导出到 e:\MySQL\mydb.sql 文件中。<br>打开开始-&gt;运行-&gt;输入“cmd”,进入命令行模式。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">c:\&gt; mysqldump -h localhost -u root -p mydb &gt;e:\MySQL\mydb.sql</div></pre></td></tr></table></figure></p>
+<p>然后输入密码,等待一会导出就成功了,可以到目标文件中检查是否成功。<br>例 2:将数据库 mydb 中的 mytable 导出到 e:\MySQL\mytable.sql 文件中。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">c:\&gt; mysqldump -h localhost -u root -p mydb mytable&gt;e:\MySQL\mytable.sql</div></pre></td></tr></table></figure></p>
+<p>例 3:将数据库 mydb 的结构导出到 e:\MySQL\mydb_stru.sql 文件中。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">c:\&gt; mysqldump -h localhost -u root -p mydb --add-drop-table &gt;e:\MySQL\mydb_stru.sql</div></pre></td></tr></table></figure></p>
+<p>备注:-h localhost 可以省略,其一般在虚拟主机上用。<br>3)只导出数据不导出数据结构<br>格式:mysqldump -u [数据库用户名] -p -t [要备份的数据库名称]&gt;[备份文件的保存路径]<br>4)导出数据库中的Events<br>格式:mysqldump -u [数据库用户名] -p -E [数据库用户名]&gt;[备份文件的保存路径]<br>5)导出数据库中的存储过程和函数<br>格式:mysqldump -u [数据库用户名] -p -R [数据库用户名]&gt;[备份文件的保存路径]</p>
+<h3 id="从外部文件导入数据库中"><a href="#从外部文件导入数据库中" class="headerlink" title="从外部文件导入数据库中"></a>从外部文件导入数据库中</h3><p>1)使用“source”命令<br>首先进入“mysql”命令控制台,然后创建数据库,然后使用该数据库。最后执行下面操作。<br>mysql&gt;source [备份文件的保存路径]<br>2)使用“&lt;”符号<br>首先进入“mysql”命令控制台,然后创建数据库,然后退出 MySQL,进入 DOS 界面。最后执行下面操作。<br>mysql -u root –p &lt; [备份文件的保存路径]</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/21/Linux常见指令/" rel="next" title="Linux常见指令">
+                <i class="fa fa-chevron-left"></i> Linux常见指令
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/05/NodeJs开发Web后台服务/" rel="prev" title="NodeJs开发Web后台服务">
+                NodeJs开发Web后台服务 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="ZhangHy" />
+          <p class="site-author-name" itemprop="name">ZhangHy</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL安装目录"><span class="nav-number">1.</span> <span class="nav-text">MySQL安装目录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库目录"><span class="nav-number">1.1.</span> <span class="nav-text">数据库目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置文件"><span class="nav-number">1.2.</span> <span class="nav-text">配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相关命令"><span class="nav-number">1.3.</span> <span class="nav-text">相关命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动脚本"><span class="nav-number">1.4.</span> <span class="nav-text">启动脚本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统管理"><span class="nav-number">2.</span> <span class="nav-text">系统管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#连接MySQL"><span class="nav-number">2.1.</span> <span class="nav-text">连接MySQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改新密码"><span class="nav-number">2.2.</span> <span class="nav-text">修改新密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增加新用户"><span class="nav-number">2.3.</span> <span class="nav-text">增加新用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除用户"><span class="nav-number">2.4.</span> <span class="nav-text">删除用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除用户的数据库"><span class="nav-number">2.5.</span> <span class="nav-text">删除用户的数据库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库操作"><span class="nav-number">3.</span> <span class="nav-text">数据库操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#显示所有的数据库"><span class="nav-number">3.1.</span> <span class="nav-text">显示所有的数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建数据库"><span class="nav-number">3.2.</span> <span class="nav-text">创建数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接数据库"><span class="nav-number">3.3.</span> <span class="nav-text">连接数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看当前使用的数据库"><span class="nav-number">3.4.</span> <span class="nav-text">查看当前使用的数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#当前数据库包含的表信息"><span class="nav-number">3.5.</span> <span class="nav-text">当前数据库包含的表信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除数据库"><span class="nav-number">3.6.</span> <span class="nav-text">删除数据库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表操作"><span class="nav-number">4.</span> <span class="nav-text">表操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#建表"><span class="nav-number">4.1.</span> <span class="nav-text">建表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取表结构"><span class="nav-number">4.2.</span> <span class="nav-text">获取表结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除表"><span class="nav-number">4.3.</span> <span class="nav-text">删除表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入数据"><span class="nav-number">4.4.</span> <span class="nav-text">插入数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询表中的数据"><span class="nav-number">4.5.</span> <span class="nav-text">查询表中的数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除表中数据"><span class="nav-number">4.6.</span> <span class="nav-text">删除表中数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改表中数据"><span class="nav-number">4.7.</span> <span class="nav-text">修改表中数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在表中增加字段"><span class="nav-number">4.8.</span> <span class="nav-text">在表中增加字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更改表名"><span class="nav-number">4.9.</span> <span class="nav-text">更改表名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新字段内容"><span class="nav-number">4.10.</span> <span class="nav-text">更新字段内容</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库导入导出"><span class="nav-number">5.</span> <span class="nav-text">数据库导入导出</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#从数据库导出数据库文件"><span class="nav-number">5.1.</span> <span class="nav-text">从数据库导出数据库文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从外部文件导入数据库中"><span class="nav-number">5.2.</span> <span class="nav-text">从外部文件导入数据库中</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZhangHy</span>
+
+  
+</div>
+
+
+  <div class="powered-by">
+    由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+  </div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">
+    主题 &mdash;
+    <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+      NexT.Pisces
+    </a>
+  </div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
