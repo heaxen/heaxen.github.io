@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://weibo.com/"/>
-  <updated>2018-12-14T02:38:24.527Z</updated>
+  <updated>2018-12-14T09:21:36.770Z</updated>
   <id>http://weibo.com/</id>
   
   <author>
@@ -14,6 +14,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>测试111111</title>
+    <link href="http://weibo.com/2018/12/14/%E6%B5%8B%E8%AF%95111111/"/>
+    <id>http://weibo.com/2018/12/14/测试111111/</id>
+    <published>2018-12-14T09:21:15.000Z</published>
+    <updated>2018-12-14T09:21:36.770Z</updated>
+    
+    <content type="html"><![CDATA[<p>这是测试这是测试</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这是测试这是测试&lt;/p&gt;
+
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>PHP结合Linux命令实现页面下载</title>
@@ -652,43 +672,6 @@
     </summary>
     
       <category term="JavaScript" scheme="http://weibo.com/categories/JavaScript/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>15款Chrome插件推荐</title>
-    <link href="http://weibo.com/2017/12/03/15%E6%AC%BEChrome%E6%8F%92%E4%BB%B6%E6%8E%A8%E8%8D%90/"/>
-    <id>http://weibo.com/2017/12/03/15款Chrome插件推荐/</id>
-    <published>2017-12-03T09:08:52.000Z</published>
-    <updated>2018-12-14T09:10:06.402Z</updated>
-    
-    <content type="html"><![CDATA[<p><a href="https://mp.weixin.qq.com/s/uaQFaaU54sx98BcyI2jskA?" target="_blank" rel="external">原文链接</a><br>相信很多人都在使用 Chrome 浏览器，其流畅的浏览体验得到了不少用户的偏爱，但流畅只是一方面， Chrome 最大的优势还是其支持众多强大好用的扩展程序（Extensions）。</p>
-<h2 id="Data-Saver：为你省下一些流量"><a href="#Data-Saver：为你省下一些流量" class="headerlink" title="Data Saver：为你省下一些流量"></a>Data Saver：为你省下一些流量</h2><p>Google 官方推出的省流量扩展程序，启用之后 Chrome 会自动压缩被访问网页的数据来节省流量，但不包括 SSL 加密协议的网页，这个版本还处在测试阶段。另外，iOS 和 Android 版本的 Chrome 可以在设置中启用。<br>在 Chrome Web Store 下载 Data Saver (Beta)。<br><a id="more"></a></p>
-<h2 id="Lucidchart-Diagrams-Desktop：在线绘制多种图表"><a href="#Lucidchart-Diagrams-Desktop：在线绘制多种图表" class="headerlink" title="Lucidchart Diagrams - Desktop：在线绘制多种图表"></a>Lucidchart Diagrams - Desktop：在线绘制多种图表</h2><p>这个扩展程序是一款多功能绘制程序，支持绘制流程图，思维导图，版面设计等，并且有在线和离线两种模式，可谓功能强大。<br>在 Chrome Web Store 下载 Lucidchart Diagrams - Desktop</p>
-<h2 id="Trackr：追踪你的上网习惯"><a href="#Trackr：追踪你的上网习惯" class="headerlink" title="Trackr：追踪你的上网习惯"></a>Trackr：追踪你的上网习惯</h2><p>这个扩展程序做的事情就是记录你使用 Chrome 上网的习惯，包括上了哪些网站、每个网站呆多长时间，并且还用图表的形式反馈出来，总之装了这个扩展程序就不要上奇奇怪怪的网站了。<br>在 Chrome Web Store 下载 Trackr。</p>
-<h2 id="Reader-View：Chrome-也有-Safari-的阅读模式"><a href="#Reader-View：Chrome-也有-Safari-的阅读模式" class="headerlink" title="Reader View：Chrome 也有 Safari 的阅读模式"></a>Reader View：Chrome 也有 Safari 的阅读模式</h2><p>将网页转换成 Safari 阅读模式的样式，让你更方便舒适的阅读网页文字，当你访问文章网页的时候，扩展程序的按钮会显示在地址栏末端，点击就能轻松享受更好的阅读模式。<br>在 Chrome Web Store 下载 Reader View。</p>
-<h2 id="Dropbox-for-Gmail：更方便的使用-Dropbox"><a href="#Dropbox-for-Gmail：更方便的使用-Dropbox" class="headerlink" title="Dropbox for Gmail：更方便的使用 Dropbox"></a>Dropbox for Gmail：更方便的使用 Dropbox</h2><p>Dropbox 的 Chrome 扩展程序，能够让你快速打开 Dropbox 上最近访问的文件，或者快速分享 Dropbox 上的文件给朋友，对于使用 Dropbox 的朋友来说会方便很多。<br>在 Chrome Web Store 下载 Dropbox for Gmail。</p>
-<h2 id="DrumUp：个性化的浏览推荐"><a href="#DrumUp：个性化的浏览推荐" class="headerlink" title="DrumUp：个性化的浏览推荐"></a>DrumUp：个性化的浏览推荐</h2><p>当你打开一个网页的时候，为您推荐与现在浏览的网页内容相似或者相关的内容，对于英文的支持比较好，每天阅读很多的人能找到很多关联的感兴趣内容。<br>在 Chrome Web Store 下载 DrumUp。</p>
-<h2 id="Highly-Highlighter：网页浏览也玩社交分享"><a href="#Highly-Highlighter：网页浏览也玩社交分享" class="headerlink" title="Highly Highlighter：网页浏览也玩社交分享"></a>Highly Highlighter：网页浏览也玩社交分享</h2><p>这个扩展程序允许你高亮自己所浏览网页的重要部分，保存到本地或者分享给自己的朋友，你也可以在 Highly 上关注自己的朋友，并获得它高亮文段的推送。<br>在 Chrome Web Store 下载 Highly Highlighter。</p>
-<h2 id="Mainichi：学习日语，每页一词"><a href="#Mainichi：学习日语，每页一词" class="headerlink" title="Mainichi：学习日语，每页一词"></a>Mainichi：学习日语，每页一词</h2><p>学习日语的新方式，每当你打开一个新标签页对会显示一个日文单词，并且配有一张简洁的图片、假名及其读音，不知道有多少朋友在学习日语呢？<br>在 Chrome Web Store 下载 Mainichi。</p>
-<h2 id="New-Tab-Startup-Quotes：学习成功人士的格言"><a href="#New-Tab-Startup-Quotes：学习成功人士的格言" class="headerlink" title="New Tab Startup Quotes：学习成功人士的格言"></a>New Tab Startup Quotes：学习成功人士的格言</h2><p>想学习成功人士的精神和智慧，这个扩展程序可以帮到你，每当你打开一个标签页，它都会显示一位成功人士的格言，不得不说熬得一锅好鸡汤。<br>在 Chrome Web Store 下载 New Tab Startup Quotes。</p>
-<h2 id="Delight-for-Chrome"><a href="#Delight-for-Chrome" class="headerlink" title="Delight for Chrome"></a>Delight for Chrome</h2><p>每次打开一个新标签页都会显示一段绝美的延时摄影视频，同时还会显示天气等信息，效果非常棒，而且显示的自然风景每次都不一样。<br>在 Chrome Web Store 下载 Delight for Chrome。</p>
-<h2 id="Google-Art-Project"><a href="#Google-Art-Project" class="headerlink" title="Google Art Project"></a>Google Art Project</h2><p>每次打开一个新标签页都会显示一张来自 Google Cultural Institute 的艺术图片，可能是梵高或者莫奈的画作，可能是自然风景的图片，甚至是世界各地的街头涂鸦，每次都不一样。<br>在 Chrome Web Store 下载 Google Art Project。</p>
-<h2 id="Unsplash-Instant"><a href="#Unsplash-Instant" class="headerlink" title="Unsplash Instant"></a>Unsplash Instant</h2><p>每次打开一个新标签页都会显示一张来自 Unsplash 的摄影作品，全高清的分辨率和专业的摄影元素，Unsplash 的作品都是满满的文艺范儿，非常适合文艺青年。<br>在 Chrome Web Store 下载 Unsplash Instant。</p>
-<h2 id="Flickr-Tab"><a href="#Flickr-Tab" class="headerlink" title="Flickr Tab"></a>Flickr Tab</h2><p>每次打开一个新标签页都会显示一张来自 Flickr 的摄影作品，Flickr 是世界上最大的图片社区之一，庞大的用户群让它能够时刻保持拥有高水平的摄影作品，一定有你喜欢的类型。<br>在 Chrome Web Store 下载 Flickr Tab。</p>
-<h2 id="Wandertab"><a href="#Wandertab" class="headerlink" title="Wandertab"></a>Wandertab</h2><p>每次打开一个新标签页都会显示一张来自世界各地经典的摄影作品，让你足不出户就可以浏览世界各地的名胜风景，这些摄影作品的水品都颇高，当做壁纸都不为过。<br>在 Chrome Web Store 下载 Wandertab。</p>
-<h2 id="Urthecast-Imagery"><a href="#Urthecast-Imagery" class="headerlink" title="Urthecast Imagery"></a>Urthecast Imagery</h2><p>每次打开一个新标签页都会显示一张来自卫星拍摄的地质地貌图片，地球的纹理错综复杂，每一张照片都是一副艺术品，是追求逼格的人士的不二选择。<br>在 Chrome Web Store 下载 Urthecast Imagery。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;a href=&quot;https://mp.weixin.qq.com/s/uaQFaaU54sx98BcyI2jskA?&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;原文链接&lt;/a&gt;&lt;br&gt;相信很多人都在使用 Chrome 浏览器，其流畅的浏览体验得到了不少用户的偏爱，但流畅只是一方面， Chrome 最大的优势还是其支持众多强大好用的扩展程序（Extensions）。&lt;/p&gt;
-&lt;h2 id=&quot;Data-Saver：为你省下一些流量&quot;&gt;&lt;a href=&quot;#Data-Saver：为你省下一些流量&quot; class=&quot;headerlink&quot; title=&quot;Data Saver：为你省下一些流量&quot;&gt;&lt;/a&gt;Data Saver：为你省下一些流量&lt;/h2&gt;&lt;p&gt;Google 官方推出的省流量扩展程序，启用之后 Chrome 会自动压缩被访问网页的数据来节省流量，但不包括 SSL 加密协议的网页，这个版本还处在测试阶段。另外，iOS 和 Android 版本的 Chrome 可以在设置中启用。&lt;br&gt;在 Chrome Web Store 下载 Data Saver (Beta)。&lt;br&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Chrome" scheme="http://weibo.com/categories/Chrome/"/>
     
     
   </entry>
