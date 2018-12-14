@@ -266,597 +266,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://weibo.com/2018/12/06/开启-关闭ubuntu防火墙/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZhangHy">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZhangHy's Zone!">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/06/开启-关闭ubuntu防火墙/" itemprop="url">开启/关闭ubuntu防火墙</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-06T11:46:21+08:00">
-                2018-12-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="安装防火墙"><a href="#安装防火墙" class="headerlink" title="安装防火墙"></a>安装防火墙</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install ufw</div></pre></td></tr></table></figure>
-<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><h3 id="1、启用"><a href="#1、启用" class="headerlink" title="1、启用"></a>1、启用</h3><p>sudo ufw enable<br>sudo ufw default deny<br>作用：开启了防火墙并随系统启动同时关闭所有外部对本机的访问（本机访问外部正常）。</p>
-<h3 id="2、关闭"><a href="#2、关闭" class="headerlink" title="2、关闭"></a>2、关闭</h3><p>sudo ufw disable </p>
-<h3 id="3、查看防火墙状态"><a href="#3、查看防火墙状态" class="headerlink" title="3、查看防火墙状态"></a>3、查看防火墙状态</h3><p>sudo ufw status </p>
-<h3 id="4、开启-禁用相应端口或服务举例"><a href="#4、开启-禁用相应端口或服务举例" class="headerlink" title="4、开启/禁用相应端口或服务举例"></a>4、开启/禁用相应端口或服务举例</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">sudo ufw allow 80 允许外部访问80端口</div><div class="line">sudo ufw delete allow 80 禁止外部访问80 端口</div><div class="line">sudo ufw allow from 192.168.1.1 允许此IP访问所有的本机端口</div><div class="line">sudo ufw deny smtp 禁止外部访问smtp服务</div><div class="line">sudo ufw delete allow smtp 删除上面建立的某条规则</div><div class="line">sudo ufw deny proto tcp from 10.0.0.0/8 to 192.168.0.1 port 22 要拒绝所有的TCP流量从10.0.0.0/8 到192.168.0.1地址的22端口</div><div class="line"> </div><div class="line">可以允许所有RFC1918网络（局域网/无线局域网的）访问这个主机（/8,/16,/12是一种网络分级）：</div><div class="line">sudo ufw allow from 10.0.0.0/8</div><div class="line">sudo ufw allow from 172.16.0.0/12</div><div class="line">sudo ufw allow from 192.168.0.0/16</div></pre></td></tr></table></figure>
-<p>推荐设置<br>sudo apt-get install ufw<br>sudo ufw enable<br>sudo ufw default deny </p>
-<p>这样设置已经很安全，如果有特殊需要，可以使用sudo ufw allow开启相应服务。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://weibo.com/2018/12/06/Ubuntu14-04使用qemu创建虚拟机并配置桥接网络/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZhangHy">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZhangHy's Zone!">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/06/Ubuntu14-04使用qemu创建虚拟机并配置桥接网络/" itemprop="url">Ubuntu14.04使用qemu创建虚拟机并配置桥接网络</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-06T11:05:40+08:00">
-                2018-12-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>需要在宿主机中为虚拟机创建一个</p>
-<h5 id="tap虚拟网络接口，"><a href="#tap虚拟网络接口，" class="headerlink" title="tap虚拟网络接口，"></a>tap虚拟网络接口，</h5><p>并创建一个</p>
-<h5 id="虚拟网桥br0，"><a href="#虚拟网桥br0，" class="headerlink" title="虚拟网桥br0，"></a>虚拟网桥br0，</h5><p>并将tap和br0桥接起来就可以实现虚拟机的网络了。<br></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/12/06/Ubuntu14-04使用qemu创建虚拟机并配置桥接网络/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://weibo.com/2018/12/05/在Ubuntu中安装和使用kvm/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZhangHy">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZhangHy's Zone!">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/05/在Ubuntu中安装和使用kvm/" itemprop="url">在Ubuntu中安装和使用kvm</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-05T12:43:30+08:00">
-                2018-12-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>首先解决设备不能上网的问题：<br>手动设置静态IP<br>1、vim /etc/network/interfaces</p>
-<p>2、修改文件内容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">auto lo</div><div class="line">iface lo inet loopback</div><div class="line"></div><div class="line">auto eth0</div><div class="line">iface eth0 inet static</div><div class="line">address 192.168.199.186</div><div class="line">netmask 255.255.255.0</div><div class="line">gateway 192.168.199.1</div><div class="line">dns-nameserver 8.8.8.8</div></pre></td></tr></table></figure></p>
-<p>3、配置DNS解析器<br>vim /etc/reslov.conf，输入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nameserver 8.8.8.8  //(8.8.8.8谷歌的DNS解析器，可能比较慢)</div><div class="line">nameserver 114.114.114.114  //(国内的DNS解析器)</div></pre></td></tr></table></figure></p>
-<p>但是Ubuntu Server 中resolv.conf重启时会被覆盖，解决方法如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">1.需要创建一个文件/etc/resolvconf/resolv.conf.d/tail</div><div class="line">sudo vi /etc/resolvconf/resolv.conf.d/tail</div><div class="line"></div><div class="line">2.在该文件中写入自己需要的dns服务器，格式与/etc/resolv.conf相同</div><div class="line">nameserver 8.8.8.8  </div><div class="line"></div><div class="line">3.重启下resolvconf程序</div><div class="line">sudo /etc/init.d/resolvconf restart </div><div class="line"></div><div class="line">再去看看/etc/resolv.conf文件,可以看到自己添加的dns服务器已经加到该文件中</div></pre></td></tr></table></figure></p>
-<p>4、重启网络sudo /etc/init.d/networking restart<br>   重启网卡还有以下几种方法：</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/12/05/在Ubuntu中安装和使用kvm/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://weibo.com/2018/12/04/Webpack/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZhangHy">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZhangHy's Zone!">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/04/Webpack/" itemprop="url">Webpack</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-04T19:13:56+08:00">
-                2018-12-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Webpack/" itemprop="url" rel="index">
-                    <span itemprop="name">Webpack</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Webpack(模块打包机)是一种模块化工具，用于分析项目结构，找到JavaScript模块以及一些其他的浏览器不能直接圆形的拓展语言(Scss, TypeScript等)，并将其转换和打包为合适的格式供浏览器使用。</p>
-<p>Webpack对比Grunt和Gulp：<br>Grunt/Gulp是一种优化前端的开发流程的工具；工作方式是:在一个配置文件中，指明对某些文件进行类似编译，组合，压缩等任务的具体步骤，工具之后以自动完成这些任务。</p>
-<p>Webpack是一种模块化解决方案，多场景可替代Grunt/Gulp；工作方式：将项目当作一个整体，通过一个给定的主文件(如：index.js),Webpack将从这个文件开始找到项目的所有依赖文件，使用loaders处理它们，最后打包成一个(或者多个)浏览器可是别的JavaScript文件。</p>
-<p>Webpack的处理速度相对于Grunt/Gulp更快更直接，能打包更多不同类型的文件。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://weibo.com/2018/12/04/npm模块安装问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -954,152 +363,6 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/12/04/npm模块安装问题/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://weibo.com/2018/12/04/常见的浏览器User-Agent/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZhangHy">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZhangHy's Zone!">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/04/常见的浏览器User-Agent/" itemprop="url">常见的浏览器User-Agent</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-04T10:58:01+08:00">
-                2018-12-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>UserAgent中文名为用户代理，是Http协议中的一部分，属于头域的组成部分，简称UA。<br>向访问网站提供你所使用的浏览器类型及版本、操作系统及版本、浏览器内核、等信息。<br>通过UA，用户所访问的网站可以显示不同的排版。<br>浏览器的UA字串的标准格式：浏览器标识(操作系统标识;加密等级标识;浏览器语言)渲染引擎标识版本信息。<br></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/12/04/常见的浏览器User-Agent/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1393,6 +656,712 @@
 <h2 id="count"><a href="#count" class="headerlink" title="count()"></a>count()</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">    <span class="variable">$file_path</span> = <span class="string">"test.txt"</span>;</div><div class="line">    <span class="keyword">if</span>(file_exists(<span class="variable">$file_path</span>))&#123;</div><div class="line">        <span class="variable">$file_arr</span> = file(<span class="variable">$file_path</span>);</div><div class="line">        <span class="keyword">for</span>(<span class="variable">$i</span>=0;<span class="variable">$i</span>&lt;count(<span class="variable">$file_arr</span>);<span class="variable">$i</span>++)&#123;//逐行读取文件内容</div><div class="line">            <span class="built_in">echo</span> <span class="variable">$file_arr</span>[<span class="variable">$i</span>].<span class="string">"&lt;br /&gt;"</span>;</div><div class="line">        &#125;</div><div class="line">        /*</div><div class="line">        foreach(<span class="variable">$file_arr</span> as <span class="variable">$value</span>)&#123;</div><div class="line">            <span class="built_in">echo</span> <span class="variable">$value</span>.<span class="string">"&lt;br /&gt;"</span>;</div><div class="line">        &#125;*/</div><div class="line">    &#125;</div><div class="line">?&gt;</div></pre></td></tr></table></figure>
 <h2 id="fgets"><a href="#fgets" class="headerlink" title="fgets()"></a>fgets()</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">    <span class="variable">$file_path</span> = <span class="string">"test.txt"</span>;</div><div class="line">    <span class="keyword">if</span>(file_exists(<span class="variable">$file_path</span>))&#123;</div><div class="line">        <span class="variable">$fp</span> = fopen(<span class="variable">$file_path</span>,<span class="string">"r"</span>);</div><div class="line">        <span class="variable">$str</span> =<span class="string">""</span>;</div><div class="line">        <span class="keyword">while</span>(!feof(<span class="variable">$fp</span>))&#123;</div><div class="line">            <span class="variable">$str</span> .= fgets(<span class="variable">$fp</span>);//逐行读取。如果fgets不写length参数，默认是读取1k。</div><div class="line">        &#125;</div><div class="line">        <span class="variable">$str</span> = str_replace(<span class="string">"\r\n"</span>,<span class="string">"&lt;br /&gt;"</span>,<span class="variable">$str</span>);</div><div class="line">            <span class="built_in">echo</span> <span class="variable">$str</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">?&gt;</div></pre></td></tr></table></figure>
           
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://weibo.com/2018/12/03/PHP获取文件信息相关基础函数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZhangHy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhangHy's Zone!">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/03/PHP获取文件信息相关基础函数/" itemprop="url">PHP获取文件信息相关基础函数</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-03T19:00:09+08:00">
+                2018-12-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//设置临时时区</div><div class="line">&lt;?php</div><div class="line">header(<span class="string">'content-type:text/html;charset=utf-8'</span>);</div><div class="line">date_default_timezone_set(<span class="string">'PRC'</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">* 文件信息相关API</div><div class="line">*/</div><div class="line"><span class="variable">$filename</span>=<span class="string">"./test1.txt"</span>;</div><div class="line"></div><div class="line">// <span class="variable">$filename</span>=<span class="string">"test"</span>;</div><div class="line">//filetype(<span class="variable">$filename</span>):获取文件的类型,返回的是文件的类型</div><div class="line"><span class="built_in">echo</span> <span class="string">'文件类型为：'</span>,filetype(<span class="variable">$filename</span>),<span class="string">'&lt;br/&gt;'</span>;</div><div class="line"></div><div class="line">//filesize(<span class="variable">$filename</span>):获得文件的大小,返回字节</div><div class="line"><span class="built_in">echo</span> <span class="string">'文件大小为：'</span>,filesize(<span class="variable">$filename</span>),<span class="string">'&lt;br/&gt;'</span>;</div><div class="line"></div><div class="line">//filectime(<span class="variable">$filename</span>):获取文件的创建时间</div><div class="line"><span class="built_in">echo</span> <span class="string">'文件创建时间为：'</span>,filectime(<span class="variable">$filename</span>),<span class="string">'&lt;br/&gt;'</span>;</div><div class="line"><span class="built_in">echo</span> <span class="string">'文件创建时间为：'</span>,date(<span class="string">'Y年m月d日 H:i:s'</span>,filectime(<span class="variable">$filename</span>)),<span class="string">'&lt;br/&gt;'</span>;</div><div class="line"></div><div class="line">//filemtime(<span class="variable">$filename</span>):文件的修改时间</div><div class="line"><span class="built_in">echo</span> <span class="string">'文件的修改时间为：'</span>,date(<span class="string">"Y/m/d H:i:s"</span>,filemtime(<span class="variable">$filename</span>)),<span class="string">'&lt;br/&gt;'</span>;</div><div class="line"></div><div class="line">//fileatime(<span class="variable">$filename</span>):文件的最后访问时间</div><div class="line"><span class="built_in">echo</span> <span class="string">'文件的最后访问时间为：'</span>,date(<span class="string">"Y/m/d H:i:s"</span>,fileatime(<span class="variable">$filename</span>)),<span class="string">'&lt;br/&gt;'</span>;</div><div class="line"><span class="built_in">echo</span> <span class="string">'&lt;hr/&gt;'</span>;</div><div class="line"></div><div class="line">//检测文件是否可读、可写、可执行is_readable()、is_writeable()、is_executable();</div><div class="line">var_dump(</div><div class="line">is_readable(<span class="variable">$filename</span>),</div><div class="line">is_writable(<span class="variable">$filename</span>),</div><div class="line">is_writeable(<span class="variable">$filename</span>),</div><div class="line">is_executable(<span class="variable">$filename</span>)</div><div class="line">);</div><div class="line"></div><div class="line">//is_file(<span class="variable">$filename</span>):检测是否为文件,并且文件存在</div><div class="line"><span class="variable">$filename</span>=<span class="string">'./test1.txt'</span>;</div><div class="line"><span class="variable">$filename</span>=<span class="string">'./test2.txt'</span>;</div><div class="line">var_dump(is_file(<span class="variable">$filename</span>));</div><div class="line"></div><div class="line">/**</div><div class="line">* pathinfo():文件路径相关信息</div><div class="line">*/</div><div class="line"></div><div class="line"><span class="variable">$filename</span>=<span class="string">"./test1.txt"</span>;</div><div class="line"><span class="variable">$pathinfo</span>=pathinfo(<span class="variable">$filename</span>);</div><div class="line">print_r(<span class="variable">$pathinfo</span>);</div><div class="line">/*</div><div class="line">Array</div><div class="line">(</div><div class="line">[dirname] =&gt; .</div><div class="line">[basename] =&gt; test1.txt</div><div class="line">[extension] =&gt; txt</div><div class="line">[filename] =&gt; test1</div><div class="line">)</div><div class="line">*/</div><div class="line"><span class="built_in">echo</span> <span class="string">'文件扩展名：'</span>,pathinfo(<span class="variable">$filename</span>,PATHINFO_EXTENSION),<span class="string">'&lt;br/&gt;'</span>;</div><div class="line"><span class="built_in">echo</span> <span class="string">'&lt;hr/&gt;'</span>;</div><div class="line"><span class="variable">$filename</span>=__FILE__;</div><div class="line">// <span class="built_in">echo</span> <span class="variable">$filename</span>;</div><div class="line"></div><div class="line"><span class="built_in">echo</span> pathinfo(<span class="variable">$filename</span>,PATHINFO_DIRNAME),<span class="string">'&lt;br/&gt;'</span>;</div><div class="line"><span class="built_in">echo</span> pathinfo(<span class="variable">$filename</span>,PATHINFO_BASENAME),<span class="string">'&lt;br/&gt;'</span>;</div><div class="line"><span class="built_in">echo</span> pathinfo(<span class="variable">$filename</span>,PATHINFO_EXTENSION),<span class="string">'&lt;br/&gt;'</span>;</div><div class="line"><span class="built_in">echo</span> pathinfo(<span class="variable">$filename</span>,PATHINFO_FILENAME),<span class="string">'&lt;br/&gt;'</span>;</div><div class="line"></div><div class="line">//basename():返回路径中的文件名部分</div><div class="line"><span class="built_in">echo</span> basename(<span class="variable">$filename</span>),<span class="string">'&lt;br/&gt;'</span>;</div><div class="line"></div><div class="line"><span class="built_in">echo</span> basename(<span class="variable">$filename</span>,<span class="string">'.php'</span>),<span class="string">'&lt;br/&gt;'</span>;返回路径中的文件名部分 不包含.php后缀</div><div class="line">//dirname():返回文件名中路径部分</div><div class="line"><span class="built_in">echo</span> dirname(<span class="variable">$filename</span>),<span class="string">'&lt;br/&gt;'</span>;</div><div class="line"></div><div class="line">//file_exists():检测文件或者目录是否存在</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://weibo.com/2018/12/03/PHP操作数组/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZhangHy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhangHy's Zone!">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/03/PHP操作数组/" itemprop="url">PHP操作数组</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-03T18:06:35+08:00">
+                2018-12-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>数组的合并，追加，删除，拆分，查找等</p>
+<h2 id="1-合并数组"><a href="#1-合并数组" class="headerlink" title="1. 合并数组"></a>1. 合并数组</h2><p>array_merge()函数将数组合并到一起，返回一个联合的数组。所得到的数组以第一个输入数组参数开始，按后面数组参数出现的顺序依次迫加。其形式为：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">array array_merge (array array1 array2…,arrayN)</div></pre></td></tr></table></figure></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/03/PHP操作数组/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://weibo.com/2018/12/03/github上传项目导致gitbash报错的问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZhangHy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhangHy's Zone!">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/03/github上传项目导致gitbash报错的问题/" itemprop="url">github上传项目导致gitbash报错的问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-03T17:15:43+08:00">
+                2018-12-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>刚刚上传blog的时候，git bash一直报错，主要以下两个错误：<br>1、Run config : Please tell me who you are<br>2、fatal: HttpRequestException encountered<br></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/03/github上传项目导致gitbash报错的问题/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://weibo.com/2018/12/03/JS加密七种方法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZhangHy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhangHy's Zone!">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/03/JS加密七种方法/" itemprop="url">JS加密七种方法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-03T16:08:18+08:00">
+                2018-12-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>本文一共介绍了七种方法：<br>一：最简单的加密解密<br>二：转义字符”\”的妙用<br>三：使用Microsoft出品的脚本编码器Script Encoder来进行编码<br>四：任意添加NUL空字符（十六进制00H）<br>五：无用内容混乱以及换行空格TAB大法<br>六：自写解密函数法<br>七：错误的利用<br></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/03/JS加密七种方法/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://weibo.com/2017/10/25/解决jQuery表单submit报错的问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZhangHy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhangHy's Zone!">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/25/解决jQuery表单submit报错的问题/" itemprop="url">解决jQuery表单submit报错的问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-25T20:09:03+08:00">
+                2017-10-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jQuery/" itemprop="url" rel="index">
+                    <span itemprop="name">jQuery</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>工作过程中遇到表单提交的时候报错，于是在网上了找了找文档，发现如下解决方案，完美解决工作问题：<br></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/25/解决jQuery表单submit报错的问题/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
