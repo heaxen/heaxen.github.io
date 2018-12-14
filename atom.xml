@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://weibo.com/"/>
-  <updated>2018-12-14T10:04:18.780Z</updated>
+  <updated>2018-12-14T10:04:11.103Z</updated>
   <id>http://weibo.com/</id>
   
   <author>
@@ -14,39 +14,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>Ubuntu14.04安装并配置FTP</title>
-    <link href="http://weibo.com/2018/11/02/Ubuntu14-04%E5%AE%89%E8%A3%85%E5%B9%B6%E9%85%8D%E7%BD%AEFTP/"/>
-    <id>http://weibo.com/2018/11/02/Ubuntu14-04安装并配置FTP/</id>
-    <published>2018-11-02T03:50:54.000Z</published>
-    <updated>2018-12-14T10:04:18.780Z</updated>
-    
-    <content type="html"><![CDATA[<p>之前在Ubuntu上装的虚拟机的空间不够，拉取两个分支的时候就会显示disk不足，虚拟机上只能存在一个分支代码，想要从宿主机把分支代码通过FTP传输到虚拟机，但是宿主机并不支持FTP，接下来就是主要接受我在宿主机和虚拟机安装和配置FTP的步骤。<br><a id="more"></a></p>
-<h2 id="安装vsftpd"><a href="#安装vsftpd" class="headerlink" title="安装vsftpd"></a>安装vsftpd</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#sudo apt-get update  //防止出现"有 几个软件包无法下载，您可以运行apt-get update------"的错误提示，导致无法安装</span></div><div class="line"><span class="comment">#sudo apt-get install vsftpd</span></div></pre></td></tr></table></figure>
-<h2 id="判断vsftpd是否安装成功"><a href="#判断vsftpd是否安装成功" class="headerlink" title="判断vsftpd是否安装成功"></a>判断vsftpd是否安装成功</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#sudo service vsftpd restart</span></div></pre></td></tr></table></figure>
-<p><img src="/2018/11/02/Ubuntu14-04安装并配置FTP/restart_vsftpd.png" alt=""><br>上图表示处于运行状态，安装服务成功。</p>
-<h2 id="以”-home-ubuntu-zhy-version”目录作为用户主目录"><a href="#以”-home-ubuntu-zhy-version”目录作为用户主目录" class="headerlink" title="以”/home/ubuntu_zhy/version”目录作为用户主目录"></a>以”/home/ubuntu_zhy/version”目录作为用户主目录</h2><p>同样可以新建目录作为用户主目录，使用以下命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo mkdir /home/uftp</div></pre></td></tr></table></figure></p>
-<h2 id="新建用户uftp并设置密码"><a href="#新建用户uftp并设置密码" class="headerlink" title="新建用户uftp并设置密码"></a>新建用户uftp并设置密码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#sudo useradd -d /home/ubuntu_zhy/version -s /bin/bash uftp</span></div><div class="line"><span class="comment">#sudo passwd uftp //输入两次</span></div></pre></td></tr></table></figure>
-<h2 id="修改配置文件-etc-vsftpd-conf"><a href="#修改配置文件-etc-vsftpd-conf" class="headerlink" title="修改配置文件/etc/vsftpd.conf"></a>修改配置文件/etc/vsftpd.conf</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#sudo vi /etc/vsftpd.conf</span></div></pre></td></tr></table></figure>
-<p>新增：<br>userlist_deny=NO      //指定user_list的文件，里面放允许ftp登陆的本地用户<br>userlist_enable=YES   //指定user_list的文件，里面放允许ftp登陆的本地用户<br>userlist_file=/etc/allowed_users   //记录允许本地登陆用户名的文件<br>seccomp_sandbox=NO    //不配置可能导致530的问题<br>修改：<br>local_enable=YES      //允许本地用户登陆</p>
-<h2 id="新建-etc-allowed-users文件"><a href="#新建-etc-allowed-users文件" class="headerlink" title="新建/etc/allowed_users文件"></a>新建/etc/allowed_users文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#sudo vi /etc/allowed_users</span></div></pre></td></tr></table></figure>
-<p>输入uftp</p>
-<h2 id="查看-etc-ftpusers文件中的内容"><a href="#查看-etc-ftpusers文件中的内容" class="headerlink" title="查看/etc/ftpusers文件中的内容"></a>查看/etc/ftpusers文件中的内容</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#sudo vi /etc/ftpusers</span></div></pre></td></tr></table></figure>
-<p>看一看有没有uftp这个用户名;<br>如果没有，就直接退出。<br>如果有就删除uftp,因为这个文件中记录的是不能访问FTP服务器的用户清单。</p>
-<h2 id="使用WinSCP登录FTP服务器"><a href="#使用WinSCP登录FTP服务器" class="headerlink" title="使用WinSCP登录FTP服务器"></a>使用WinSCP登录FTP服务器</h2><p>运行WinSCP(没有就下载安装WinSCP)–&gt;输入IP、用户名、密码–&gt;保存–&gt;勾选”保存密码”–&gt;确定–&gt;登录–&gt;登录成功。<br><img src="/2018/11/02/Ubuntu14-04安装并配置FTP/winscp.png" alt=""></p>
-<h2 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#sudo apt-get remove --purge vsftpd //(--purge 选项表示彻底删除改软件和相关文件)</span></div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;之前在Ubuntu上装的虚拟机的空间不够，拉取两个分支的时候就会显示disk不足，虚拟机上只能存在一个分支代码，想要从宿主机把分支代码通过FTP传输到虚拟机，但是宿主机并不支持FTP，接下来就是主要接受我在宿主机和虚拟机安装和配置FTP的步骤。&lt;br&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Linux" scheme="http://weibo.com/categories/Linux/"/>
-    
-    
-  </entry>
   
   <entry>
     <title>PHP结合Linux命令实现页面下载</title>
@@ -174,6 +141,67 @@
   </entry>
   
   <entry>
+    <title>Ubuntu14.04安装并配置FTP</title>
+    <link href="http://weibo.com/2018/07/15/Ubuntu14-04%E5%AE%89%E8%A3%85%E5%B9%B6%E9%85%8D%E7%BD%AEFTP/"/>
+    <id>http://weibo.com/2018/07/15/Ubuntu14-04安装并配置FTP/</id>
+    <published>2018-07-15T03:50:54.000Z</published>
+    <updated>2018-12-14T10:09:17.573Z</updated>
+    
+    <content type="html"><![CDATA[<p>之前在Ubuntu上装的虚拟机的空间不够，拉取两个分支的时候就会显示disk不足，虚拟机上只能存在一个分支代码，想要从宿主机把分支代码通过FTP传输到虚拟机，但是宿主机并不支持FTP，接下来就是主要接受我在宿主机和虚拟机安装和配置FTP的步骤。<br><a id="more"></a></p>
+<h2 id="安装vsftpd"><a href="#安装vsftpd" class="headerlink" title="安装vsftpd"></a>安装vsftpd</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#sudo apt-get update  //防止出现"有 几个软件包无法下载，您可以运行apt-get update------"的错误提示，导致无法安装</span></div><div class="line"><span class="comment">#sudo apt-get install vsftpd</span></div></pre></td></tr></table></figure>
+<h2 id="判断vsftpd是否安装成功"><a href="#判断vsftpd是否安装成功" class="headerlink" title="判断vsftpd是否安装成功"></a>判断vsftpd是否安装成功</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#sudo service vsftpd restart</span></div></pre></td></tr></table></figure>
+<p><img src="/2018/07/15/Ubuntu14-04安装并配置FTP/restart_vsftpd.png" alt=""><br>上图表示处于运行状态，安装服务成功。</p>
+<h2 id="以”-home-ubuntu-zhy-version”目录作为用户主目录"><a href="#以”-home-ubuntu-zhy-version”目录作为用户主目录" class="headerlink" title="以”/home/ubuntu_zhy/version”目录作为用户主目录"></a>以”/home/ubuntu_zhy/version”目录作为用户主目录</h2><p>同样可以新建目录作为用户主目录，使用以下命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo mkdir /home/uftp</div></pre></td></tr></table></figure></p>
+<h2 id="新建用户uftp并设置密码"><a href="#新建用户uftp并设置密码" class="headerlink" title="新建用户uftp并设置密码"></a>新建用户uftp并设置密码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#sudo useradd -d /home/ubuntu_zhy/version -s /bin/bash uftp</span></div><div class="line"><span class="comment">#sudo passwd uftp //输入两次</span></div></pre></td></tr></table></figure>
+<h2 id="修改配置文件-etc-vsftpd-conf"><a href="#修改配置文件-etc-vsftpd-conf" class="headerlink" title="修改配置文件/etc/vsftpd.conf"></a>修改配置文件/etc/vsftpd.conf</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#sudo vi /etc/vsftpd.conf</span></div></pre></td></tr></table></figure>
+<p>新增：<br>userlist_deny=NO      //指定user_list的文件，里面放允许ftp登陆的本地用户<br>userlist_enable=YES   //指定user_list的文件，里面放允许ftp登陆的本地用户<br>userlist_file=/etc/allowed_users   //记录允许本地登陆用户名的文件<br>seccomp_sandbox=NO    //不配置可能导致530的问题<br>修改：<br>local_enable=YES      //允许本地用户登陆</p>
+<h2 id="新建-etc-allowed-users文件"><a href="#新建-etc-allowed-users文件" class="headerlink" title="新建/etc/allowed_users文件"></a>新建/etc/allowed_users文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#sudo vi /etc/allowed_users</span></div></pre></td></tr></table></figure>
+<p>输入uftp</p>
+<h2 id="查看-etc-ftpusers文件中的内容"><a href="#查看-etc-ftpusers文件中的内容" class="headerlink" title="查看/etc/ftpusers文件中的内容"></a>查看/etc/ftpusers文件中的内容</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#sudo vi /etc/ftpusers</span></div></pre></td></tr></table></figure>
+<p>看一看有没有uftp这个用户名;<br>如果没有，就直接退出。<br>如果有就删除uftp,因为这个文件中记录的是不能访问FTP服务器的用户清单。</p>
+<h2 id="使用WinSCP登录FTP服务器"><a href="#使用WinSCP登录FTP服务器" class="headerlink" title="使用WinSCP登录FTP服务器"></a>使用WinSCP登录FTP服务器</h2><p>运行WinSCP(没有就下载安装WinSCP)–&gt;输入IP、用户名、密码–&gt;保存–&gt;勾选”保存密码”–&gt;确定–&gt;登录–&gt;登录成功。<br><img src="/2018/07/15/Ubuntu14-04安装并配置FTP/winscp.png" alt=""></p>
+<h2 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#sudo apt-get remove --purge vsftpd //(--purge 选项表示彻底删除改软件和相关文件)</span></div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;之前在Ubuntu上装的虚拟机的空间不够，拉取两个分支的时候就会显示disk不足，虚拟机上只能存在一个分支代码，想要从宿主机把分支代码通过FTP传输到虚拟机，但是宿主机并不支持FTP，接下来就是主要接受我在宿主机和虚拟机安装和配置FTP的步骤。&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://weibo.com/categories/Linux/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>开启/关闭ubuntu防火墙</title>
+    <link href="http://weibo.com/2018/07/14/%E5%BC%80%E5%90%AF-%E5%85%B3%E9%97%ADubuntu%E9%98%B2%E7%81%AB%E5%A2%99/"/>
+    <id>http://weibo.com/2018/07/14/开启-关闭ubuntu防火墙/</id>
+    <published>2018-07-14T03:46:21.000Z</published>
+    <updated>2018-12-14T10:09:04.692Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="安装防火墙"><a href="#安装防火墙" class="headerlink" title="安装防火墙"></a>安装防火墙</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install ufw</div></pre></td></tr></table></figure>
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><h3 id="1、启用"><a href="#1、启用" class="headerlink" title="1、启用"></a>1、启用</h3><p>sudo ufw enable<br>sudo ufw default deny<br>作用：开启了防火墙并随系统启动同时关闭所有外部对本机的访问（本机访问外部正常）。<br><a id="more"></a></p>
+<h3 id="2、关闭"><a href="#2、关闭" class="headerlink" title="2、关闭"></a>2、关闭</h3><p>sudo ufw disable </p>
+<h3 id="3、查看防火墙状态"><a href="#3、查看防火墙状态" class="headerlink" title="3、查看防火墙状态"></a>3、查看防火墙状态</h3><p>sudo ufw status </p>
+<h3 id="4、开启-禁用相应端口或服务举例"><a href="#4、开启-禁用相应端口或服务举例" class="headerlink" title="4、开启/禁用相应端口或服务举例"></a>4、开启/禁用相应端口或服务举例</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">sudo ufw allow 80 允许外部访问80端口</div><div class="line">sudo ufw delete allow 80 禁止外部访问80 端口</div><div class="line">sudo ufw allow from 192.168.1.1 允许此IP访问所有的本机端口</div><div class="line">sudo ufw deny smtp 禁止外部访问smtp服务</div><div class="line">sudo ufw delete allow smtp 删除上面建立的某条规则</div><div class="line">sudo ufw deny proto tcp from 10.0.0.0/8 to 192.168.0.1 port 22 要拒绝所有的TCP流量从10.0.0.0/8 到192.168.0.1地址的22端口</div><div class="line"> </div><div class="line">可以允许所有RFC1918网络（局域网/无线局域网的）访问这个主机（/8,/16,/12是一种网络分级）：</div><div class="line">sudo ufw allow from 10.0.0.0/8</div><div class="line">sudo ufw allow from 172.16.0.0/12</div><div class="line">sudo ufw allow from 192.168.0.0/16</div></pre></td></tr></table></figure>
+<p>推荐设置<br>sudo apt-get install ufw<br>sudo ufw enable<br>sudo ufw default deny </p>
+<p>这样设置已经很安全，如果有特殊需要，可以使用sudo ufw allow开启相应服务。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;安装防火墙&quot;&gt;&lt;a href=&quot;#安装防火墙&quot; class=&quot;headerlink&quot; title=&quot;安装防火墙&quot;&gt;&lt;/a&gt;安装防火墙&lt;/h2&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;sudo apt-get install ufw&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&quot;使用方法&quot;&gt;&lt;a href=&quot;#使用方法&quot; class=&quot;headerlink&quot; title=&quot;使用方法&quot;&gt;&lt;/a&gt;使用方法&lt;/h2&gt;&lt;h3 id=&quot;1、启用&quot;&gt;&lt;a href=&quot;#1、启用&quot; class=&quot;headerlink&quot; title=&quot;1、启用&quot;&gt;&lt;/a&gt;1、启用&lt;/h3&gt;&lt;p&gt;sudo ufw enable&lt;br&gt;sudo ufw default deny&lt;br&gt;作用：开启了防火墙并随系统启动同时关闭所有外部对本机的访问（本机访问外部正常）。&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://weibo.com/categories/Linux/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>KVM虚拟化调整虚拟内存和CPU大小</title>
     <link href="http://weibo.com/2018/07/11/KVM%E8%99%9A%E6%8B%9F%E5%8C%96%E8%B0%83%E6%95%B4%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E5%92%8CCPU%E5%A4%A7%E5%B0%8F/"/>
     <id>http://weibo.com/2018/07/11/KVM虚拟化调整虚拟内存和CPU大小/</id>
@@ -201,33 +229,6 @@
     </summary>
     
       <category term="Linux, KVM" scheme="http://weibo.com/categories/Linux-KVM/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>开启/关闭ubuntu防火墙</title>
-    <link href="http://weibo.com/2018/07/10/%E5%BC%80%E5%90%AF-%E5%85%B3%E9%97%ADubuntu%E9%98%B2%E7%81%AB%E5%A2%99/"/>
-    <id>http://weibo.com/2018/07/10/开启-关闭ubuntu防火墙/</id>
-    <published>2018-07-10T03:46:21.000Z</published>
-    <updated>2018-12-14T09:51:55.413Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="安装防火墙"><a href="#安装防火墙" class="headerlink" title="安装防火墙"></a>安装防火墙</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install ufw</div></pre></td></tr></table></figure>
-<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><h3 id="1、启用"><a href="#1、启用" class="headerlink" title="1、启用"></a>1、启用</h3><p>sudo ufw enable<br>sudo ufw default deny<br>作用：开启了防火墙并随系统启动同时关闭所有外部对本机的访问（本机访问外部正常）。</p>
-<h3 id="2、关闭"><a href="#2、关闭" class="headerlink" title="2、关闭"></a>2、关闭</h3><p>sudo ufw disable </p>
-<h3 id="3、查看防火墙状态"><a href="#3、查看防火墙状态" class="headerlink" title="3、查看防火墙状态"></a>3、查看防火墙状态</h3><p>sudo ufw status </p>
-<h3 id="4、开启-禁用相应端口或服务举例"><a href="#4、开启-禁用相应端口或服务举例" class="headerlink" title="4、开启/禁用相应端口或服务举例"></a>4、开启/禁用相应端口或服务举例</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">sudo ufw allow 80 允许外部访问80端口</div><div class="line">sudo ufw delete allow 80 禁止外部访问80 端口</div><div class="line">sudo ufw allow from 192.168.1.1 允许此IP访问所有的本机端口</div><div class="line">sudo ufw deny smtp 禁止外部访问smtp服务</div><div class="line">sudo ufw delete allow smtp 删除上面建立的某条规则</div><div class="line">sudo ufw deny proto tcp from 10.0.0.0/8 to 192.168.0.1 port 22 要拒绝所有的TCP流量从10.0.0.0/8 到192.168.0.1地址的22端口</div><div class="line"> </div><div class="line">可以允许所有RFC1918网络（局域网/无线局域网的）访问这个主机（/8,/16,/12是一种网络分级）：</div><div class="line">sudo ufw allow from 10.0.0.0/8</div><div class="line">sudo ufw allow from 172.16.0.0/12</div><div class="line">sudo ufw allow from 192.168.0.0/16</div></pre></td></tr></table></figure>
-<p>推荐设置<br>sudo apt-get install ufw<br>sudo ufw enable<br>sudo ufw default deny </p>
-<p>这样设置已经很安全，如果有特殊需要，可以使用sudo ufw allow开启相应服务。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;安装防火墙&quot;&gt;&lt;a href=&quot;#安装防火墙&quot; class=&quot;headerlink&quot; title=&quot;安装防火墙&quot;&gt;&lt;/a&gt;安装防火墙&lt;/h2&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;
-    
-    </summary>
-    
-      <category term="Linux" scheme="http://weibo.com/categories/Linux/"/>
     
     
   </entry>
